@@ -14,9 +14,13 @@ return [
      'goods_types' => 'أنواع البضائع',
      'units' => 'وحدات القياس',
      'accounts' => 'الحسابات',
+     'settings' => 'الاعدادات',
      'users' => 'المستخدمون',
      'statuses' => 'الحالات',
      'payment_methods' => 'طرق الدفع',
-    
+     'Logout' => 'تسجيل الخروج ',
+//     add_carrir
+
+     'add_carrir' => 'اضافةالناقل',
 
 ];

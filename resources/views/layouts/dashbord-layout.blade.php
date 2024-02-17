@@ -59,7 +59,7 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  z-index: 1;
+  z-index: 1000;
   width: 120px;
   height: 120px;
   margin: -76px 0 0 -76px;
@@ -115,7 +115,7 @@
 <!-- BEGIN: Body-->
 
 <body class="vertical-layout vertical-menu-modern  navbar-floating footer-static dark-layout   menu-collapsed" data-open="click" data-menu="vertical-menu-modern" data-col="">
-<div id="loader"  style="display: none;" ></div>
+<div id="loader" class="d-none"></div>
       <!-- BEGIN: Header-->
     <nav class="header-navbar navbar navbar-expand-lg align-items-center floating-nav navbar-light navbar-shadow">
         <div class="navbar-container d-flex content">
@@ -353,7 +353,7 @@
                         <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('main.Logout') }}
                         </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

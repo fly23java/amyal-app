@@ -160,49 +160,72 @@
                     </ul>
                 </li>
 
+                <li class=" nav-item"><a class="d-flex align-items-center" href="#">
+                     <i class="fa fa-user"></i>
+                    <span class="menu-title text-truncate" data-i18n="Components">
+                    {{ trans('main.accounts') }}
+                    </span></a>
+                    <ul class="menu-content">
+                       
+                        <li>
+                                <a class="d-flex align-items-center" href="{{ route('accounts.account.index') }}">
+                                <i data-feather="circle"></i>
+                                    <span class="menu-title text-truncate" data-i18n="Country">
+                                    {{ trans('main.accounts') }}
+                                    </span>
+                                </a>
+                        </li>
+                        <li>
+                            <a class="d-flex align-items-center" href="{{ route('users.user.index') }}">
+                            <i data-feather="circle"></i>
+                                <span class="menu-title text-truncate" data-i18n="Country">
+                                {{ trans('main.users') }}
+                                </span>
+                            </a>
+                        </li>
+                       
+                    </ul>
+                </li>
 
 
-                <li class=" nav-item">
-                    <a class="d-flex align-items-center" href="{{ route('units.unit.index') }}">
-                        <i data-feather='grid'></i>
-                        <span class="menu-title text-truncate" data-i18n="Country">
-                        {{ trans('main.units') }}
-                        </span>
-                    </a>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="#">
+                    <i class="fa fa-cog"></i>
+                    <span class="menu-title text-truncate" data-i18n="Components">
+                    {{ trans('main.settings') }}
+                    </span></a>
+                    <ul class="menu-content">
+                       
+                            <li>
+                                <a class="d-flex align-items-center" href="{{ route('units.unit.index') }}">
+                                    <i data-feather='grid'></i>
+                                    <span class="menu-title text-truncate" data-i18n="Country">
+                                    {{ trans('main.units') }}
+                                    </span>
+                                </a>
+                            </li>
+                            
+                        
+                            <li>
+                                <a class="d-flex align-items-center" href="{{ route('statuses.status.index') }}">
+                                    <i data-feather='grid'></i>
+                                    <span class="menu-title text-truncate" data-i18n="Country">
+                                    {{ trans('main.statuses') }}
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="d-flex align-items-center" href="{{ route('payment_methods.payment_method.index') }}">
+                                    <i data-feather='grid'></i>
+                                    <span class="menu-title text-truncate" data-i18n="Country">
+                                    {{ trans('main.payment_methods') }}
+                                    </span>
+                                </a>
+                            </li>
+                       
+                    </ul>
                 </li>
-                <li class=" nav-item">
-                    <a class="d-flex align-items-center" href="{{ route('accounts.account.index') }}">
-                        <i class="fa fa-user"></i>
-                        <span class="menu-title text-truncate" data-i18n="Country">
-                        {{ trans('main.accounts') }}
-                        </span>
-                    </a>
-                </li>
-                <li class=" nav-item">
-                    <a class="d-flex align-items-center" href="{{ route('users.user.index') }}">
-                        <i data-feather='fa fa-users'></i>
-                        <span class="menu-title text-truncate" data-i18n="Country">
-                        {{ trans('main.users') }}
-                        </span>
-                    </a>
-                </li>
-               
-                <li class=" nav-item">
-                    <a class="d-flex align-items-center" href="{{ route('statuses.status.index') }}">
-                        <i data-feather='grid'></i>
-                        <span class="menu-title text-truncate" data-i18n="Country">
-                        {{ trans('main.statuses') }}
-                        </span>
-                    </a>
-                </li>
-                <li class=" nav-item">
-                    <a class="d-flex align-items-center" href="{{ route('payment_methods.payment_method.index') }}">
-                        <i data-feather='grid'></i>
-                        <span class="menu-title text-truncate" data-i18n="Country">
-                        {{ trans('main.payment_methods') }}
-                        </span>
-                    </a>
-                </li>
+
+                
                 <!-- END : Contry and cities -->
                
 

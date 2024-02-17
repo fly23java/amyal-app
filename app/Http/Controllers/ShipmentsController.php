@@ -246,7 +246,7 @@ $Statuses = Status::pluck('name_arabic','id')->all();
   
         $pdf = PDF::LoadView('wey_bill.show', $data);
   
-        return $pdf->stream('document.pdf');
+        return $pdf->download('document.pdf');
       
     
     }

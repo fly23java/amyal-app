@@ -78,6 +78,7 @@
                                                             <span>{{ trans('shipments.edit') }}</span>
                                                         </a>
                                                          <a class="dropdown-item"  id="test_hima"  data-id="{{ $shipment->id  }}" data-toggle="modal" data-target="#modals-slide-in">
+                                                            <i data-feather="plus" class="mr-50"></i>
                                                             <span>{{ trans('main.add_carrir') }}</span>
                                                         </a>
                                                         

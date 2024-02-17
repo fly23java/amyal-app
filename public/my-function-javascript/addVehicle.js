@@ -7,7 +7,9 @@ $(document).ready(function(){
     $(document).on('click', '#test_hima', function(e) {
         //get cover id
        
-        $('#loader').css("display","block");
+        $("#loader").removeClass("d-none"); 
+        $("#loader").addClass("d-block"); 
+        
         var id=$(this).data('id');
         var vehcil;
         var data={
@@ -58,6 +60,7 @@ $(document).ready(function(){
                     if($.trim(response.shipment.carrier_price)){
                         $("#carrier_price").val(response.shipment.carrier_price);
                     }
+                  
               
                 });
            
@@ -68,9 +71,13 @@ $(document).ready(function(){
         });
 
       
-        console.log('test addd');
+        
+        
           
-        $('#loader').css("display","none");    
+        $("#loader").removeClass("d-block");
+        $("#loader").addClass("d-none"); 
+       
+       
         $('#modals-slide-in').modal('show');
         
     });
@@ -79,6 +86,7 @@ $(document).ready(function(){
     
     $(document).on('change', '#vehicle_id', function(e) {
         // console.log('change');
+
         let  oldCarrierPrice = $("#carrier_price").val();
             var data = {
                 'vehicle_id' : $('#vehicle_id').val(),
@@ -87,7 +95,7 @@ $(document).ready(function(){
               
             };
           
-            
+            $("#loader").addClass("d-block"); 
             //  console.log(data);
             $.ajax({
                 url: config.routes.getCarrierPrice,
@@ -102,6 +110,7 @@ $(document).ready(function(){
                     $("#carrier_price").val(oldCarrierPrice);
                 }
             });
-    
+            
+            $("#loader").addClass("d-none"); 
         });
 });
