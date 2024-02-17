@@ -13,7 +13,7 @@
     <div class="card text-bg-theme">
 
         <div class="card-header d-flex justify-content-between align-items-center p-3">
-            <h4 class="m-0">Units</h4>
+            <h4 class="m-0">{{ trans('main.units') }}</h4>
             <div>
                 <a href="{{ route('units.unit.create') }}" class="btn btn-secondary" title="{{ trans('units.create') }}">
                     <span class="fa-solid fa-plus" aria-hidden="true"></span>

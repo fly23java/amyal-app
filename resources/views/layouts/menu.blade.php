@@ -47,19 +47,19 @@
                <li class=" nav-item"><a class="d-flex align-items-center" href="#">
                     <i data-feather='clipboard'></i>
                     <span class="menu-title text-truncate" data-i18n="Components">
-                    contract
+                    {{ trans('main.contracts') }}
                     </span></a>
                     <ul class="menu-content">
                         <li><a class="d-flex align-items-center" href="{{ route('contracts.contract.index') }}">
                             <i data-feather="circle"></i>
                             <span class="menu-item" data-i18n="Alerts">
-                                {{ trans('contracts.contract') }}
+                                {{ trans('main.contracts') }}
                             </span></a>
                         </li>
                         <li><a class="d-flex align-items-center" href="{{ route('contract_details.contract_detail.index') }}">
                             <i data-feather="circle"></i>
                             <span class="menu-item" data-i18n="Alerts">
-                                {{ trans('contract_details.contract_detail') }}
+                                {{ trans('main.contract_details') }}
                             </span></a>
                         </li>
                        
@@ -72,7 +72,7 @@
                     <a class="d-flex align-items-center" href="{{ route('shipments.shipment.index') }}">
                         <i data-feather='plus'></i>
                         <span class="menu-title text-truncate" data-i18n="Country">
-                        {{ trans('shipments.shipment') }}
+                        {{ trans('main.shipments') }}
                         </span>
                     </a>
                 </li>
@@ -84,25 +84,25 @@
                 <li class=" nav-item"><a class="d-flex align-items-center" href="#">
                     <i data-feather='truck'></i>
                     <span class="menu-title text-truncate" data-i18n="Components">
-                     Drivers
+                    {{ trans('main.vehicles') }}
                     </span></a>
                     <ul class="menu-content">
                         <li><a class="d-flex align-items-center" href="{{ route('vehicle_types.vehicle_type.index') }}">
                             <i data-feather="circle"></i>
                             <span class="menu-item" data-i18n="Alerts">
-                                {{ trans('vehicle_types.vehicle_type') }}
+                                {{ trans('main.vehicle_types') }}
                             </span></a>
                         </li>
                         <li><a class="d-flex align-items-center" href="{{ route('vehicles.vehicle.index') }}">
                             <i data-feather="circle"></i>
                             <span class="menu-item" data-i18n="Alerts">
-                                {{ trans('vehicles.vehicle') }}
+                                {{ trans('main.vehicles') }}
                             </span></a>
                         </li>
                         <li><a class="d-flex align-items-center" href="{{ route('drivers.driver.index') }}">
                             <i data-feather="circle"></i>
                             <span class="menu-item" data-i18n="Alerts">
-                                {{ trans('drivers.driver') }}
+                                {{ trans('main.drivers') }}
                             </span></a>
                         </li>
                        
@@ -113,25 +113,25 @@
                 <li class=" nav-item"><a class="d-flex align-items-center" href="#">
                     <i data-feather='anchor'></i>
                     <span class="menu-title text-truncate" data-i18n="Components">
-                     cities
+                    {{ trans('main.cities') }}
                     </span></a>
                     <ul class="menu-content">
                         <li><a class="d-flex align-items-center" href="{{ route('countries.country.index') }}">
                             <i data-feather="circle"></i>
                             <span class="menu-item" data-i18n="Alerts">
-                                {{ trans('countries.country') }}
+                                {{ trans('main.countries') }}
                             </span></a>
                         </li>
                         <li><a class="d-flex align-items-center" href="{{ route('regions.region.index') }}">
                             <i data-feather="circle"></i>
                             <span class="menu-item" data-i18n="Alerts">
-                                {{ trans('regions.region') }}
+                                {{ trans('main.regions') }}
                             </span></a>
                         </li>
                         <li><a class="d-flex align-items-center" href="{{ route('cities.city.index') }}">
                             <i data-feather="circle"></i>
                             <span class="menu-item" data-i18n="Alerts">
-                                {{ trans('cities.city') }}
+                                {{ trans('main.cities') }}
                             </span></a>
                         </li>
                        
@@ -140,19 +140,19 @@
                 <li class=" nav-item"><a class="d-flex align-items-center" href="#">
                      <i data-feather='shopping-bag'></i>
                     <span class="menu-title text-truncate" data-i18n="Components">
-                     goods
+                    {{ trans('main.goods') }}
                     </span></a>
                     <ul class="menu-content">
                         <li><a class="d-flex align-items-center" href="{{ route('goods.goods.index') }}">
                             <i data-feather="circle"></i>
                             <span class="menu-item" data-i18n="Alerts">
-                                {{ trans('goods.goods') }}
+                                {{ trans('main.goods') }}
                             </span></a>
                         </li>
                         <li><a class="d-flex align-items-center" href="{{ route('goods_types.goods_type.index') }}">
                             <i data-feather="circle"></i>
                             <span class="menu-item" data-i18n="Alerts">
-                                {{ trans('goods_types.goods_type') }}
+                                {{ trans('main.goods_types') }}
                             </span></a>
                         </li>
                         
@@ -166,7 +166,7 @@
                     <a class="d-flex align-items-center" href="{{ route('units.unit.index') }}">
                         <i data-feather='grid'></i>
                         <span class="menu-title text-truncate" data-i18n="Country">
-                        {{ trans('units.unit') }}
+                        {{ trans('main.units') }}
                         </span>
                     </a>
                 </li>
@@ -174,7 +174,7 @@
                     <a class="d-flex align-items-center" href="{{ route('accounts.account.index') }}">
                         <i class="fa fa-user"></i>
                         <span class="menu-title text-truncate" data-i18n="Country">
-                        {{ trans('accounts.account') }}
+                        {{ trans('main.accounts') }}
                         </span>
                     </a>
                 </li>
@@ -182,7 +182,7 @@
                     <a class="d-flex align-items-center" href="{{ route('users.user.index') }}">
                         <i data-feather='fa fa-users'></i>
                         <span class="menu-title text-truncate" data-i18n="Country">
-                        {{ trans('users.user') }}
+                        {{ trans('main.users') }}
                         </span>
                     </a>
                 </li>
@@ -191,7 +191,7 @@
                     <a class="d-flex align-items-center" href="{{ route('statuses.status.index') }}">
                         <i data-feather='grid'></i>
                         <span class="menu-title text-truncate" data-i18n="Country">
-                        {{ trans('statuses.status') }}
+                        {{ trans('main.statuses') }}
                         </span>
                     </a>
                 </li>
@@ -199,7 +199,7 @@
                     <a class="d-flex align-items-center" href="{{ route('payment_methods.payment_method.index') }}">
                         <i data-feather='grid'></i>
                         <span class="menu-title text-truncate" data-i18n="Country">
-                        {{ trans('payment_methods.payment_method') }}
+                        {{ trans('main.payment_methods') }}
                         </span>
                     </a>
                 </li>

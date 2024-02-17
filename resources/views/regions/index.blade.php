@@ -13,7 +13,7 @@
     <div class="card text-bg-theme">
 
         <div class="card-header d-flex justify-content-between align-items-center p-3">
-            <h4 class="m-0">Regions</h4>
+            <h4 class="m-0">{{ trans('main.regions') }}</h4>
             <div>
                 <a href="{{ route('regions.region.create') }}" class="btn btn-secondary" title="{{ trans('regions.create') }}">
                     <span class="fa-solid fa-plus" aria-hidden="true"></span>

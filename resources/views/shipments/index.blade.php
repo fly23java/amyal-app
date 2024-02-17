@@ -13,7 +13,7 @@
     <div class="card text-bg-theme">
 
         <div class="card-header d-flex justify-content-between align-items-center p-3">
-            <h4 class="m-0">Shipments</h4>
+            <h4 class="m-0">{{ trans('main.shipments') }}</h4>
             <div>
                 <a href="{{ route('shipments.shipment.create') }}" class="btn btn-secondary" title="{{ trans('shipments.create') }}">
                     <span class="fa-solid fa-plus" aria-hidden="true"></span>

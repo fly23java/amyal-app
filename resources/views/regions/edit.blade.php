@@ -5,7 +5,7 @@
     <div class="card text-bg-theme">
   
          <div class="card-header d-flex justify-content-between align-items-center p-3">
-            <h4 class="m-0">{{ !empty($title) ? $title : 'Region' }}</h4>
+            <h4 class="m-0">{{ trans('regions.edit') }}</h4>
             <div>
                 <a href="{{ route('regions.region.index') }}" class="btn btn-primary" title="{{ trans('regions.show_all') }}">
                     <span class="fa-solid fa-table-list" aria-hidden="true"></span>

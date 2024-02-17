@@ -5,7 +5,7 @@
 <div class="card text-bg-theme">
 
      <div class="card-header d-flex justify-content-between align-items-center p-3">
-        <h4 class="m-0">{{ isset($user->name) ? $user->name : 'User' }}</h4>
+        <h4 class="m-0">{{ trans('users.show') }}</h4>
         <div>
             <form method="POST" action="{!! route('users.user.destroy', $user->id) !!}" accept-charset="UTF-8">
                 <input name="_method" value="DELETE" type="hidden">
