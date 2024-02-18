@@ -22,5 +22,6 @@ return [
 //     add_carrir
 
      'add_carrir' => 'اضافةالناقل',
+     'reset' => 'إعادة ضبط',
 
 ];

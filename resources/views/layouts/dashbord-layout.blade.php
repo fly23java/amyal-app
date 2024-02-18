@@ -10,6 +10,7 @@
     <meta name="description" content="amyale system">
     <meta name="keywords" content="amyale system">
     <meta name="author" content="PIXINVENT">
+    
     <title>amyal-system</title>
    
   
@@ -581,12 +582,16 @@ $.ajaxSetup({
             getVehcile: "{{ route('shipments.shipment.getVehcile')}}",
             getCarrierPrice: "{{ route('shipments.shipment.getCarrierPrice')}}",
             shipmentDetails: "{{ route('shipments.shipment.shipmentDetails')}}",
+            getPdf: "{{ route('shipments.shipment.pdf')}}",
         }
     };
 </script>
+<link rel="stylesheet" type="text/css" href="{{ asset('1708119800_11531/styles.css') }}" media="all" />
+<script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
      <script src="{{ asset('my-function-javascript/getprice.js') }}"></script>
      <script src="{{ asset('my-function-javascript/addVehicle.js') }}"></script>
      <script src="{{ asset('my-function-javascript/sendAjaxRequest.js') }}"></script>
+     <script src="{{ asset('my-function-javascript/getPdf.js') }}"></script>
 </body>
 <!-- END: Body-->
 

@@ -40,6 +40,7 @@
                          
                             <th>{{ trans('shipments.status_id') }}</th>
                             <th>{{ trans('shipments.price') }}</th>
+                            <th>{{ trans('shipments.carrier_price') }}</th>
                            
 
                             <th></th>
@@ -56,6 +57,7 @@
                             
                             <td class="align-middle badge badge-pill badge-light-warning  mt-1">{{ optional($shipment->Status)->name_arabic }}</td>
                             <td class="align-middle">{{ $shipment->price }}</td>
+                            <td class="align-middle">{{ $shipment->carrier_price }}</td>
                             
 
                             <td class="text-end">
@@ -81,6 +83,15 @@
                                                             <i data-feather="plus" class="mr-50"></i>
                                                             <span>{{ trans('main.add_carrir') }}</span>
                                                         </a>
+                                                         <a class="dropdown-item"    data-id="{{ $shipment->id  }}" data-toggle="modal" data-target="#modals-statuses-update">
+                                                            <i data-feather="plus" class="mr-50"></i>
+                                                            <span>{{ trans('statuses.edit') }}</span>
+                                                        </a>
+                                                         <a class="dropdown-item"  href="{{ route('shipments.shipment.pdf') }}"  data-id="{{ $shipment->id  }}">
+                                                            <i data-feather="plus" class="mr-50"></i>
+                                                            <span>{{ trans('main.testprint') }}</span>
+                                                        </a>
+                                                       
                                                         
                                                          
                                                     </div>
@@ -109,7 +120,7 @@
 
                         <div class="modal modal-slide-in new-user-modal fade" id="modals-slide-in">
                             <div class="modal-dialog">
-                                <form class="add-new-user modal-content pt-0"  method="get" action="{{ route('shipments.shipment.shipmentDetails') }}" id="create_shipment_details_form">
+                                <form class="add-new-user modal-content pt-0"  method="POST" action="{{ route('shipments.shipment.getAddVehcileToShipment') }}" id="create_shipment_details_form">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                                     <div class="modal-header mb-1">
                                         <h5 class="modal-title" id="exampleModalLabel">
@@ -120,6 +131,7 @@
                                     <input  name="shipment_delivery_detail_id" type="hidden" id="shipment_delivery_detail_id" >
                                     <input  name="supervisor_user_id" type="hidden"  value=" {{ Auth::user()->id }} " >
                                     <input  name="shipment_id" type="hidden" id="shipment_id" >
+                                    {{ csrf_field() }}
                                         <div class="form-group">
                                             <label class="form-label" for="vehicle_id">{{ trans('shipment_delivery_details.vehicle_id') }}</label>
                                             <select class="form-select form-control{{ $errors->has('vehicle_id') ? ' is-invalid' : '' }}" id="vehicle_id" name="vehicle_id" required="true" placeholder="">
@@ -130,14 +142,51 @@
                                     <div class="modal-body flex-grow-1">
                                         <div class="form-group">
                                             <label class="form-label" for="basic-icon-default-fullname">{{ trans('shipments.carrier_price') }}</label>
-                                            <input class="form-control{{ $errors->has('loading_time') ? ' is-invalid' : '' }}" name="carrier_price" type="number" id="carrier_price"  placeholder="{{ trans('shipments.carrier_price__placeholder') }}"  value="@if ($shipment->carrier_price ){{$shipment->carrier_price }} @endif" >
+                                            <input class="form-control{{ $errors->has('loading_time') ? ' is-invalid' : '' }}" name="carrier_price" type="number" id="carrier_price"  placeholder="{{ trans('shipments.carrier_price__placeholder') }}"  value="@if ($shipment->carrier_price ){{$shipment->carrier_price }}@endif" >
                                         </div>
                                     </div>
                                    
                                    
                                     <div class="modal-body flex-grow-1" >
-                                        <button type="submit" class="btn btn-primary mr-1 data-submit">Submit</button>
-                                        <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary mr-1 data-submit">{{ trans('shipments.update') }}</button>
+                                        <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">{{ trans('main.reset') }}</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        <div class="modal modal-slide-in statuses-update fade" id="modals-statuses-update">
+                            <div class="modal-dialog">
+                                <form class="add-new-user modal-content pt-0"  method="POST" action="{{ route('shipments.shipment.getAddVehcileToShipment') }}" id="create_shipment_details_form">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+                                    <div class="modal-header mb-1">
+                                        <h5 class="modal-title" id="exampleModalLabel">
+                                             {{ trans('statuses.edit') }}
+                                        </h5>
+                                    </div>
+                                    <div class="modal-body flex-grow-1">
+                                    <input  name="shipment_delivery_detail_id" type="hidden" id="shipment_delivery_detail_id" >
+                                    <input  name="supervisor_user_id" type="hidden"  value=" {{ Auth::user()->id }} " >
+                                    <input  name="shipment_id" type="hidden" id="shipment_id" >
+                                    {{ csrf_field() }}
+                                        <div class="form-group">
+                                            <label class="form-label" for="vehicle_id">{{ trans('statuses.model_plural') }}</label>
+                                            <select class="form-select form-control{{ $errors->has('status_id') ? ' is-invalid' : '' }}" id="status_id" name="status_id" required="true" placeholder="">
+                                                  
+                                            </select>
+                                        </div>
+                                    </div>
+                                   
+                                   
+                                   
+                                    <div class="modal-body flex-grow-1" >
+                                        <button type="submit" class="btn btn-primary mr-1 data-submit">{{ trans('shipments.update') }}</button>
+                                        <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">{{ trans('main.reset') }}</button>
                                     </div>
                                 </form>
                             </div>

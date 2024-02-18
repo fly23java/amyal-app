@@ -7,8 +7,8 @@ $(document).ready(function(){
     $(document).on('click', '#test_hima', function(e) {
         //get cover id
        
-        $("#loader").removeClass("d-none"); 
-        $("#loader").addClass("d-block"); 
+        // $("#loader").removeClass("d-none"); 
+        // $("#loader").addClass("d-block"); 
         
         var id=$(this).data('id');
         var vehcil;
@@ -74,8 +74,8 @@ $(document).ready(function(){
         
         
           
-        $("#loader").removeClass("d-block");
-        $("#loader").addClass("d-none"); 
+        // $("#loader").removeClass("d-block");
+        // $("#loader").addClass("d-none"); 
        
        
         $('#modals-slide-in').modal('show');
@@ -95,7 +95,7 @@ $(document).ready(function(){
               
             };
           
-            $("#loader").addClass("d-block"); 
+            // $("#loader").addClass("d-block"); 
             //  console.log(data);
             $.ajax({
                 url: config.routes.getCarrierPrice,
@@ -111,6 +111,6 @@ $(document).ready(function(){
                 }
             });
             
-            $("#loader").addClass("d-none"); 
+            // $("#loader").addClass("d-none"); 
         });
 });

@@ -15,7 +15,9 @@ use App\Models\ContractDetail;
 use App\Models\ShipmentDeliveryDetail;
 use App\Models\Vehicle;
 use Exception;
-use PDF;
+use View;
+use Auth;
+
 use Illuminate\Http\Request;
 
 
@@ -195,59 +197,96 @@ $Statuses = Status::pluck('name_arabic','id')->all();
     public function getAddVehcileToShipment(Request $request)
     {
 
-       dd($request->all());
-        // this inject funtion form services 
-        // return   (new ShipmentService())->getCarrierPrice($request);
+    //    dd($request->all());
+       request()->validate([
+       
+        "supervisor_user_id" => 'required',
+        "shipment_id" => 'required',
+        "vehicle_id" => 'required',
+        "carrier_price" => 'required',
+         ]);
+         $shipment = Shipment::findOrFail($request->shipment_id);
+         $shipment->update([
+                
+                "carrier_price" =>  $request->carrier_price,
+                "supervisor_user_id" => Auth::user()->id,
+                
+            ]);
+            // dd($shipment);
+            if(!empty($request->shipment_delivery_detail_id)){
+                $shipment->ShipmentDeliveryDetail()->updateOrCreate([
+                    "vehicle_id" => $request->vehicle_id,
+                    ]);
+            }else{
+
+                $shipment->ShipmentDeliveryDetail()->updateOrCreate([
+                    "vehicle_id" => $request->vehicle_id,
+                    ]);
+            }
+
+            return redirect()->route('shipments.shipment.index')
+                ->with('success_message', trans('shipment_delivery_details.model_was_updated'));
     
     }
     public function shipmentDetails(Request $request)
     {
 
        
-        dd($request->all());
-        request()->validate([
-            "shipment_delivery_detail_id" => 'required',
-            "supervisor_user_id" => 'required',
-            "shipment_id" => 'required',
-            "vehicle_id" => 'required',
-            "carrier_price" => 'required',
-             ]);
+    //     // dd($request->all());
+    //     request()->validate([
+    //         "shipment_delivery_detail_id" => 'required',
+    //         "supervisor_user_id" => 'required',
+    //         "shipment_id" => 'required',
+    //         "vehicle_id" => 'required',
+    //         "carrier_price" => 'required',
+    //          ]);
             
-      $shipment = Shipment::updateOrCreate(
-        [
-            'id' => $request->shipment_id
-        ],
-        [
+    //   $shipment = Shipment::update(
+    //     [
+    //         'id' => $request->shipment_id
+    //     ],
+    //     [
             
-            "carrier_price" =>  $request->carrier_price,
-            "supervisor_user_id" =>  $request->shipment_delivery_detail_id,
+    //         "carrier_price" =>  $request->carrier_price,
+    //         "supervisor_user_id" => Auth::user()->id,
             
-        ]);
+    //     ]);
       
-        if(!empty($request->shipment_delivery_detail_id)){
-         ShipmentDeliveryDetail::updateOrCreate(
-        [
-            'id' => $request->shipment_delivery_detail_id
-        ],
-        [
-          "vehicle_id" => $request->vehicle_id,
-        ]);
-        }
+    //     if(!empty($request->shipment_delivery_detail_id)){
+    //      ShipmentDeliveryDetail::updateOrCreate(
+    //     [
+    //         'id' => $request->shipment_delivery_detail_id
+    //     ],
+    //     [
+    //       "vehicle_id" => $request->vehicle_id,
+    //     ]);
+    //     }else{
+
+    //         ShipmentDeliveryDetail::update([
+    //               "vehicle_id" => $request->vehicle_id,
+    //             ]);
+    //     }
         // this inject funtion form services 
         // return   (new ShipmentService())->shipmentDetails($request);
     
     }
     public function pdf()
     {
-        $data = [
-            'foo' => 'عربي',
-            'url' => url()
-        ];
-  
-        $pdf = PDF::LoadView('wey_bill.show', $data);
-  
-        return $pdf->download('document.pdf');
       
+
+        $shipment = Shipment::findOrFail(2);
+        $Vehicle = Vehicle::findOrFail($shipment->shipmentDeliveryDetail->vehicle_id);
+        return view('shipments.weybill',compact('shipment','Vehicle'));
+        //   View::make('wey_bill.show',[
+        //      'shipment'=>$shipment,
+        //      'Vehicle'=>$Vehicle,
+        //     ]);
+
+        // $pdfContant = $pdf->render();
+        // return response()->json([
+        //     'pdfContant'  =>$pdfContant,
+        // ]);
+
     
     }
 
