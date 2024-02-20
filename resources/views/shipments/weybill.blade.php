@@ -379,7 +379,7 @@
                         <div class="wcdiv" style="left:343.5pt; clip:rect(1pt,177.75pt,22.35pt,0.5pt);">
                             <div class="wcdiv" style="left:5pt; top:6pt; direction:rtl;">
                                 <span class="wcspan wctext001" style="font-size:9pt; left:77.64pt; top:-9.71pt; line-height:10.05pt;"> 
-                                {{ utf8_encode($shipment->getAUserName($shipment->user_id)->name) }}
+                                {{ $shipment->getAUserName($shipment->user_id)->name }}
                                 </span>
                             </div>
                         </div>

@@ -27,7 +27,10 @@ use Illuminate\Support\Facades\DB;
 
 class ShipmentsController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the shipments.
      *
@@ -87,7 +90,7 @@ class ShipmentsController extends Controller
      */
     public function show($id)
     {
-        $shipment = Shipment::with('user','city','city','vehicletype','goods','status','user')->findOrFail($id);
+        $shipment = Shipment::with('user','city','city','vehicletype','goods','status','user','vehicletype')->findOrFail($id);
 
         return view('shipments.show', compact('shipment'));
     }
@@ -270,25 +273,53 @@ $Statuses = Status::pluck('name_arabic','id')->all();
         // return   (new ShipmentService())->shipmentDetails($request);
     
     }
-    public function pdf()
+    public function pdf($id)
     {
+    //   dd($id);
+
+        $shipment = Shipment::findOrFail($id);
+         $Vehicle = Vehicle::findOrFail($shipment->shipmentDeliveryDetail->vehicle_id);
+        return view('shipments.weybill' , compact('shipment','Vehicle'));
       
-
-        $shipment = Shipment::findOrFail(2);
-        $Vehicle = Vehicle::findOrFail($shipment->shipmentDeliveryDetail->vehicle_id);
-        return view('shipments.weybill',compact('shipment','Vehicle'));
-        //   View::make('wey_bill.show',[
-        //      'shipment'=>$shipment,
-        //      'Vehicle'=>$Vehicle,
-        //     ]);
-
-        // $pdfContant = $pdf->render();
-        // return response()->json([
-        //     'pdfContant'  =>$pdfContant,
-        // ]);
 
     
     }
+
+
+    public function statusesGet(Request $request)
+    {
+      
+        // return response()->json($request->all());
+        $shipment = Shipment::findOrFail($request->id);
+        $Status = Status::all();
+       
+        return response()->json(
+            [
+            'success' => 'true',
+            'shipment' => $shipment,
+            'Status' => $Status
+            
+        ]);
+    
+    }
+    public function statusUpdate(Request $request)
+    {
+      
+        // dd($request->all());
+
+        $shipment = Shipment::findOrFail($request->shipment_status_id);
+        $shipment->update([
+               
+               "status_id" =>  $request->status_id,
+               
+           ]);
+
+           return redirect()->route('shipments.shipment.index')
+           ->with('success_message', trans('statuses.model_was_updated')); 
+       
+    
+    }
+
 
 
 

@@ -2,6 +2,7 @@
 
 return [
     'id' => 'Id',
+    'login' => 'تسجيل الدخزل',
     'id__placeholder' => 'Enter id here...',
     'name' => 'الاسم',
     'name__placeholder' => 'أدخل الاسم هنا...',
@@ -9,7 +10,7 @@ return [
      'email__placeholder' => 'أدخل البريد الإلكتروني هنا...',
      'email_verified_at' => 'البريد الإلكتروني الذي تم التحقق منه',
      'email_verified_at__placeholder' => 'أدخل البريد الإلكتروني الذي تم التحقق منه هنا...',
-     'password ' => 'كلمة المرور',
+     'password' => 'كلمة المرور',
      'password__placeholder' => 'أدخل كلمة المرور هنا...',
      'birth_date' => 'تاريخ الميلاد',
      'birth_date__placeholder' => 'أدخل تاريخ الميلاد هنا...',

@@ -8,6 +8,15 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <style>
+      @font-face {
+            font-family: "Cairo";
+            src: url("{{ asset('Cairo-VariableFont_slnt.ttf') }}");
+        }
+        *{
+            font-family: "Cairo", sans-serif !important;
+        }
+    </style>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -18,7 +27,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
 </head>
-<body>
+<body style="direction: rtl;">
     <div id="app">
     
 

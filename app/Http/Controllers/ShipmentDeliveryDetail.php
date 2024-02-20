@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class ShipmentDeliveryDetail extends Model
 {
     
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * The database table used by the model.
      *

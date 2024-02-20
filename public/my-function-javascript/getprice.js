@@ -32,7 +32,7 @@ $(document).on('change', '#create_shipment_form', function(e) {
                 $("#price").val(response.price);
             },
             error: function(response) {
-                $("#price").val('');
+                
             }
         });
     }

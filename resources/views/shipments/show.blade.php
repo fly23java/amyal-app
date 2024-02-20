@@ -34,11 +34,11 @@
     <div class="card-body">
         <dl class="row">
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.user_id') }}</dt>
-            <dd class="col-lg-10 col-xl-9">{{ optional($shipment->User)->name }}</dd>
+            <dd class="col-lg-10 col-xl-9">{{ $shipment->getAUserName($shipment->user_id)->name }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.loading_city_id') }}</dt>
-            <dd class="col-lg-10 col-xl-9">{{ optional($shipment->City)->name_arabic }}</dd>
+            <dd class="col-lg-10 col-xl-9">{{ $shipment->getCityName($shipment->loading_city_id)->name_arabic }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.unloading_city_id') }}</dt>
-            <dd class="col-lg-10 col-xl-9">{{ optional($shipment->City)->name_arabic }}</dd>
+            <dd class="col-lg-10 col-xl-9">{{  $shipment->getCityName($shipment->unloading_city_id)->name_arabic}}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.vehicle_type_id') }}</dt>
             <dd class="col-lg-10 col-xl-9">{{ optional($shipment->VehicleType)->name_arabic }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.goods_id') }}</dt>
@@ -51,6 +51,8 @@
             <dd class="col-lg-10 col-xl-9">{{ $shipment->carrier_price }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.supervisor_user_id') }}</dt>
             <dd class="col-lg-10 col-xl-9">{{ optional($shipment->User)->name }}</dd>
+            <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.carrir') }}</dt>
+            <dd class="col-lg-10 col-xl-9">{{ $shipment->shipmentDeliveryDetail->vehicle_id }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.created_at') }}</dt>
             <dd class="col-lg-10 col-xl-9">{{ $shipment->created_at }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.updated_at') }}</dt>

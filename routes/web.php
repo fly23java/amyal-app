@@ -363,8 +363,12 @@ Route::group([
           ->name('shipments.shipment.getAddVehcileToShipment');
       Route::post('/shipment/shipmentDetails',[ShipmentsController::class, 'shipmentDetails'])
           ->name('shipments.shipment.shipmentDetails');
-      Route::get('/shipment/pdf',[ShipmentsController::class, 'pdf'])
+      Route::get('/shipment/pdf/{shipment}',[ShipmentsController::class, 'pdf'])
           ->name('shipments.shipment.pdf');
+      Route::get('/shipment/statusesGet',[ShipmentsController::class, 'statusesGet'])
+          ->name('shipments.shipment.statusesGet');
+      Route::post('/shipment/statusUpdate',[ShipmentsController::class, 'statusUpdate'])
+          ->name('shipments.shipment.statusUpdate');
  });
 
 

@@ -11,7 +11,10 @@ use Exception;
 
 class VehiclesController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the vehicles.
      *
@@ -32,7 +35,7 @@ class VehiclesController extends Controller
     public function create()
     {
         $VehicleTypes = VehicleType::pluck('name_arabic','id')->all();
-$Accounts = Account::pluck('name_arabic','id')->all();
+        $Accounts = Account::pluck('name_arabic','id')->all();
         
         return view('vehicles.create', compact('VehicleTypes','Accounts'));
     }
@@ -80,7 +83,7 @@ $Accounts = Account::pluck('name_arabic','id')->all();
     {
         $vehicle = Vehicle::findOrFail($id);
         $VehicleTypes = VehicleType::pluck('name_arabic','id')->all();
-$Accounts = Account::pluck('name_arabic','id')->all();
+        $Accounts = Account::pluck('name_arabic','id')->all();
 
         return view('vehicles.edit', compact('vehicle','VehicleTypes','Accounts'));
     }

@@ -82,6 +82,10 @@ class Shipment extends Model
     {
         return Vehicle::where('id',$data)->first();
     }
+    public function getCarrir($data)
+    {
+        return Vehicle::where('id',$data)->first();
+    }
     /**
      * Get the City for this model.
      *
