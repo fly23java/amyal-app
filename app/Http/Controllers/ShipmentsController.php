@@ -39,7 +39,13 @@ class ShipmentsController extends Controller
     public function index()
     {
         $Vehicles = Vehicle::all();
-        $shipments = Shipment::with('user','city','city','vehicletype','goods','status','user')->orderBy('id', 'DESC')->get();
+        $shipments = Shipment::orderBy('id', 'desc')
+        ->with('user', 'city', 'vehicletype', 'goods', 'status')
+        ->get();
+
+      
+
+        
 
         return view('shipments.index', compact('shipments' ,'Vehicles'));
     }
@@ -90,7 +96,7 @@ class ShipmentsController extends Controller
      */
     public function show($id)
     {
-        $shipment = Shipment::with('user','city','city','vehicletype','goods','status','user','vehicletype')->findOrFail($id);
+        $shipment = Shipment::with('user','city','goods','status','user','vehicletype')->findOrFail($id);
 
         return view('shipments.show', compact('shipment'));
     }
@@ -278,8 +284,8 @@ $Statuses = Status::pluck('name_arabic','id')->all();
     //   dd($id);
 
         $shipment = Shipment::findOrFail($id);
-         $Vehicle = Vehicle::findOrFail($shipment->shipmentDeliveryDetail->vehicle_id);
-        return view('shipments.weybill' , compact('shipment','Vehicle'));
+         $vehicle = Vehicle::findOrFail($shipment->shipmentDeliveryDetail->vehicle_id);
+        return view('shipments.weybill' , compact('shipment','vehicle'));
       
 
     

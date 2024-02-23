@@ -20,6 +20,7 @@ use App\Http\Controllers\PaymentMethodsController;
 use App\Http\Controllers\ShipmentsController;
 use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\ShipmentDeliveryDetailsController;
+use App\Http\Controllers\PrintWaybillController;
 
 /*
 |--------------------------------------------------------------------------
@@ -390,5 +391,13 @@ Route::group([
     Route::delete('/shipment_delivery_detail/{shipmentDeliveryDetail}',[ShipmentDeliveryDetailsController::class, 'destroy'])
          ->name('shipment_delivery_details.shipment_delivery_detail.destroy');
 });
+
+Route::group([
+     'prefix' => 'print_waybills',
+ ], function () {
+     Route::get('/', [PrintWaybillController::class, 'generateInvoice'])
+          ->name('print_waybills.print_waybill.generateInvoice');
+    
+ });
 
 

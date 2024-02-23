@@ -52,7 +52,9 @@
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.supervisor_user_id') }}</dt>
             <dd class="col-lg-10 col-xl-9">{{ optional($shipment->User)->name }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.carrir') }}</dt>
-            <dd class="col-lg-10 col-xl-9">{{ $shipment->shipmentDeliveryDetail->vehicle_id }}</dd>
+            <dd class="col-lg-10 col-xl-9">{{   $shipment->shipmentDeliveryDetail->vehicle_id }}
+
+            </dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.created_at') }}</dt>
             <dd class="col-lg-10 col-xl-9">{{ $shipment->created_at }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.updated_at') }}</dt>

@@ -69,7 +69,10 @@ class Shipment extends Model
         return $this->belongsTo('App\Models\User','supervisor_user_id','id');
     }
 
-
+    public function getAccountName($data)
+    {
+        return Account::where('id',$data)->first();
+    }
     public function getAUserName($data)
     {
         return User::where('id',$data)->first();

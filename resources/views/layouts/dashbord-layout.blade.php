@@ -104,6 +104,25 @@
   display: none;
   text-align: center;
 }
+
+ #print{
+    margin: 10px;
+    padding: 10px;
+    background: #fff!important;
+    color : #000
+
+ }
+
+ #print tr{
+
+    border-bottom: 1px solid #ddd;
+
+ }
+ #print th{
+
+    background-color: #000;
+    color : #fff
+ }
 </style>
    
    
@@ -582,13 +601,16 @@ $.ajaxSetup({
             getVehcile: "{{ route('shipments.shipment.getVehcile')}}",
             getCarrierPrice: "{{ route('shipments.shipment.getCarrierPrice')}}",
             shipmentDetails: "{{ route('shipments.shipment.shipmentDetails')}}",
-            
-            statusesGet: "{{ route('shipments.shipment.statusesGet')}}",
+            getPdf: "{{ route('print_waybills.print_waybill.print')}}",
+             statusesGet: "{{ route('shipments.shipment.statusesGet')}}",
         }
     };
 </script>
-<link rel="stylesheet" type="text/css" href="{{ asset('1708119800_11531/styles.css') }}" media="all" />
-<script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+     <!-- Include html2canvas library -->
+     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+    <!-- Include pdfjs library -->
+    < <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
      <script src="{{ asset('my-function-javascript/getprice.js') }}"></script>
      <script src="{{ asset('my-function-javascript/addVehicle.js') }}"></script>>
      <script src="{{ asset('my-function-javascript/getPdf.js') }}"></script>
