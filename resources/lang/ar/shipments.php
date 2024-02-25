@@ -7,6 +7,8 @@ return [
     'serial_number__placeholder' => 'أدخل الرقم التسلسلي هنا...',
     'user_id' => 'المستخدم',
     'user_id__placeholder' => 'اختر المستخدم',
+    'shipment_date' => 'تاريخ الشحنة ',
+    'shipment_date__placeholder' => 'ادخل تاريخ الشحنة ',
     'loading_city_id' => 'مدينة التحميل',
     'loading_city_id__placeholder' => 'اختر مدينة التحميل',
     'loading_location' => 'جاري تحميل الموقع',

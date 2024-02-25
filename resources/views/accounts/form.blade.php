@@ -66,17 +66,25 @@
 <div class="mb-3 row">
     <label for="type" class="col-form-label text-lg-end col-lg-2 col-xl-3">{{ trans('accounts.type') }}</label>
     <div class="col-lg-10 col-xl-9">
-        <select class="form-select  form-control select2{{ $errors->has('type') ? ' is-invalid' : '' }}" id="type" name="type" required="true">
+        <select class="form-select  form-control {{ $errors->has('type') ? ' is-invalid' : '' }}" id="type" name="type" required="true">
         	    <option value="" style="display: none;" {{ old('type', optional($account)->type ?: '') == '' ? 'selected' : '' }} disabled selected>{{ trans('accounts.type__placeholder') }}</option>
-        	@foreach (['admin' => trans('accounts.type_admin'),
-                'individual_shipper' => trans('accounts.type_individual_shipper'),
-                'individual_carrier' => trans('accounts.type_individual_carrier'),
-                'business_shipper' => trans('accounts.type_business_shipper'),
-                'business_carrier' => trans('accounts.type_business_carrier')] as $key => $text)
-			    <option value="{{ $key }}" {{ old('type', optional($account)->type) == $key ? 'selected' : '' }}>
-			    	{{ $text }}
+        	   
+			    <option value="admin" {{ old('type', optional($account)->type) == 'admin' ? 'selected' : '' }}>
+			    	{{ trans('accounts.type_admin') }}
 			    </option>
-			@endforeach
+			    <option value="individual_shipper" {{ old('type', optional($account)->type) == 'individual_shipper' ? 'selected' : '' }}>
+			    	{{ trans('accounts.type_individual_shipper') }}
+			    </option>
+			    <option value="individual_carrier" {{ old('type', optional($account)->type) == 'individual_carrier' ? 'selected' : '' }}>
+			    	{{ trans('accounts.type_individual_carrier') }}
+			    </option>
+			    <option value="business_shipper" {{ old('type', optional($account)->type) == 'business_shipper' ? 'selected' : '' }}>
+			    	{{ trans('accounts.type_business_shipper') }}
+			    </option>
+			    <option value="business_carrier" {{ old('type', optional($account)->type) == 'business_carrier' ? 'selected' : '' }}>
+			    	{{ trans('accounts.type_business_carrier') }}
+			    </option>
+			
         </select>
         
         {!! $errors->first('type', '<div class="invalid-feedback">:message</div>') !!}

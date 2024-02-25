@@ -46,7 +46,7 @@ class AccountsController extends Controller
      */
     public function store(Request $request)
     {
-        
+        // dd($request->all());
         $data = $this->getData($request);
         
         Account::create($data);
@@ -94,11 +94,22 @@ class AccountsController extends Controller
      */
     public function update($id, Request $request)
     {
-        
+        // dd($request->all());
         $data = $this->getData($request);
         
         $account = Account::findOrFail($id);
-        $account->update($data);
+       
+        $account->update([
+            "name_arabic" => $data['name_arabic'],
+            "name_english" => $data['name_english'],
+            "cr_number" => $data['cr_number'],
+            "bank" => $data['bank'],
+            "iban" => $data['iban'],
+            "account_number" => $data['account_number'],
+            "tax_number" => $data['tax_number'],
+            "tax_value" => $data['tax_value'],
+            "type" =>  $data['type'],
+        ]);
 
         return redirect()->route('accounts.account.index')
             ->with('success_message', 'Account was successfully updated.');  
@@ -140,7 +151,9 @@ class AccountsController extends Controller
             'name_english' => 'nullable|string|min:0|max:255',
             
             'bank' => 'nullable|string|min:0|max:255',
+            'cr_number' => 'nullable|string|min:0|max:255',
             'iban' => 'nullable|string|min:0|max:255',
+            'account_number' => 'nullable|string|min:0|max:255',
            
             'tax_number' => 'nullable|numeric|string|min:0|max:255',
             'tax_value' => 'nullable|string|min:0|max:255',

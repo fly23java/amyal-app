@@ -50,14 +50,16 @@
 <div class="mb-3 row">
     <label for="type" class="col-form-label text-lg-end col-lg-2 col-xl-3">{{ trans('users.type') }}</label>
     <div class="col-lg-10 col-xl-9">
-        <select class="form-select   select2   form-control{{ $errors->has('type') ? ' is-invalid' : '' }}" id="type" name="type" required="true">
-        	    <option value="" style="display: none;" {{ old('type', optional($user)->type ?: '') == '' ? 'selected' : '' }} disabled selected>{{ trans('users.type__placeholder') }}</option>
-        	@foreach (['admin' => trans('users.type_admin'),
-'staff' => trans('users.type_staff')] as $key => $text)
-			    <option value="{{ $key }}" {{ old('type', optional($user)->type) == $key ? 'selected' : '' }}>
-			    	{{ $text }}
+        <select class="form-select  form-control{{ $errors->has('type') ? ' is-invalid' : '' }}" id="type" name="type" required="true">
+        	    <option  style="display: none;" {{ old('type', optional($user)->type ?: '') == '' ? 'selected' : '' }} disabled selected>{{ trans('users.type__placeholder') }}</option>
+        
+			    <option value="admin" {{ old('type', optional($user)->type) == 'admin' ? 'selected' : '' }}>
+			    	{{ trans('users.type_admin') }}
 			    </option>
-			@endforeach
+			    <option value="staff" {{ old('type', optional($user)->type) == 'staff' ? 'selected' : '' }}>
+			    	{{ trans('users.type_staff') }}
+			    </option>
+			
         </select>
         
         {!! $errors->first('type', '<div class="invalid-feedback">:message</div>') !!}
@@ -69,12 +71,14 @@
     <div class="col-lg-10 col-xl-9">
         <select class="form-select   select2   form-control{{ $errors->has('status') ? ' is-invalid' : '' }}" id="status" name="status" required="true">
         	    <option value="" style="display: none;" {{ old('status', optional($user)->status ?: '') == '' ? 'selected' : '' }} disabled selected>{{ trans('users.status__placeholder') }}</option>
-        	@foreach (['active' => trans('users.status_active'),
-'disabled' => trans('users.status_disabled')] as $key => $text)
-			    <option value="{{ $key }}" {{ old('status', optional($user)->status) == $key ? 'selected' : '' }}>
-			    	{{ $text }}
+        
+                <option value="active" {{ old('status', optional($user)->status) == 'active' ? 'selected' : '' }}>
+			    	{{ trans('users.status_active') }}
 			    </option>
-			@endforeach
+                <option value="disabled" {{ old('status', optional($user)->status) == 'disabled' ? 'selected' : '' }}>
+			    	{{ trans('users.status_disabled') }}
+			    </option>
+			
         </select>
         
         {!! $errors->first('status', '<div class="invalid-feedback">:message</div>') !!}

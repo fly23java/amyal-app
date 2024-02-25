@@ -127,17 +127,17 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
        
         // dd($request->all());
-        if($request->password){
+
         $user->update([
             "name" => $request->name,
             "email" => $request->email,
-            "password" => Hash::make($request->password),
+           
             "birth_date" =>$request->birth_date,
             "account_id" =>$request->account_id,
             "type" =>$request->type,
             "status" => $request->status,
         ]);
-        }else{
+        if($request->password){
             $user->update([
                 "password" => Hash::make($request->password),
               ]);

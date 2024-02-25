@@ -601,7 +601,7 @@ $.ajaxSetup({
             getVehcile: "{{ route('shipments.shipment.getVehcile')}}",
             getCarrierPrice: "{{ route('shipments.shipment.getCarrierPrice')}}",
             shipmentDetails: "{{ route('shipments.shipment.shipmentDetails')}}",
-            getPdf: "{{ route('print_waybills.print_waybill.print')}}",
+            
              statusesGet: "{{ route('shipments.shipment.statusesGet')}}",
         }
     };
@@ -611,7 +611,7 @@ $.ajaxSetup({
 
     <!-- Include pdfjs library -->
     < <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-     <script src="{{ asset('my-function-javascript/getprice.js') }}"></script>
+    
      <script src="{{ asset('my-function-javascript/addVehicle.js') }}"></script>>
      <script src="{{ asset('my-function-javascript/getPdf.js') }}"></script>
      <script src="{{ asset('my-function-javascript/statusesGet.js') }}"></script>

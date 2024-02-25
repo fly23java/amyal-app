@@ -13,6 +13,12 @@ class Account extends Model
         'name_arabic',
         'name_english',
         'cr_number',
+        'bank',
+        'iban',
+        'account_number',
+        'tax_number',
+        'tax_value',
+        'type',
     ];
 
     public function users() 

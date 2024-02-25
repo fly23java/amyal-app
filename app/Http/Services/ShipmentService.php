@@ -27,6 +27,7 @@ class ShipmentService {
             'goods_id' => $data ['goods_id'],
             'price' => $data ['price'],
             'status_id' => 1 ,
+            'shipment_date' => $data ['shipment_date'] ,
         ]);
        $Shipment_id = DB::getPdo()->lastInsertId();
 
@@ -129,7 +130,22 @@ class ShipmentService {
  
     
 
-   
+     public static function generateSerialNumber()
+     {
+         $today = Carbon::today()->toDateString();
+         $lastShipment = static::whereDate('shipment_date', $today)->latest('id')->first();
+ 
+         if ($lastShipment) {
+             $lastTransactionNumber = intval($lastShipment->transaction_number);
+             $nextTransactionNumber = $lastTransactionNumber + 1;
+         } else {
+             $nextTransactionNumber = 1;
+         }
+ 
+         $serialNumber = $today . '-' . str_pad($nextTransactionNumber, 4, '0', STR_PAD_LEFT);
+ 
+         return $serialNumber;
+     }
 
   
 

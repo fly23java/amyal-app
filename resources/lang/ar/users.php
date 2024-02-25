@@ -2,7 +2,7 @@
 
 return [
     'id' => 'Id',
-    'login' => 'تسجيل الدخزل',
+    'login' => 'تسجيل الدخول',
     'id__placeholder' => 'Enter id here...',
     'name' => 'الاسم',
     'name__placeholder' => 'أدخل الاسم هنا...',

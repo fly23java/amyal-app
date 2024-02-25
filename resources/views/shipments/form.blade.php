@@ -16,6 +16,13 @@
 </div>
 
 <div class="mb-3 row">
+    <label for="shipment_date" class="col-form-label text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.shipment_date') }}</label>
+    <div class="col-lg-10 col-xl-9">
+        <input class="form-control {{ $errors->has('shipment_date') ? ' is-invalid' : '' }}  flatpickr-disabled-range flatpickr-input" name="shipment_date" type="text" id="shipment_date" value="{{ old('shipment_date', optional($shipment)->shipment_date) }}" placeholder="{{ trans('shipments.shipment_date__placeholder') }}">
+        {!! $errors->first('shipment_date', '<div class="invalid-feedback">:message</div>') !!}
+    </div>
+</div>
+<div class="mb-3 row">
     <label for="loading_city_id" class="col-form-label text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.loading_city_id') }}</label>
     <div class="col-lg-10 col-xl-9">
         <select class="form-select   select2   form-control{{ $errors->has('loading_city_id') ? ' is-invalid' : '' }}" id="loading_city_id" name="loading_city_id" required="true">
