@@ -24,7 +24,7 @@ class ContractDetailsController extends Controller
      */
     public function index()
     {
-        $contractDetails = ContractDetail::with('contract','vehicletype','goods','city','city')->orderBy('id', 'DESC')->get();
+        $contractDetails = ContractDetail::with('contract','vehicletype','goods','city')->orderBy('id', 'DESC')->get();
 
         return view('contract_details.index', compact('contractDetails'));
     }
@@ -36,7 +36,7 @@ class ContractDetailsController extends Controller
      */
     public function create()
     {
-        $Contracts = Contract::pluck('description','id')->all();
+        $Contracts = Contract::pluck('contract_title','id')->all();
 $VehicleTypes = VehicleType::pluck('name_arabic','id')->all();
 $Goods = Goods::pluck('name_arabic','id')->all();
 $Cities = City::pluck('name_arabic','id')->all();
@@ -86,7 +86,7 @@ $Cities = City::pluck('name_arabic','id')->all();
     public function edit($id)
     {
         $contractDetail = ContractDetail::findOrFail($id);
-        $Contracts = Contract::pluck('description','id')->all();
+        $Contracts = Contract::pluck('contract_title','id')->all();
 $VehicleTypes = VehicleType::pluck('name_arabic','id')->all();
 $Goods = Goods::pluck('name_arabic','id')->all();
 $Cities = City::pluck('name_arabic','id')->all();

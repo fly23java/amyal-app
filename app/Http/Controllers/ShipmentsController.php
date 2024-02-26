@@ -39,9 +39,7 @@ class ShipmentsController extends Controller
     public function index()
     {
         $Vehicles = Vehicle::all();
-        $shipments = Shipment::orderBy('id', 'desc')
-        ->with('user', 'city', 'vehicletype', 'goods', 'status')
-        ->get();
+        $shipments = Shipment::orderBy('serial_number', 'desc')->get();
 
       
 

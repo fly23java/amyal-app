@@ -87,7 +87,10 @@ class Shipment extends Model
     }
     public function getCarrir($data)
     {
-        return Vehicle::where('id',$data)->first();
+        $shipmentDeliveryDetail =  shipmentDeliveryDetail::where('shipment_id',$data)->first();
+        $Vehicle =  Vehicle::where('id',$shipmentDeliveryDetail['vehicle_id'])->first();
+        return Account::where('id', $Vehicle['account_id'])->first();
+        // return Vehicle::where('id',$shipmentDeliveryDetail['vehicle_id'])->first();
     }
     /**
      * Get the City for this model.

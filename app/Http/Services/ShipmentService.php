@@ -27,7 +27,7 @@ class ShipmentService {
             'goods_id' => $data ['goods_id'],
             'price' => $data ['price'],
             'status_id' => 1 ,
-            'shipment_date' => $data ['shipment_date'] ,
+            
         ]);
        $Shipment_id = DB::getPdo()->lastInsertId();
 

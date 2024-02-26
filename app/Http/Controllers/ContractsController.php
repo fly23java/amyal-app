@@ -47,10 +47,10 @@ class ContractsController extends Controller
      */
     public function store(ContractsFormRequest $request)
     {
+        // dd($request->all());   
+         $request->validated();
         
-        $data = $request->getData();
-        
-        Contract::create($data);
+        Contract::create($request->all());
 
         return redirect()->route('contracts.contract.index')
             ->with('success_message', trans('contracts.model_was_added'));

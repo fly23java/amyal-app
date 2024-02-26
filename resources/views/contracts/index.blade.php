@@ -29,10 +29,10 @@
         <div class="card-body p-0">
             <div class="table-responsive">
 
-                <table class="table table-striped ">
+                <table class="table table-striped  zero-configuration1">
                     <thead>
                         <tr>
-                            <th>{{ trans('contracts.description') }}</th>
+                            <th>{{ trans('contracts.contract_title') }}</th>
                             <th>{{ trans('contracts.receiver_id') }}</th>
 
                             <th></th>
@@ -41,7 +41,7 @@
                     <tbody>
                     @foreach($contracts as $contract)
                         <tr>
-                            <td class="align-middle">{{ $contract->description }}</td>
+                            <td class="align-middle">{{ $contract->contract_title }}</td>
                             <td class="align-middle">{{ optional($contract->User)->name }}</td>
 
                             <td class="text-end">

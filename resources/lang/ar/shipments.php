@@ -23,6 +23,7 @@ return [
     'goods_id__placeholder' => 'اختر البضائع',
     'status_id' => 'الحالة',
     'status_id__placeholder' => 'اختر الحالة',
+    'carrir' => 'الناقل',
     'price' => 'السعر',
     'price__placeholder' => 'أدخل السعر هنا...',
     'carrier_price' => 'سعر الناقل',

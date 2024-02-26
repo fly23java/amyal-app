@@ -27,6 +27,7 @@ class ContractsFormRequest extends FormRequest
         $rules = [
             'sender_id' => 'required',
             'receiver_id' => 'required',
+            'contract_title' => 'required',
             'description' => 'required',
         ];
 

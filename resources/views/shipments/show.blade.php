@@ -52,7 +52,11 @@
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.supervisor_user_id') }}</dt>
             <dd class="col-lg-10 col-xl-9">{{ optional($shipment->User)->name }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.carrir') }}</dt>
-            <dd class="col-lg-10 col-xl-9">{{   $shipment->shipmentDeliveryDetail->vehicle_id }}
+            <dd class="col-lg-10 col-xl-9">
+                @if (!empty($shipment->shipmentDeliveryDetail->shipment_id))
+                    {{ ($shipment->getCarrir($shipment->id)->name_arabic)  }}
+                @endif
+               
 
             </dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.created_at') }}</dt>

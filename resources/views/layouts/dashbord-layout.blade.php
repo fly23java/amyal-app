@@ -553,9 +553,20 @@
 
 
              
-        }     });
+        } , order: [[3, 'desc']]  });
 
-           
+        $('.zero-configuration1').DataTable({
+        "drawCallback": function () {
+            $('.previous').addClass('btn btn-sm btn-dark');
+            $('.paginate_button ').addClass('btn btn-sm btn-primary');
+
+            $('.next').addClass('btn btn-sm btn-dark');
+            $('#DataTables_Table_0_filter input').addClass('form-control');
+            $('#DataTables_Table_0_length select').addClass('custom-select form-control');
+
+
+             
+        } });
      
     } );
 
@@ -613,7 +624,7 @@ $.ajaxSetup({
     < <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     
      <script src="{{ asset('my-function-javascript/addVehicle.js') }}"></script>>
-     <script src="{{ asset('my-function-javascript/getPdf.js') }}"></script>
+     <script src="{{ asset('my-function-javascript/getprice.js') }}"></script>
      <script src="{{ asset('my-function-javascript/statusesGet.js') }}"></script>
 </body>
 <!-- END: Body-->

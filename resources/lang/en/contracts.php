@@ -7,6 +7,8 @@ return [
     'sender_id__placeholder' => 'Select sender',
     'receiver_id' => 'Receiver',
     'receiver_id__placeholder' => 'Select receiver',
+    'contract_title' => 'Contract title',
+    'contract_title__placeholder' => 'Enter Contract title..',
     'description' => 'Description',
     'created_at' => 'Created At',
     'created_at__placeholder' => 'Enter created at here...',

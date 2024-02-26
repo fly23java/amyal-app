@@ -395,7 +395,7 @@ Route::group([
 Route::group([
      'prefix' => 'print_waybills',
  ], function () {
-     Route::get('/', [PrintWaybillController::class, 'generateInvoice'])
+     Route::get('/{id}', [PrintWaybillController::class, 'generateInvoice'])
           ->name('print_waybills.print_waybill.generateInvoice');
     
  });

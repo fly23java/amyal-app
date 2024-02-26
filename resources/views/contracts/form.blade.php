@@ -31,6 +31,14 @@
     </div>
 </div>
 
+
+<div class="mb-3 row">
+    <label for="name_arabic" class="col-form-label text-lg-end col-lg-2 col-xl-3">{{ trans('contracts.contract_title') }}</label>
+    <div class="col-lg-10 col-xl-9">
+        <input class="form-control{{ $errors->has('contract_title') ? ' is-invalid' : '' }}" name="contract_title" type="text" id="contract_title" value="{{ old('contract_title', optional($contract)->contract_title) }}" minlength="1" maxlength="255" required="true" placeholder="{{ trans('contracts.contract_title__placeholder') }}">
+        {!! $errors->first('contract_title', '<div class="invalid-feedback">:message</div>') !!}
+    </div>
+</div>
 <div class="mb-3 row">
     <label for="description" class="col-form-label text-lg-end col-lg-2 col-xl-3">{{ trans('contracts.description') }}</label>
     <div class="col-lg-10 col-xl-9">

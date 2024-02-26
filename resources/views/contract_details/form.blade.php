@@ -10,7 +10,7 @@
 			    </option>
 			@endforeach
         </select>
-        
+       
         {!! $errors->first('contract_id', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>

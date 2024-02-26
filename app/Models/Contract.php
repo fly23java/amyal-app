@@ -33,6 +33,7 @@ class Contract extends Model
     protected $fillable = [
                   'sender_id',
                   'receiver_id',
+                  'contract_title',
                   'description'
               ];
 

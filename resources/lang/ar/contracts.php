@@ -8,6 +8,8 @@ return [
     'description' => 'الوصف',
     'receiver_id' => 'المستقبل',
     'receiver_id__placeholder' => 'اختر جهة الاستقبال',
+    'contract_title' => 'عنوان التعاقد ',
+    'contract_title__placeholder' => 'ادخل عنوان التعاقد',
     'created_at' => 'تم الإنشاء في',
     'created_at__placeholder' => 'أدخل تم الإنشاء هنا...',
     'updated_at' => 'تم التحديث عند',

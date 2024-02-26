@@ -26,6 +26,7 @@ class ShipmentsFormRequest extends FormRequest
     {
         $rules = [
             'user_id' => 'required',
+            'shipment_date' => 'required',
             'loading_city_id' => 'required',
             'unloading_city_id' => 'required',
             'vehicle_type_id' => 'required',

@@ -11,6 +11,7 @@
     color: #333;
     direction: rtl;
     font-size:26px;
+    background-color: #eee;
     
 }
 
@@ -144,7 +145,9 @@ th{
             </tr>
         </table>
 
-
+        <div  style="position: absolute;top:{{ $top}}%;right: {{ $right }}%;">
+            @include('weybill.seal')
+        </div>
       
     </div>
 </body>

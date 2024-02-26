@@ -87,7 +87,7 @@
                                                             <i data-feather="plus" class="mr-50"></i>
                                                             <span>{{ trans('statuses.edit') }}</span>
                                                         </a>
-                                                         <a class="dropdown-item" href="{{ route('shipments.shipment.pdf', $shipment->id ) }}">
+                                                         <a class="dropdown-item" href="{{ route('print_waybills.print_waybill.generateInvoice', $shipment->id ) }}">
                                                             <i data-feather="plus" class="mr-50"></i>
                                                             <span>{{ trans('main.testprint') }}</span>
                                                         </a>
