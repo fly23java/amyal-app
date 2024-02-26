@@ -70,14 +70,7 @@
                                 <input name="_method" value="DELETE" type="hidden">
                                 {{ csrf_field() }}
                                      <div class="btn-group btn-group-sm" role="group">
-                                        <a class="btn btn-secondary" href="{{ route('shipments.shipment.show', $shipment->id ) }}">
-                                        <i class="fa-solid fa-eye"></i>
-                                          
-                                        </a>
-                                        <a class="btn btn-secondary" href="{{ route('shipments.shipment.edit', $shipment->id ) }}">
-                                            <i class="fa-solid fa-edit"></i>
-                                            
-                                        </a>
+                                     
                                         <div class="dropdown">
                                                     <button type="button" class="btn btn-secondary  text-white dropdown-toggle hide-arrow" data-toggle="dropdown">
                                                          <i class="fa-solid fa-table-list"></i>
@@ -105,6 +98,15 @@
                                                          
                                                     </div>
                                         </div>
+
+                                        <a class="btn btn-secondary" href="{{ route('shipments.shipment.show', $shipment->id ) }}">
+                                        <i class="fa-solid fa-eye"></i>
+                                          
+                                        </a>
+                                        <a class="btn btn-secondary" href="{{ route('shipments.shipment.edit', $shipment->id ) }}">
+                                            <i class="fa-solid fa-edit"></i>
+                                            
+                                        </a>
                                     </div>
                                         
 

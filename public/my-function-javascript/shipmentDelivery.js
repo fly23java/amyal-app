@@ -4,7 +4,7 @@ $(document).ready(function(){
 
 
     
-    $(document).on('click', '#test_hima', function(e) {
+    $(document).on('click', '#shipment_delivery', function(e) {
         //get cover id
        
         // $("#loader").removeClass("d-none"); 
@@ -15,70 +15,36 @@ $(document).ready(function(){
         var data={
             'id': id
         };
-        $("#shipment_id").val(id);
+        $("#shipment_delivery_shipment_id").val(id);
      
            // start get data if you hava
         $.ajax({
-            url: config.routes.getVehcile,
+            url: config.routes.shipmentDetails,
             method: 'get',
-            dataType: 'json',
-            success: function(response){
-               $.each(response.Vehicle, function (i, item) {
-                    $('#vehicle_id').append($('<option>', { 
-                        value: item.id,
-                        text : item.plate +' '+item.right_letter  +' '+item.middle_letter  +' '+item.left_letter 
-                    }));
-                   
-
-
-                    $('#vehicle_id').select2();
-                });
-                
-            },
-            error: function(response) {
-              
-            }
-        });
-        // start get data if you hava
-        $.ajax({
-            url: config.routes.getDatahipmentdetails,
-            method: 'get',
-            dataType: 'json',
             data: data,
+            dataType: 'json',
             success: function(response){
-                vehcil = response.shipmentDeliveryDetail.vehicle_id;
-                $("#shipment_delivery_detail_id").val(response.shipmentDeliveryDetail.id);
-                $("#vehicle_id option").each(function(){
-                    
-                   
-                    if($(this).val()== vehcil){ // EDITED THIS LINE
-                        $(this).attr("selected","selected");    
-                        $('#vehicle_id').select2();
-                      
-                    }
-                   
-                    if($.trim(response.shipment.carrier_price)){
-                        $("#carrier_price").val(response.shipment.carrier_price);
-                    }
-                  
+               console.log(response.shipmentDeliveryDetail);
+
+               if($.trim(response.shipmentDeliveryDetail.loading_time)){
+                $("#loading_time").val(response.shipmentDeliveryDetail.loading_time);
+                }
+               if($.trim(response.shipmentDeliveryDetail.unloading_time)){
+                $("#unloading_time").val(response.shipmentDeliveryDetail.unloading_time);
+                }
+               if($.trim(response.shipmentDeliveryDetail.arrival_time)){
+                $("#arrival_time").val(response.shipmentDeliveryDetail.arrival_time);
+                }
+               if($.trim(response.shipmentDeliveryDetail.departure_time)){
+                $("#departure_time").val(response.shipmentDeliveryDetail.departure_time);
+                }
               
-                });
-           
+                $("#shipment_delivery_shipment_id").val(response.shipmentDeliveryDetail.shipment_id);
             },
             error: function(response) {
-                console.log('not data');
+              
             }
         });
-
-      
-        
-        
-          
-        // $("#loader").removeClass("d-block");
-        // $("#loader").addClass("d-none"); 
-       
-       
-        $('#modals-slide-in').modal('show');
         
     });
     

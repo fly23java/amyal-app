@@ -238,56 +238,23 @@ $Statuses = Status::pluck('name_arabic','id')->all();
     public function shipmentDetails(Request $request)
     {
 
-       
-    //     // dd($request->all());
-    //     request()->validate([
-    //         "shipment_delivery_detail_id" => 'required',
-    //         "supervisor_user_id" => 'required',
-    //         "shipment_id" => 'required',
-    //         "vehicle_id" => 'required',
-    //         "carrier_price" => 'required',
-    //          ]);
-            
-    //   $shipment = Shipment::update(
-    //     [
-    //         'id' => $request->shipment_id
-    //     ],
-    //     [
-            
-    //         "carrier_price" =>  $request->carrier_price,
-    //         "supervisor_user_id" => Auth::user()->id,
-            
-    //     ]);
-      
-    //     if(!empty($request->shipment_delivery_detail_id)){
-    //      ShipmentDeliveryDetail::updateOrCreate(
-    //     [
-    //         'id' => $request->shipment_delivery_detail_id
-    //     ],
-    //     [
-    //       "vehicle_id" => $request->vehicle_id,
-    //     ]);
-    //     }else{
 
-    //         ShipmentDeliveryDetail::update([
-    //               "vehicle_id" => $request->vehicle_id,
-    //             ]);
-    //     }
-        // this inject funtion form services 
-        // return   (new ShipmentService())->shipmentDetails($request);
-    
+        $shipment = Shipment::findOrFail($request->id);
+        return response()->json(
+            [
+            'success' => 'true',
+            'shipmentDeliveryDetail' => $shipment->shipmentDeliveryDetail,
+           ]);
     }
-    public function pdf($id)
+
+
+    public function storeShipmentDetails(Request $request)
     {
-    //   dd($id);
+        dd($request->all());
 
-        $shipment = Shipment::findOrFail($id);
-         $vehicle = Vehicle::findOrFail($shipment->shipmentDeliveryDetail->vehicle_id);
-        return view('shipments.weybill' , compact('shipment','vehicle'));
-      
+        $shipment = Shipment::findOrFail($request->shipment_id);
+          }
 
-    
-    }
 
 
     public function statusesGet(Request $request)
