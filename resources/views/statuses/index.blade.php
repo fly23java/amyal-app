@@ -13,7 +13,7 @@
     <div class="card text-bg-theme">
 
         <div class="card-header d-flex justify-content-between align-items-center p-3">
-            <h4 class="m-0">{{ trans('main.statuses') }}</h4>
+            <h4 class="m-0">Statuses</h4>
             <div>
                 <a href="{{ route('statuses.status.create') }}" class="btn btn-secondary" title="{{ trans('statuses.create') }}">
                     <span class="fa-solid fa-plus" aria-hidden="true"></span>
@@ -29,11 +29,13 @@
         <div class="card-body p-0">
             <div class="table-responsive">
 
-                <table class="table table-striped zero-configuration">
+                <table class="table table-striped ">
                     <thead>
                         <tr>
                             <th>{{ trans('statuses.name_arabic') }}</th>
                             <th>{{ trans('statuses.name_english') }}</th>
+                            <th>{{ trans('statuses.confirm_sending_the_message') }}</th>
+                            <th>{{ trans('statuses.parent_id') }}</th>
 
                             <th></th>
                         </tr>
@@ -43,6 +45,8 @@
                         <tr>
                             <td class="align-middle">{{ $status->name_arabic }}</td>
                             <td class="align-middle">{{ $status->name_english }}</td>
+                            <td class="align-middle">{{ ($status->confirm_sending_the_message) ? 'نعم' : 'لا' }}</td>
+                            <td class="align-middle">{{ optional($status->ParentStatus)->name_arabic }}</td>
 
                             <td class="text-end">
 

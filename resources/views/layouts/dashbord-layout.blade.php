@@ -626,6 +626,10 @@ $.ajaxSetup({
      <script src="{{ asset('my-function-javascript/addVehicle.js') }}"></script>>
      <script src="{{ asset('my-function-javascript/getprice.js') }}"></script>
      <script src="{{ asset('my-function-javascript/statusesGet.js') }}"></script>
+     <script src="{{ asset('my-function-javascript/shipmentDelivery.js') }}"></script>
+
+
+
 </body>
 <!-- END: Body-->
 

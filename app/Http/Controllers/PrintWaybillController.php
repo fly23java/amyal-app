@@ -22,14 +22,14 @@ class PrintWaybillController extends Controller
             'right' => $right,
            
         ];
-        // return view('weybill.layouts', $data);
+       
         $html = \View::make('weybill.layouts', $data)->render();
         
         $pdf = SnappyPdf::loadHTML($html)->setOption('enable-local-file-access', true);
 
       
         
-        // You can save the PDF to a file or return it as a response
+       
         // Save to file
         // $pdf->save('pdf/test.pdf');
         
@@ -37,7 +37,7 @@ class PrintWaybillController extends Controller
         return $pdf->download($shipment->serial_number.'.pdf');
         // return $pdf->stream();
 
-        // return response()->file($pdfFilePath);
+    
         
 
     

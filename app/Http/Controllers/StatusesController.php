@@ -9,10 +9,7 @@ use Exception;
 
 class StatusesController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+
     /**
      * Display a listing of the statuses.
      *
@@ -20,7 +17,7 @@ class StatusesController extends Controller
      */
     public function index()
     {
-        $statuses = Status::orderBy('id', 'DESC')->get();
+        $statuses = Status::with('parentstatus')->paginate(25);
 
         return view('statuses.index', compact('statuses'));
     }
@@ -32,9 +29,9 @@ class StatusesController extends Controller
      */
     public function create()
     {
+        $ParentStatuses = Status::pluck('name_arabic','id')->all();
         
-        
-        return view('statuses.create');
+        return view('statuses.create', compact('ParentStatuses'));
     }
 
     /**
@@ -64,7 +61,7 @@ class StatusesController extends Controller
      */
     public function show($id)
     {
-        $status = Status::findOrFail($id);
+        $status = Status::with('parentstatus')->findOrFail($id);
 
         return view('statuses.show', compact('status'));
     }
@@ -79,9 +76,9 @@ class StatusesController extends Controller
     public function edit($id)
     {
         $status = Status::findOrFail($id);
-        
+        $ParentStatuses = Status::pluck('name_arabic','id')->all();
 
-        return view('statuses.edit', compact('status'));
+        return view('statuses.edit', compact('status','ParentStatuses'));
     }
 
     /**

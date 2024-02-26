@@ -5,7 +5,7 @@
 <div class="card text-bg-theme">
 
      <div class="card-header d-flex justify-content-between align-items-center p-3">
-        <h4 class="m-0">{{ trans('statuses.show') }}</h4>
+        <h4 class="m-0">{{ isset($title) ? $title : 'Status' }}</h4>
         <div>
             <form method="POST" action="{!! route('statuses.status.destroy', $status->id) !!}" accept-charset="UTF-8">
                 <input name="_method" value="DELETE" type="hidden">
@@ -37,6 +37,14 @@
             <dd class="col-lg-10 col-xl-9">{{ $status->name_arabic }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('statuses.name_english') }}</dt>
             <dd class="col-lg-10 col-xl-9">{{ $status->name_english }}</dd>
+            <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('statuses.message_text_in_arabic') }}</dt>
+            <dd class="col-lg-10 col-xl-9">{{ $status->message_text_in_arabic }}</dd>
+            <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('statuses.message_text_in_english') }}</dt>
+            <dd class="col-lg-10 col-xl-9">{{ $status->message_text_in_english }}</dd>
+            <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('statuses.confirm_sending_the_message') }}</dt>
+            <dd class="col-lg-10 col-xl-9">{{ ($status->confirm_sending_the_message) ? 'Yes' : 'No' }}</dd>
+            <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('statuses.parent_id') }}</dt>
+            <dd class="col-lg-10 col-xl-9">{{ optional($status->ParentStatus)->name_arabic }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('statuses.created_at') }}</dt>
             <dd class="col-lg-10 col-xl-9">{{ $status->created_at }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('statuses.updated_at') }}</dt>

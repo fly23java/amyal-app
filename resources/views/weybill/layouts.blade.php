@@ -11,7 +11,7 @@
     color: #333;
     direction: rtl;
     font-size:26px;
-    background-color: #eee;
+    /* background-color: #eee; */
     
 }
 
@@ -46,6 +46,10 @@ th{
     .redios{
         
         border-radius: 11px;
+    }
+
+    @media print {
+    background: #eee !important; /* <= DISABLES backgrounds */
     }
     </style>
     

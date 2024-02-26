@@ -32,7 +32,11 @@ class Status extends Model
      */
     protected $fillable = [
                   'name_arabic',
-                  'name_english'
+                  'name_english',
+                  'message_text_in_arabic',
+                  'message_text_in_english',
+                  'confirm_sending_the_message',
+                  'parent_id'
               ];
 
     /**
@@ -49,6 +53,35 @@ class Status extends Model
      */
     protected $casts = [];
     
+    /**
+     * Get the ParentStatus for this model.
+     *
+     * @return App\Models\Status
+     */
+    public function ParentStatus()
+    {
+        return $this->belongsTo('App\Models\Status','parent_id','id');
+    }
+
+    /**
+     * Get the shipment for this model.
+     *
+     * @return App\Models\Shipment
+     */
+    public function shipment()
+    {
+        return $this->hasOne('App\Models\Shipment','status_id','id');
+    }
+
+    /**
+     * Get the childStatus for this model.
+     *
+     * @return App\Models\Status
+     */
+    public function childStatus()
+    {
+        return $this->hasOne('App\Models\Status','parent_id','id');
+    }
 
 
     /**
@@ -57,20 +90,20 @@ class Status extends Model
      * @param  string  $value
      * @return array
      */
-    // public function getCreatedAtAttribute($value)
-    // {
-    //     return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
-    // }
+    public function getCreatedAtAttribute($value)
+    {
+        return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
+    }
 
-    // /**
-    //  * Get updated_at in array format
-    //  *
-    //  * @param  string  $value
-    //  * @return array
-    //  */
-    // public function getUpdatedAtAttribute($value)
-    // {
-    //     return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
-    // }
+    /**
+     * Get updated_at in array format
+     *
+     * @param  string  $value
+     * @return array
+     */
+    public function getUpdatedAtAttribute($value)
+    {
+        return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
+    }
 
 }

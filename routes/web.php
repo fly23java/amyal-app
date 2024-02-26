@@ -370,6 +370,8 @@ Route::group([
           ->name('shipments.shipment.statusesGet');
       Route::post('/shipment/statusUpdate',[ShipmentsController::class, 'statusUpdate'])
           ->name('shipments.shipment.statusUpdate');
+
+          
  });
 
 

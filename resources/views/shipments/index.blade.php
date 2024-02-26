@@ -38,8 +38,8 @@
                             <th>{{ trans('shipments.unloading_city_id') }}</th>
                             <th>{{ trans('shipments.vehicle_type_id') }}</th>
                          
-                            <th>{{ trans('shipments.status_id') }}</th>
-                            <th>{{ trans('shipments.price') }}</th>
+                            <!-- <th>{{ trans('shipments.status_id') }}</th> -->
+                            <th>{{ trans('shipments.carrir') }}</th>
                             <th>{{ trans('shipments.supervisor_user_id') }}</th>
                            
 
@@ -55,8 +55,12 @@
                             <td class="align-middle">{{  $shipment->getCityName($shipment->unloading_city_id)->name_arabic  }}</td>
                             <td class="align-middle">{{ optional($shipment->VehicleType)->name_arabic }}</td>
                             
-                            <td class="align-middle badge badge-pill badge-light-warning  mt-1">{{ optional($shipment->Status)->name_arabic }}</td>
-                            <td class="align-middle">{{ $shipment->price }}</td>
+                            <!-- <td class="align-middle badge badge-pill badge-light-warning  mt-1">{{ optional($shipment->Status)->name_arabic }}</td> -->
+                            <td class="align-middle">
+                            @if (!empty($shipment->shipmentDeliveryDetail->shipment_id))
+                                {{ ($shipment->getCarrir($shipment->id)->name_arabic)  }}
+                            @endif
+                            </td>
                             <td class="align-middle">{{ optional($shipment->User)->name }}</td>
                             
 
@@ -65,20 +69,21 @@
                                 <form method="POST" action="{!! route('shipments.shipment.destroy', $shipment->id) !!}" accept-charset="UTF-8">
                                 <input name="_method" value="DELETE" type="hidden">
                                 {{ csrf_field() }}
-
-                                <div class="dropdown">
+                                     <div class="btn-group btn-group-sm" role="group">
+                                        <a class="btn btn-secondary" href="{{ route('shipments.shipment.show', $shipment->id ) }}">
+                                        <i class="fa-solid fa-eye"></i>
+                                          
+                                        </a>
+                                        <a class="btn btn-secondary" href="{{ route('shipments.shipment.edit', $shipment->id ) }}">
+                                            <i class="fa-solid fa-edit"></i>
+                                            
+                                        </a>
+                                        <div class="dropdown">
                                                     <button type="button" class="btn btn-secondary  text-white dropdown-toggle hide-arrow" data-toggle="dropdown">
                                                          <i class="fa-solid fa-table-list"></i>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="{{ route('shipments.shipment.show', $shipment->id ) }}">
-                                                            <i data-feather="edit-2" class="mr-50"></i>
-                                                            <span>{{ trans('shipments.show') }}</span>
-                                                        </a>
-                                                        <a class="dropdown-item" href="{{ route('shipments.shipment.edit', $shipment->id ) }}">
-                                                            <i data-feather="trash" class="mr-50"></i>
-                                                            <span>{{ trans('shipments.edit') }}</span>
-                                                        </a>
+                                                       
                                                          <a class="dropdown-item"  id="test_hima"  data-id="{{ $shipment->id  }}" data-toggle="modal" data-target="#modals-slide-in">
                                                             <i data-feather="plus" class="mr-50"></i>
                                                             <span>{{ trans('main.add_carrir') }}</span>
@@ -91,11 +96,17 @@
                                                             <i data-feather="plus" class="mr-50"></i>
                                                             <span>{{ trans('main.testprint') }}</span>
                                                         </a>
+                                                         <a class="dropdown-item"  id="shipment_delivery" data-id="{{ $shipment->id  }}" data-toggle="modal" data-target="#models-shipment-delivery" >
+                                                            <i data-feather="plus" class="mr-50"></i>
+                                                            <span>{{ trans('main.shipment_delivery') }}</span>
+                                                        </a>
                                                        
                                                         
                                                          
                                                     </div>
-                                                </div>
+                                        </div>
+                                    </div>
+                                        
 
                                        
                                     </div>
@@ -117,79 +128,20 @@
         
         @endif
 
-
-                        <div class="modal modal-slide-in new-user-modal fade" id="modals-slide-in">
-                            <div class="modal-dialog">
-                                <form class="add-new-user modal-content pt-0"  method="POST" action="{{ route('shipments.shipment.getAddVehcileToShipment') }}" id="create_shipment_details_form">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-                                    <div class="modal-header mb-1">
-                                        <h5 class="modal-title" id="exampleModalLabel">
-                                             {{ trans('shipments.edit') }}
-                                        </h5>
-                                    </div>
-                                    <div class="modal-body flex-grow-1">
-                                    <input  name="shipment_delivery_detail_id" type="hidden" id="shipment_delivery_detail_id" >
-                                    <input  name="supervisor_user_id" type="hidden"  value=" {{ Auth::user()->id }} " >
-                                    <input  name="shipment_id" type="hidden" id="shipment_id" >
-                                    {{ csrf_field() }}
-                                        <div class="form-group">
-                                            <label class="form-label" for="vehicle_id">{{ trans('shipment_delivery_details.vehicle_id') }}</label>
-                                            <select class="form-select form-control{? ' is-invalid' : '' }}" id="vehicle_id" name="vehicle_id" required="true" placeholder="">
-                                                  
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="modal-body flex-grow-1">
-                                        <div class="form-group">
-                                            <label class="form-label" for="basic-icon-default-fullname">{{ trans('shipments.carrier_price') }}</label>
-                                            <input class="form-control" name="carrier_price" type="number" id="carrier_price"  placeholder="{{ trans('shipments.carrier_price__placeholder') }}"  value="@if (!empty($shipment->carrier_price)){{$shipment->carrier_price }}@endif" >
-                                        </div>
-                                    </div>
-                                   
-                                   
-                                    <div class="modal-body flex-grow-1" >
-                                        <button type="submit" class="btn btn-primary mr-1 data-submit">{{ trans('shipments.update') }}</button>
-                                        <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">{{ trans('main.reset') }}</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+            <!-- modals shipment edit -->
+            @include('shipments.modals-shipment-edit')          
+        
+        
+            @include('shipments.modals-statuses-update')          
+           
+            @include('shipments.modals-shimpment-delivery')          
 
 
 
 
 
 
-                        <div class="modal modal-slide-in statuses-update fade" id="modals-statuses-update">
-                            <div class="modal-dialog">
-                                <form class="add-new-user modal-content pt-0"  method="POST" action="{{ route('shipments.shipment.statusUpdate') }}" id="create_shipment_details_form">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-                                    <div class="modal-header mb-1">
-                                        <h5 class="modal-title" id="exampleModalLabel">
-                                             {{ trans('statuses.edit') }}
-                                        </h5>
-                                    </div>
-                                    <div class="modal-body flex-grow-1">
-                               
-                                    <input  name="shipment_status_id" type="hidden" id="shipment_status_id" >
-                                    {{ csrf_field() }}
-                                        <div class="form-group">
-                                            <label class="form-label" for="status_id">{{ trans('statuses.model_plural') }}</label>
-                                            <select class="form-select form-control" id="status_id" name="status_id" required="true" placeholder="">
-                                                  
-                                            </select>
-                                        </div>
-                                    </div>
-                                   
-                                   
-                                   
-                                    <div class="modal-body flex-grow-1" >
-                                        <button type="submit" class="btn btn-primary mr-1 data-submit">{{ trans('shipments.update') }}</button>
-                                        <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">{{ trans('main.reset') }}</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                        
     
     </div>
 
