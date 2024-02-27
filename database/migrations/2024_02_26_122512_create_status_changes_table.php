@@ -15,7 +15,15 @@ return new class extends Migration
     {
         Schema::create('status_changes', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('shipment_id');
+            $table->unsignedBigInteger('status_id'); // Change here
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+        
+            $table->foreign('shipment_id')->references('id')->on('shipments')->onDelete('cascade');
+            $table->foreign('status_id')->references('id')->on('statuses'); // Adjust the reference table
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+          
         });
     }
 

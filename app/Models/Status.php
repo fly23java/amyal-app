@@ -90,20 +90,20 @@ class Status extends Model
      * @param  string  $value
      * @return array
      */
-    // public function getCreatedAtAttribute($value)
-    // {
-    //     return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
-    // }
+    public function getCreatedAtAttribute($value)
+    {
+        return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
+    }
 
-    // /**
-    //  * Get updated_at in array format
-    //  *
-    //  * @param  string  $value
-    //  * @return array
-    //  */
-    // public function getUpdatedAtAttribute($value)
-    // {
-    //     return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
-    // }
+    /**
+     * Get updated_at in array format
+     *
+     * @param  string  $value
+     * @return array
+     */
+    public function getUpdatedAtAttribute($value)
+    {
+        return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
+    }
 
 }

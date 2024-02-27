@@ -49,7 +49,7 @@
 <div class="mb-3 row">
     <label for="parent_id" class="col-form-label text-lg-end col-lg-2 col-xl-3">{{ trans('statuses.parent_id') }}</label>
     <div class="col-lg-10 col-xl-9">
-        <select class="form-select form-control{{ $errors->has('parent_id') ? ' is-invalid' : '' }}" id="parent_id" name="parent_id">
+        <select class="form-select{{ $errors->has('parent_id') ? ' is-invalid' : '' }}" id="parent_id" name="parent_id">
         	    <option value="" style="display: none;" {{ old('parent_id', optional($status)->parent_id ?: '') == '' ? 'selected' : '' }} disabled selected>{{ trans('statuses.parent_id__placeholder') }}</option>
         	@foreach ($ParentStatuses as $key => $ParentStatus)
 			    <option value="{{ $key }}" {{ old('parent_id', optional($status)->parent_id) == $key ? 'selected' : '' }}>

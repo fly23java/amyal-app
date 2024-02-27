@@ -3,22 +3,19 @@
 @section('content')
 
     <div class="card text-bg-theme">
-  
-         <div class="card-header d-flex justify-content-between align-items-center p-3">
-            <h4 class="m-0">{{ !empty($title) ? $title : 'Status' }}</h4>
-            <div>
-                <a href="{{ route('statuses.status.index') }}" class="btn btn-primary" title="{{ trans('statuses.show_all') }}">
-                    <span class="fa-solid fa-table-list" aria-hidden="true"></span>
-                </a>
 
-                <a href="{{ route('statuses.status.create') }}" class="btn btn-secondary" title="{{ trans('statuses.create') }}">
-                    <span class="fa-solid fa-plus" aria-hidden="true"></span>
+         <div class="card-header d-flex justify-content-between align-items-center p-3">
+            <h4 class="m-0">{{ trans('status_changes.create') }}</h4>
+            <div>
+                <a href="{{ route('status_changes.status_change.index') }}" class="btn btn-primary" title="{{ trans('status_changes.show_all') }}">
+                    <span class="fa-solid fa-table-list" aria-hidden="true"></span>
                 </a>
             </div>
         </div>
+        
 
         <div class="card-body">
-
+        
             @if ($errors->any())
                 <div class="alert alert-danger" role="alert">
                     <ul class="list-unstyled mb-0">
@@ -29,19 +26,21 @@
                 </div>
             @endif
 
-            <form method="POST" class="needs-validation" novalidate action="{{ route('statuses.status.update', $status->id) }}" id="edit_status_form" name="edit_status_form" accept-charset="UTF-8" >
+            <form method="POST" class="needs-validation" novalidate action="{{ route('status_changes.status_change.store') }}" accept-charset="UTF-8" id="create_status_change_form" name="create_status_change_form" >
             {{ csrf_field() }}
-            <input name="_method" type="hidden" value="PUT">
-            @include ('statuses.form', [
-                                        'status' => $status,
+            @include ('status_changes.form', [
+                                        'statusChange' => null,
                                       ])
 
                 <div class="col-lg-10 col-xl-9 offset-lg-2 offset-xl-3">
-                    <input class="btn btn-primary" type="submit" value="{{ trans('statuses.update') }}">
+                    <input class="btn btn-primary" type="submit" value="{{ trans('status_changes.add') }}">
                 </div>
+
             </form>
 
         </div>
     </div>
 
 @endsection
+
+

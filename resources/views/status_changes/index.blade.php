@@ -13,17 +13,17 @@
     <div class="card text-bg-theme">
 
         <div class="card-header d-flex justify-content-between align-items-center p-3">
-            <h4 class="m-0">Statuses</h4>
+            <h4 class="m-0">Status Changes</h4>
             <div>
-                <a href="{{ route('statuses.status.create') }}" class="btn btn-secondary" title="{{ trans('statuses.create') }}">
+                <a href="{{ route('status_changes.status_change.create') }}" class="btn btn-secondary" title="{{ trans('status_changes.create') }}">
                     <span class="fa-solid fa-plus" aria-hidden="true"></span>
                 </a>
             </div>
         </div>
         
-        @if(count($statuses) == 0)
+        @if(count($statusChanges) == 0)
             <div class="card-body text-center">
-                <h4>{{ trans('statuses.none_available') }}</h4>
+                <h4>{{ trans('status_changes.none_available') }}</h4>
             </div>
         @else
         <div class="card-body p-0">
@@ -32,37 +32,35 @@
                 <table class="table table-striped ">
                     <thead>
                         <tr>
-                            <th>{{ trans('statuses.name_arabic') }}</th>
-                            <th>{{ trans('statuses.name_english') }}</th>
-                            <th>{{ trans('statuses.confirm_sending_the_message') }}</th>
-                            <th>{{ trans('statuses.parent_id') }}</th>
+                            <th>{{ trans('status_changes.shipment_id') }}</th>
+                            <th>{{ trans('status_changes.status_id') }}</th>
+                            <th>{{ trans('status_changes.user_id') }}</th>
 
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($statuses as $status)
+                    @foreach($statusChanges as $statusChange)
                         <tr>
-                            <td class="align-middle">{{ $status->name_arabic }}</td>
-                            <td class="align-middle">{{ $status->name_english }}</td>
-                            <td class="align-middle">{{ ($status->confirm_sending_the_message) ? 'Yes' : 'No' }}</td>
-                            <td class="align-middle">{{ optional($status->ParentStatus)->name_arabic }}</td>
+                            <td class="align-middle">{{ optional($statusChange->Shipment)->serial_number }}</td>
+                            <td class="align-middle">{{ optional($statusChange->Status)->name_arabic }}</td>
+                            <td class="align-middle">{{ optional($statusChange->User)->name }}</td>
 
                             <td class="text-end">
 
-                                <form method="POST" action="{!! route('statuses.status.destroy', $status->id) !!}" accept-charset="UTF-8">
+                                <form method="POST" action="{!! route('status_changes.status_change.destroy', $statusChange->id) !!}" accept-charset="UTF-8">
                                 <input name="_method" value="DELETE" type="hidden">
                                 {{ csrf_field() }}
 
                                     <div class="btn-group btn-group-sm" role="group">
-                                        <a href="{{ route('statuses.status.show', $status->id ) }}" class="btn btn-info" title="{{ trans('statuses.show') }}">
+                                        <a href="{{ route('status_changes.status_change.show', $statusChange->id ) }}" class="btn btn-info" title="{{ trans('status_changes.show') }}">
                                             <span class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></span>
                                         </a>
-                                        <a href="{{ route('statuses.status.edit', $status->id ) }}" class="btn btn-primary" title="{{ trans('statuses.edit') }}">
+                                        <a href="{{ route('status_changes.status_change.edit', $statusChange->id ) }}" class="btn btn-primary" title="{{ trans('status_changes.edit') }}">
                                             <span class="fa-regular fa-pen-to-square" aria-hidden="true"></span>
                                         </a>
 
-                                        <button type="submit" class="btn btn-danger" title="{{ trans('statuses.delete') }}" onclick="return confirm(&quot;{{ trans('statuses.confirm_delete') }}&quot;)">
+                                        <button type="submit" class="btn btn-danger" title="{{ trans('status_changes.delete') }}" onclick="return confirm(&quot;{{ trans('status_changes.confirm_delete') }}&quot;)">
                                             <span class="fa-regular fa-trash-can" aria-hidden="true"></span>
                                         </button>
                                     </div>
@@ -77,7 +75,7 @@
 
             </div>
 
-            {!! $statuses->links('pagination') !!}
+            {!! $statusChanges->links('pagination') !!}
         </div>
         
         @endif
