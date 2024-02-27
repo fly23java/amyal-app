@@ -73,7 +73,7 @@
 
             </div>
 
-            {!! $paymentMethods->links('pagination') !!}
+           
         </div>
         
         @endif
