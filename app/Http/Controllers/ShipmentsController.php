@@ -253,7 +253,11 @@ $Statuses = Status::pluck('name_arabic','id')->all();
         dd($request->all());
 
         $shipment = Shipment::findOrFail($request->shipment_id);
-          }
+
+
+      
+    
+    }
 
 
 
