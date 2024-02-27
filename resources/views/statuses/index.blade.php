@@ -77,7 +77,7 @@
 
             </div>
 
-            {!! $statuses->links('pagination') !!}
+         
         </div>
         
         @endif
