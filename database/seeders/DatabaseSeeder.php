@@ -19,6 +19,9 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             RegionSeeder::class,
             CitySeeder::class,
+            UnitSeeder::class,
+            PaymentMethodsSeeder::class,
+            StatusSeeder::class,
         ]);
     }
 }
