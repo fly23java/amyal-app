@@ -136,7 +136,7 @@
         
             @include('shipments.modals-statuses-update')          
            
-            @include('shipments.modals-shimpment-delivery')          
+               
 
 
 
