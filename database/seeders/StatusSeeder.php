@@ -22,6 +22,7 @@ class StatusSeeder extends Seeder
                 'message_text_in_english' => 'test',
                 'message_text_in_arabic' => 'test',
                 'confirm_sending_the_message' => true,
+                'parent_id' => null,
             ],
             [
                 'name_english' => 'Canceled',
@@ -29,6 +30,7 @@ class StatusSeeder extends Seeder
                 'message_text_in_english' => 'test',
                 'message_text_in_arabic' => 'test',
                 'confirm_sending_the_message' => true,
+                'parent_id' => null,
             ],
             [
                 'name_english' => 'Closed',
@@ -36,6 +38,7 @@ class StatusSeeder extends Seeder
                 'message_text_in_english' => 'test',
                 'message_text_in_arabic' => 'test',
                 'confirm_sending_the_message' => true,
+                'parent_id' => null,
             ],
             [
                 'name_english' => 'Finished',
@@ -43,6 +46,7 @@ class StatusSeeder extends Seeder
                 'message_text_in_english' => 'test',
                 'message_text_in_arabic' => 'test',
                 'confirm_sending_the_message' => true,
+                'parent_id' => null,
             ],
             [
                 'name_english' => 'Not Delivered',
@@ -50,6 +54,7 @@ class StatusSeeder extends Seeder
                 'message_text_in_english' => 'test',
                 'message_text_in_arabic' => 'test',
                 'confirm_sending_the_message' => true,
+                'parent_id' => null,
             ],
             [
                 'name_english' => 'Multi Status',
@@ -57,6 +62,47 @@ class StatusSeeder extends Seeder
                 'message_text_in_english' => 'test',
                 'message_text_in_arabic' => 'test',
                 'confirm_sending_the_message' => true,
+                'parent_id' => null,
+            ],
+            [
+                'name_english' => 'Multi Status',
+                'name_arabic' => ' المركبة عند للمصنع',
+                'message_text_in_english' => 'test',
+                'message_text_in_arabic' => 'test',
+                'confirm_sending_the_message' => true,
+                'parent_id' => 1,
+            ],
+            [
+                'name_english' => 'Multi Status',
+                'name_arabic' => 'تم التحميل',
+                'message_text_in_english' => 'test',
+                'message_text_in_arabic' => 'test',
+                'confirm_sending_the_message' => false,
+                'parent_id' => 1,
+            ],
+            [
+                'name_english' => 'Multi Status',
+                'name_arabic' => 'غادرة المركبةالي العميل',
+                'message_text_in_english' => 'test',
+                'message_text_in_arabic' => 'test',
+                'confirm_sending_the_message' => false,
+                'parent_id' => 1,
+            ],
+            [
+                'name_english' => 'Multi Status',
+                'name_arabic' => 'المركبة عن العميل',
+                'message_text_in_english' => 'test',
+                'message_text_in_arabic' => 'test',
+                'confirm_sending_the_message' => false,
+                'parent_id' => 1,
+            ],
+            [
+                'name_english' => 'Multi Status',
+                'name_arabic' => 'تم التفريغ',
+                'message_text_in_english' => 'test',
+                'message_text_in_arabic' => 'test',
+                'confirm_sending_the_message' => false,
+                'parent_id' => 1,
             ],
         ];
 

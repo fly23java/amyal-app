@@ -47,10 +47,10 @@
     </div>
 </div>
 
-<div class="mb-3 row">
+<div class="mb-3 row" style="display:none">
     <label for="plate_type" class="col-form-label text-lg-end col-lg-2 col-xl-3">{{ trans('vehicles.plate_type') }}</label>
     <div class="col-lg-10 col-xl-9">
-        <input class="form-control{{ $errors->has('plate_type') ? ' is-invalid' : '' }}" name="plate_type" type="number" id="plate_type" value="{{ old('plate_type', optional($vehicle)->plate_type) }}" min="-2147483648" max="2147483647" required="true" placeholder="{{ trans('vehicles.plate_type__placeholder') }}">
+        <input class="form-control{{ $errors->has('plate_type') ? ' is-invalid' : '' }}" name="plate_type" type="number" id="plate_type" value="2" min="-2147483648" max="2147483647" required="true" placeholder="{{ trans('vehicles.plate_type__placeholder') }}">
         {!! $errors->first('plate_type', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>

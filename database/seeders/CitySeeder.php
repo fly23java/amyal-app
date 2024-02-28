@@ -16,8 +16,8 @@ class CitySeeder extends Seeder
     public function run()
     {
         $cities = [
-            ['name_arabic' => ' ﺍﻟرياﺽ ' , 'name_english' => ' RIYADH ' , 'region_id' => 1],
-            ['name_arabic' => ' ﺍﻟﺪﺭعية ' , 'name_english' => ' ALDEREIAH ' , 'region_id' => 1],
+            ['name_arabic' => ' الرياض ' , 'name_english' => ' RIYADH ' , 'region_id' => 1],
+            ['name_arabic' => ' الدرعية ' , 'name_english' => ' ALDEREIAH ' , 'region_id' => 1],
             ['name_arabic' => ' ﺍﻟﺪﻭﺍﺩمي ' , 'name_english' => ' AL-DWADMY ' , 'region_id' => 1],
             ['name_arabic' => ' القويعيه ' , 'name_english' => ' AL-KWAYEYA ' , 'region_id' => 1],
             ['name_arabic' => ' ﻭﺍﺩﻯ ﺍﻟﺪﻭﺍسر ' , 'name_english' => ' WADY AL-DAWASER ' , 'region_id' => 1],
