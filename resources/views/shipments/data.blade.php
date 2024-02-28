@@ -58,10 +58,7 @@
                                                             <i data-feather="plus" class="mr-50"></i>
                                                             <span>{{ trans('main.testprint') }}</span>
                                                         </a>
-                                                         <a class="dropdown-item"  id="shipment_delivery" data-id="{{ $shipment->id  }}" data-toggle="modal" data-target="#models-shipment-delivery" >
-                                                            <i data-feather="plus" class="mr-50"></i>
-                                                            <span>{{ trans('main.shipment_delivery') }}</span>
-                                                        </a>
+                                                        
                                                        
                                                         
                                                          

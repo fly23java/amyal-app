@@ -17,8 +17,8 @@ $(document).ready(function(){
                         data: data,
                         dataType: 'json',
                         success: function(response){
-                            console.log(response);
-                                
+                            // console.log(response);
+                            $('#status_id').html("");
                             $.each(response.Status, 
                                 function (i, item) {
                                         $('#status_id').append($('<option>', { 
