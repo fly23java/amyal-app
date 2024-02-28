@@ -23,7 +23,7 @@ $(document).on('change', '#create_shipment_form', function(e) {
         };
       
         $.ajax({
-            url:  config.routes.createPhipmentForm,
+            url:  config.routes.createShipmentForm,
             method: 'get',
             data: data,
             dataType: 'json',
@@ -58,7 +58,7 @@ $(document).on('change', '#edit_shipment_form', function(e) {
         };
       
         $.ajax({
-            url:  config.routes.createPhipmentForm,
+            url:  config.routes.createShipmentForm,
             method: 'get',
             data: data,
             dataType: 'json',

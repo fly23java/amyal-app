@@ -70,6 +70,8 @@ class StatusChange extends Model
         return $this->belongsTo('App\Models\Status','status_id','id');
     }
 
+
+
     /**
      * Get the User for this model.
      *

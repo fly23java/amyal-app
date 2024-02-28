@@ -15,7 +15,7 @@
                                         <div class="form-group">
                                             <label class="form-label" for="vehicle_id">{{ trans('shipment_delivery_details.vehicle_id') }}</label>
                                             <select class="form-select form-control{? ' is-invalid' : '' }}" id="vehicle_id" name="vehicle_id" required="true" placeholder="">
-                                                  
+                                                  <option >  {{ trans('shipment_delivery_details.vehicle_id__placeholder') }} </option> 
                                             </select>
                                         </div>
                                     </div>

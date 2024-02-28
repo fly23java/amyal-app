@@ -5,6 +5,7 @@ use Illuminate\Support\Str;
 use App\Models\City;
 use App\Models\Goods;
 use App\Models\Status;
+use App\Models\StatusChange;
 use App\Models\User;
 use App\Models\VehicleType;
 use App\Models\Vehicle;
@@ -40,6 +41,20 @@ class ShipmentService {
            
        
           ]);
+        Shipment::updateOrCreate(
+            [
+               'id' => $Shipment_id
+           ],[
+            'serial_number'  =>  date('Ymd').$Shipment_id,
+           
+       
+          ]);
+
+          StatusChange::create([
+            'shipment_id' => $Shipment_id,
+            'status_id' => 1, // Change here
+            'user_id' => $data['user_id'],
+        ]);
 
 
 

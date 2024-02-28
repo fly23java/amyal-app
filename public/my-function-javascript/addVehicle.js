@@ -46,8 +46,11 @@ $(document).ready(function(){
             dataType: 'json',
             data: data,
             success: function(response){
-                vehcil = response.shipmentDeliveryDetail.vehicle_id;
-                $("#shipment_delivery_detail_id").val(response.shipmentDeliveryDetail.id);
+               if(response.shipmentDeliveryDetail){
+                if($.trim(response.shipmentDeliveryDetail.vehicle_id)){
+                    $("#shipment_delivery_detail_id").val(response.shipmentDeliveryDetail.vehicle_id);
+                }
+              
                 $("#vehicle_id option").each(function(){
                     
                    
@@ -61,8 +64,9 @@ $(document).ready(function(){
                         $("#carrier_price").val(response.shipment.carrier_price);
                     }
                   
-              
+                    
                 });
+            }
            
             },
             error: function(response) {

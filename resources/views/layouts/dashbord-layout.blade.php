@@ -528,7 +528,7 @@
 
     
 
-    @yield('script')
+   
     <script>
         $(window).on('load', function() {
             if (feather) {
@@ -609,29 +609,27 @@ $.ajaxSetup({
     // global app configuration object
     var config = {
         routes: {
-            createPhipmentForm: "{{ route('shipments.shipment.getPrice')}}",
+            retrunShipmentInTabsByStatus: "{{ route('retrun_shipment_in_tabs_by_status.retrun_shipment_in_tabs_by_status.retrunShipmentInTabsByStatus')}}",
+            createShipmentForm: "{{ route('return_prices.return_price.returnPrice')}}",
             getDatahipmentdetails: "{{ route('shipments.shipment.getDatahipmentdetails')}}",
             getVehcile: "{{ route('shipments.shipment.getVehcile')}}",
-            getCarrierPrice: "{{ route('shipments.shipment.getCarrierPrice')}}",
+            getCarrierPrice: "{{ route('return_prices.return_price.returnCarrierPrice')}}",
             shipmentDetails: "{{ route('shipments.shipment.shipmentDetails')}}",
             
              statusesGet: "{{ route('shipments.shipment.statusesGet')}}",
         }
     };
 </script>
-     <!-- Include html2canvas library -->
-     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-
-    <!-- Include pdfjs library -->
-    < <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+   
     
      <script src="{{ asset('my-function-javascript/addVehicle.js') }}"></script>>
      <script src="{{ asset('my-function-javascript/getprice.js') }}"></script>
      <script src="{{ asset('my-function-javascript/statusesGet.js') }}"></script>
      <script src="{{ asset('my-function-javascript/shipmentDelivery.js') }}"></script>
+     <script src="{{ asset('my-function-javascript/retrunShipmentInTabsByStatus.js') }}"></script>
 
-
-
+     @yield('script')
+ 
 </body>
 <!-- END: Body-->
 

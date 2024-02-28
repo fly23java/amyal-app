@@ -80,9 +80,9 @@ class Status extends Model
      */
     public function childStatus()
     {
-        return $this->hasOne('App\Models\Status','parent_id','id');
+        return $this->hasMany('App\Models\Status','parent_id','id');
     }
-
+   
 
     /**
      * Get created_at in array format

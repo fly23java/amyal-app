@@ -8,6 +8,7 @@ use App\Models\City;
 use App\Models\Goods;
 use App\Models\Shipment;
 use App\Models\Status;
+use App\Models\StatusChange;
 use App\Models\User;
 use App\Models\VehicleType;
 use App\Models\Contract;
@@ -36,16 +37,15 @@ class ShipmentsController extends Controller
      *
      * @return \Illuminate\View\View
      */
+  
     public function index()
     {
         $Vehicles = Vehicle::all();
+        $Status = Status::findOrFail(1);
+
+        // dd($Status->shipment());
         $shipments = Shipment::orderBy('serial_number', 'desc')->get();
-
-      
-
-        
-
-        return view('shipments.index', compact('shipments' ,'Vehicles'));
+        return view('shipments.index', compact('shipments' ,'Vehicles','Status'));
     }
 
     /**
@@ -110,10 +110,10 @@ class ShipmentsController extends Controller
     {
         $shipment = Shipment::findOrFail($id);
         $Users = User::pluck('name','id')->all();
-$Cities = City::pluck('name_arabic','id')->all();
-$VehicleTypes = VehicleType::pluck('name_arabic','id')->all();
-$Goods = Goods::pluck('name_arabic','id')->all();
-$Statuses = Status::pluck('name_arabic','id')->all();
+        $Cities = City::pluck('name_arabic','id')->all();
+        $VehicleTypes = VehicleType::pluck('name_arabic','id')->all();
+        $Goods = Goods::pluck('name_arabic','id')->all();
+        $Statuses = Status::pluck('name_arabic','id')->all();
 
         return view('shipments.edit', compact('shipment','Users','Cities','Cities','VehicleTypes','Goods','Statuses','Users'));
     }
@@ -160,27 +160,14 @@ $Statuses = Status::pluck('name_arabic','id')->all();
         }
     }
 
-    // get price for contracter
-    public function getPrice(Request $request)
-    {
-        // this inject funtion form services 
-        return   (new ShipmentService())->getPrice($request);
-    
-    }
+   
     public function getVehcile(Request $request)
     {
         // this inject funtion form services 
         return   (new ShipmentService())->getVehcile($request);
     
     }
-    public function getCarrierPrice(Request $request)
-    {
-
-       
-        // this inject funtion form services 
-        return   (new ShipmentService())->getCarrierPrice($request);
     
-    }
     public function getDatahipmentdetails(Request $request)
     {
         // return "test";
@@ -288,6 +275,12 @@ $Statuses = Status::pluck('name_arabic','id')->all();
                "status_id" =>  $request->status_id,
                
            ]);
+
+           StatusChange::create([
+            'shipment_id' => $request->shipment_status_id,
+            'status_id' => 1, // Change here
+            'user_id' => Auth::user()->id,
+            ]);
 
            return redirect()->route('shipments.shipment.index')
            ->with('success_message', trans('statuses.model_was_updated')); 

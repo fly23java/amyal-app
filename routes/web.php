@@ -21,6 +21,8 @@ use App\Http\Controllers\ShipmentsController;
 use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\ShipmentDeliveryDetailsController;
 use App\Http\Controllers\PrintWaybillController;
+use App\Http\Controllers\ReturnPricesController;
+use App\Http\Controllers\RetrunShipmentInTabsByStatusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +40,7 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-
+     return view('shipments.test');
 });
 
 Auth::routes();
@@ -340,6 +342,8 @@ Route::group([
  ], function () {
      Route::get('/', [ShipmentsController::class, 'index'])
           ->name('shipments.shipment.index');
+     Route::get('/test', [ShipmentsController::class, 'test'])
+          ->name('shipments.shipment.test');
      Route::get('/create', [ShipmentsController::class, 'create'])
           ->name('shipments.shipment.create');
      Route::get('/show/{shipment}',[ShipmentsController::class, 'show'])
@@ -352,12 +356,10 @@ Route::group([
           ->name('shipments.shipment.update');
      Route::delete('/shipment/{shipment}',[ShipmentsController::class, 'destroy'])
           ->name('shipments.shipment.destroy');
-      Route::get('/shipment/getPrice',[ShipmentsController::class, 'getPrice'])
-          ->name('shipments.shipment.getPrice');
+      
       Route::get('/shipment/getVehcile',[ShipmentsController::class, 'getVehcile'])
           ->name('shipments.shipment.getVehcile');
-      Route::get('/shipment/getCarrierPrice',[ShipmentsController::class, 'getCarrierPrice'])
-          ->name('shipments.shipment.getCarrierPrice');
+     
       Route::get('/shipment/getDatahipmentdetails',[ShipmentsController::class, 'getDatahipmentdetails'])
           ->name('shipments.shipment.getDatahipmentdetails');
       Route::post('/shipment/getAddVehcileToShipment',[ShipmentsController::class, 'getAddVehcileToShipment'])
@@ -375,6 +377,28 @@ Route::group([
 
           
  });
+
+
+ Route::group([
+     'prefix' => 'return_prices',
+ ], function () {
+   
+     Route::get('/return_price/getPrice',[ReturnPricesController::class, 'returnPrice'])
+          ->name('return_prices.return_price.returnPrice');
+      
+      Route::get('/return_price/returnCarrierPrice',[ReturnPricesController::class, 'returnCarrierPrice'])
+          ->name('return_prices.return_price.returnCarrierPrice');
+});
+ Route::group([
+     'prefix' => 'retrun_shipment_in_tabs_by_status',
+ ], function () {
+   
+     Route::get('/retrunShipmentInTabsByStatus',[RetrunShipmentInTabsByStatusController::class, 'retrunShipmentInTabsByStatus'])
+          ->name('retrun_shipment_in_tabs_by_status.retrun_shipment_in_tabs_by_status.retrunShipmentInTabsByStatus');
+      
+      
+});
+
 
 
  Route::group([
