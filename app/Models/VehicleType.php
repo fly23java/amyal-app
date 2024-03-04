@@ -19,5 +19,10 @@ class VehicleType extends Model
         return $this->hasMany(Vehicle::class);
     }
 
+    public function goodsTypes()
+    {
+        return $this->belongsToMany(GoodsType::class);
+    }
+
     
 }

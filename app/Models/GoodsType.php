@@ -80,6 +80,11 @@ class GoodsType extends Model
         return $this->hasOne('App\Models\GoodsType','parent_id','id');
     }
 
+    public function vehicleTypes()
+    {
+        return $this->belongsToMany(VehicleType::class);
+    }
+
 
     /**
      * Get created_at in array format
@@ -87,20 +92,20 @@ class GoodsType extends Model
      * @param  string  $value
      * @return array
      */
-    public function getCreatedAtAttribute($value)
-    {
-        return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
-    }
+    // public function getCreatedAtAttribute($value)
+    // {
+    //     return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
+    // }
 
-    /**
-     * Get updated_at in array format
-     *
-     * @param  string  $value
-     * @return array
-     */
-    public function getUpdatedAtAttribute($value)
-    {
-        return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
-    }
+    // /**
+    //  * Get updated_at in array format
+    //  *
+    //  * @param  string  $value
+    //  * @return array
+    //  */
+    // public function getUpdatedAtAttribute($value)
+    // {
+    //     return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
+    // }
 
 }

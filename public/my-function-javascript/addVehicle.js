@@ -47,10 +47,11 @@ $(document).ready(function(){
             dataType: 'json',
             data: data,
             success: function(response){
-             
+                // $('#vehicle_id').html("");
                if(response.shipmentDeliveryDetail){
                 if($.trim(response.shipmentDeliveryDetail.vehicle_id)){
                     $("#shipment_delivery_detail_id").val(response.shipmentDeliveryDetail.vehicle_id);
+                    vehcil =  response.shipmentDeliveryDetail.vehicle_id
                 }
               
                 $("#vehicle_id option").each(function(){

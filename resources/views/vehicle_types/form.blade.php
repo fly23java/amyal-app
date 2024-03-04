@@ -15,3 +15,21 @@
     </div>
 </div>
 
+
+
+<div class="mb-3 row">
+    <label for="unloading_city_id" class="col-form-label text-lg-end col-lg-2 col-xl-3">{{ trans('goods.goods_type_id') }}</label>
+    <div class="col-lg-10 col-xl-9">
+        <select class="form-select   select2   form-control{{ $errors->has('unloading_city_id') ? ' is-invalid' : '' }}" name="goods_types[]" id="goods_types" multiple required="true">
+        	   
+            @foreach($goodsTypes as $goodsType)
+                    <option value="{{ $goodsType->id }}" {{ (isset($vehicleType) && $vehicleType->goodsTypes->contains($goodsType->id)) ? 'selected' : '' }}>
+                        {{ $goodsType->name_arabic }}
+                    </option>
+            @endforeach
+        </select>
+        
+      
+    </div>
+</div>
+

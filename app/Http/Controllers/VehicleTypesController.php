@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\VehicleType;
+use App\Models\GoodsType;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -34,7 +35,10 @@ class VehicleTypesController extends Controller
     {
         
         
-        return view('vehicle_types.create');
+        $vehicleTypes = VehicleType::all();
+        $goodsTypes = GoodsType::all();
+
+        return view('vehicle_types.create', compact('vehicleTypes', 'goodsTypes'));
     }
 
     /**
@@ -48,9 +52,10 @@ class VehicleTypesController extends Controller
     {
         
         $data = $this->getData($request);
-        
-        VehicleType::create($data);
-
+        $goodsTypes = $request->input('goods_types');
+        // dd($goodsTypes);
+        $vehicleType = VehicleType::create($data);
+        $vehicleType->goodsTypes()->sync($goodsTypes);
         return redirect()->route('vehicle_types.vehicle_type.index')
             ->with('success_message', trans('vehicle_types.model_was_added'));
     }
@@ -79,9 +84,9 @@ class VehicleTypesController extends Controller
     public function edit($id)
     {
         $vehicleType = VehicleType::findOrFail($id);
-        
+        $goodsTypes = GoodsType::all();
 
-        return view('vehicle_types.edit', compact('vehicleType'));
+        return view('vehicle_types.edit', compact('vehicleType' , 'goodsTypes'));
     }
 
     /**
@@ -98,8 +103,11 @@ class VehicleTypesController extends Controller
         $data = $this->getData($request);
         
         $vehicleType = VehicleType::findOrFail($id);
-        $vehicleType->update($data);
+        $goodsTypes = $request->input('goods_types');
 
+        
+        $vehicleType->update($data);
+        $vehicleType->goodsTypes()->sync($goodsTypes);
         return redirect()->route('vehicle_types.vehicle_type.index')
             ->with('success_message', trans('vehicle_types.model_was_updated'));  
     }
@@ -136,8 +144,8 @@ class VehicleTypesController extends Controller
     protected function getData(Request $request)
     {
         $rules = [
-                'name_arabic' => 'string|min:1|nullable',
-            'name_english' => 'string|min:1|nullable', 
+            'name_arabic' => 'required|string|min:1|nullable',
+            'name_english' => 'required|string|min:1|nullable', 
         ];
 
         
