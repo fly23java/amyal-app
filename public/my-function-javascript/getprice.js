@@ -7,14 +7,14 @@ $(document).on('change', '#create_shipment_form', function(e) {
   
   
    
-    if($('#user_id').val() && 
+    if($('#account_id').val() && 
     $('#loading_city_id').val() &&
     $('#unloading_city_id').val() &&
     $('#vehicle_type_id').val() &&
     $('#goods_id').val() 
     ){
        var data = {
-            'user_id' : $('#user_id').val(),
+            'account_id' : $('#account_id').val(),
             'loading_city_id' : $('#loading_city_id').val(),
             'unloading_city_id' : $('#unloading_city_id').val(),
             'vehicle_type_id' : $('#vehicle_type_id').val(),
@@ -28,7 +28,7 @@ $(document).on('change', '#create_shipment_form', function(e) {
             data: data,
             dataType: 'json',
             success: function(response){
-                console.log(response);
+              
                 $("#price").val(response.price);
             },
             error: function(response) {
@@ -41,7 +41,7 @@ $(document).on('change', '#create_shipment_form', function(e) {
 
 $(document).on('change', '#edit_shipment_form', function(e) {
     
-    if($('#user_id').val() && 
+    if($('#account_id').val() && 
     $('#loading_city_id').val() &&
     $('#unloading_city_id').val() &&
     $('#vehicle_type_id').val() &&
@@ -49,7 +49,7 @@ $(document).on('change', '#edit_shipment_form', function(e) {
     ){
         
         var data = {
-            'user_id' : $('#user_id').val(),
+            'account_id' : $('#account_id').val(),
             'loading_city_id' : $('#loading_city_id').val(),
             'unloading_city_id' : $('#unloading_city_id').val(),
             'vehicle_type_id' : $('#vehicle_type_id').val(),
@@ -63,7 +63,7 @@ $(document).on('change', '#edit_shipment_form', function(e) {
             data: data,
             dataType: 'json',
             success: function(response){
-                console.log(response);
+              
                 $("#price").val(response.price);
                 
                

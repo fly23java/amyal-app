@@ -4,9 +4,9 @@
     <div class="col-lg-10 col-xl-9">
         <select class="form-select   select2   form-control{{ $errors->has('sender_id') ? ' is-invalid' : '' }}" id="sender_id" name="sender_id" required="true">
         	    <option value="" style="display: none;" {{ old('sender_id', optional($contract)->sender_id ?: '') == '' ? 'selected' : '' }} disabled selected>{{ trans('contracts.sender_id__placeholder') }}</option>
-        	@foreach ($Users as $key => $User)
+        	@foreach ($Accounts as $key => $Account)
 			    <option value="{{ $key }}" {{ old('sender_id', optional($contract)->sender_id) == $key ? 'selected' : '' }}>
-			    	{{ $User }}
+			    	{{ $Account }}
 			    </option>
 			@endforeach
         </select>
@@ -20,9 +20,9 @@
     <div class="col-lg-10 col-xl-9">
         <select class="form-select   select2   form-control{{ $errors->has('receiver_id') ? ' is-invalid' : '' }}" id="receiver_id" name="receiver_id" required="true">
         	    <option value="" style="display: none;" {{ old('receiver_id', optional($contract)->receiver_id ?: '') == '' ? 'selected' : '' }} disabled selected>{{ trans('contracts.receiver_id__placeholder') }}</option>
-        	@foreach ($Users as $key => $User)
+        	@foreach ($Accounts as $key => $Account)
 			    <option value="{{ $key }}" {{ old('receiver_id', optional($contract)->receiver_id) == $key ? 'selected' : '' }}>
-			    	{{ $User }}
+			    	{{ $Account }}
 			    </option>
 			@endforeach
         </select>

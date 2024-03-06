@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ContractsFormRequest;
 use App\Models\Contract;
 use App\Models\User;
+use App\Models\Account;
 use Exception;
 
 class ContractsController extends Controller
@@ -21,7 +22,7 @@ class ContractsController extends Controller
      */
     public function index()
     {
-        $contracts = Contract::with('user','user')->orderBy('id', 'DESC')->get();
+        $contracts = Contract::with('account','account')->orderBy('id', 'DESC')->get();
 
         return view('contracts.index', compact('contracts'));
     }
@@ -33,9 +34,9 @@ class ContractsController extends Controller
      */
     public function create()
     {
-        $Users = User::pluck('name','id')->all();
+        $Accounts = Account::pluck('name_arabic','id')->all();
         
-        return view('contracts.create', compact('Users','Users'));
+        return view('contracts.create', compact('Accounts'));
     }
 
     /**
@@ -80,9 +81,9 @@ class ContractsController extends Controller
     public function edit($id)
     {
         $contract = Contract::findOrFail($id);
-        $Users = User::pluck('name','id')->all();
+        $Accounts = Account::pluck('name_arabic','id')->all();
 
-        return view('contracts.edit', compact('contract','Users','Users'));
+        return view('contracts.edit', compact('contract','Accounts'));
     }
 
     /**

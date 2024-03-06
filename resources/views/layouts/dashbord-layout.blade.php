@@ -14,7 +14,9 @@
     <meta name="author" content="PIXINVENT">
     
     <title>amyal-system</title>
-   
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap');
+        </style>
   
     <style>
       @font-face {
@@ -22,8 +24,50 @@
             src: url("{{ asset('Cairo-VariableFont_slnt.ttf') }}");
         }
         body , li ,a ,td {
-            font-family: "Cairo", sans-serif !important;
+            font-family: "IBM Plex Sans Arabic", sans-serif !important;
         }
+        .ibm-plex sans arabic-thin {
+        font-family: "IBM Plex Sans Arabic", sans-serif;
+        font-weight: 100;
+        font-style: normal;
+        }
+
+        .ibm-plex sans arabic-extralight {
+        font-family: "IBM Plex Sans Arabic", sans-serif;
+        font-weight: 200;
+        font-style: normal;
+        }
+
+        .ibm-plex sans arabic-light {
+        font-family: "IBM Plex Sans Arabic", sans-serif;
+        font-weight: 300;
+        font-style: normal;
+        }
+
+        .ibm-plex sans arabic-regular {
+        font-family: "IBM Plex Sans Arabic", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        }
+
+        .ibm-plex sans arabic-medium {
+        font-family: "IBM Plex Sans Arabic", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        }
+
+        .ibm-plex sans arabic-semibold {
+        font-family: "IBM Plex Sans Arabic", sans-serif;
+        font-weight: 600;
+        font-style: normal;
+        }
+
+        .ibm-plex sans arabic-bold {
+        font-family: "IBM Plex Sans Arabic", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+        }
+
     </style>
 
     <!-- BEGIN: Vendor CSS-->

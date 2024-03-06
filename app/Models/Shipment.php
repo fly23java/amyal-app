@@ -166,10 +166,10 @@ class Shipment extends Model
     //  * @param  string  $value
     //  * @return array
     //  */
-    public function getUpdatedAtAttribute($value)
-    {
-        return  Carbon::createFromFormat($this->getDateFormat(), $value)->format('Y-m-d g:i A');
-    }
+    // public function getUpdatedAtAttribute($value)
+    // {
+    //     return  Carbon::createFromFormat($this->getDateFormat(), $value)->format('Y-m-d g:i A');
+    // }
 
     // public function getSerialNumberAttribute()
     // {

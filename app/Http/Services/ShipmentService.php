@@ -64,23 +64,24 @@ class ShipmentService {
      public function getPrice($data)
      {
              
-             $user= User::find($data->user_id);
+            //  $account= Account::find($data->account_id);
            
-             $Contract = Contract::where('receiver_id',$user['account_id'])->first();
-             
+             $Contract = Contract::where('receiver_id',$data->account_id)->first();
+             if(!empty($Contract)){
              $contractDetail = ContractDetail::where('contract_id' , $Contract['id'])
                  ->where( 'loading_city_id', $data->loading_city_id)
                  ->where( 'dispersal_city_id' ,$data->unloading_city_id)
                  ->where( 'vehicle_type_id' , $data->vehicle_type_id)
                  ->where( 'goods_id'  , $data->goods_id)
                  ->first();
-           
                  if($contractDetail) {
-                     return response()->json([
-                     'success' => 'Employee created successfully.',
-                     'price' =>$contractDetail['price']
-                     ]);
-                 }
+                    return response()->json([
+                    'success' => 'Get Price  successfully.',
+                    'price' =>$contractDetail['price']
+                    ]);
+                }
+             }
+                
          
      }
      public function getVehcile()

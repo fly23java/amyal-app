@@ -42,7 +42,7 @@
                     @foreach($contracts as $contract)
                         <tr>
                             <td class="align-middle">{{ $contract->contract_title }}</td>
-                            <td class="align-middle">{{ optional($contract->User)->name }}</td>
+                            <td class="align-middle">{{ optional($contract->Account)->name_arabic }}</td>
 
                             <td class="text-end">
 
