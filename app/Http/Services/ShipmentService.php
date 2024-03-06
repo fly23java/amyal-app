@@ -84,10 +84,13 @@ class ShipmentService {
                 
          
      }
-     public function getVehcile()
+     public function getVehcile($data)
      {
              
-             $Vehicle= Vehicle::all();
+           
+            $shipment = Shipment::where('id', $data->id)->first();
+             $Vehicle= Vehicle::where('vehicle_type_id' , $shipment->vehicle_type_id)->get();
+            //  dd($Vehicle);
             return response()->json(['success' => 'true','Vehicle' => $Vehicle]);
               
          
