@@ -23,6 +23,7 @@ use App\Http\Controllers\ShipmentDeliveryDetailsController;
 use App\Http\Controllers\PrintWaybillController;
 use App\Http\Controllers\ReturnPricesController;
 use App\Http\Controllers\RetrunShipmentInTabsByStatusController;
+use App\Http\Controllers\VehicleGoodsExtractorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -429,3 +430,4 @@ Route::group([
  });
 
 
+ Route::get('/getGoodsByVehicleType/{vehicleType}', [VehicleGoodsExtractorController::class, 'getGoodsByVehicleType']);

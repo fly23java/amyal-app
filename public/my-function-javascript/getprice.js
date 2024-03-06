@@ -69,7 +69,7 @@ $(document).on('change', '#edit_shipment_form', function(e) {
                
             },
             error: function(response) {
-                $("#price").val('');
+               
             }
         });
     }

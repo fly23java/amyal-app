@@ -45,3 +45,68 @@
     </div>
 
 @endsection
+
+
+@section('script')
+<script>
+$(document).ready(function() {
+    function fetchGoodsByVehicleType(selectedVehicleType) {
+        return $.ajax({
+            url: "{{ url('getGoodsByVehicleType')}}/" + selectedVehicleType,
+            type: 'GET'
+        });
+    }
+
+    function populateGoodsSelect(goodsData) {
+        // Empty the current goods list
+        $('#goods_id').empty();
+
+        if (goodsData.length > 0) {
+            // Iterate through the goods data and append options to the select element
+            $.each(goodsData, function(index, good) {
+                $('#goods_id').append($('<option>', {
+                    value: good.id,
+                    text: good.name_arabic
+                }));
+            });
+
+           
+            // Select the pre-existing value if it matches any option
+                var preSelectedValue = $('#goods_id').data('pre-selected') || '';
+                $('#goods_id option[value="' + preSelectedValue + '"]').prop('selected', true);
+
+        } else {
+            // No goods found message
+            $('#goods_id').append($('<option>', {
+                value: '',
+                text: "{{ trans('shipments.goods_not_found') }}"
+            }));
+        }
+    }
+
+    // Listen for changes in the vehicle type
+    $('#vehicle_type_id').on('change', function() {
+        var selectedVehicleType = $(this).val();
+
+        // Fetch goods data and handle it with a promise
+        var goodsPromise = fetchGoodsByVehicleType(selectedVehicleType);
+
+        $.when(goodsPromise)
+            .done(function(data) {
+                populateGoodsSelect(data.goods);
+            })
+            .fail(function(xhr, textStatus, errorThrown) {
+                console.error("Error fetching goods data:", errorThrown);
+            });
+    });
+
+    // Trigger change event for #vehicle_type_id if it has a pre-existing value
+    var preSelectedVehicleType = $('#vehicle_type_id').val();
+    if (preSelectedVehicleType) {
+        $('#vehicle_type_id').trigger('change');
+    }
+});
+
+</script>
+
+@endsection

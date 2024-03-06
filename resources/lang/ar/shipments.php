@@ -6,6 +6,7 @@ return [
     'serial_number' => 'الرقم التسلسلي',
     'serial_number__placeholder' => 'أدخل الرقم التسلسلي هنا...',
     'account' => 'المستفيد الاول',
+    'goods_not_found' => 'الا تةجد بضائع متوافقة مع نوع المركبة المحدد',
     'user_id' => 'المستخدم',
     'user_id__placeholder' => 'اختر المستخدم',
     'shipment_date' => 'تاريخ الشحنة ',

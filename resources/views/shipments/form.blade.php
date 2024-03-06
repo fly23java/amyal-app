@@ -67,14 +67,11 @@
 <div class="mb-3 row">
     <label for="goods_id" class="col-form-label text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.goods_id') }}</label>
     <div class="col-lg-10 col-xl-9">
-        <select class="form-select   select2   form-control{{ $errors->has('goods_id') ? ' is-invalid' : '' }}" id="goods_id" name="goods_id" required="true">
+        <select class="form-select  form-control{{ $errors->has('goods_id') ? ' is-invalid' : '' }}" id="goods_id" name="goods_id" required="true">
         	    <option value="" style="display: none;" {{ old('goods_id', optional($shipment)->goods_id ?: '') == '' ? 'selected' : '' }} disabled selected>{{ trans('shipments.goods_id__placeholder') }}</option>
-        	@foreach ($Goods as $key => $Good)
-			    <option value="{{ $key }}" {{ old('goods_id', optional($shipment)->goods_id) == $key ? 'selected' : '' }}>
-			    	{{ $Good }}
-			    </option>
-			@endforeach
+        	
         </select>
+        <div class="invalid-feedback goods_error">Please select your country</div>
         
         {!! $errors->first('goods_id', '<div class="invalid-feedback">:message</div>') !!}
     </div>

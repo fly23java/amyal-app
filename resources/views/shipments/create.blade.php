@@ -44,3 +44,46 @@
 @endsection
 
 
+
+@section('script')
+<script>
+$(document).ready(function() {
+    // Listen for changes in the vehicle type
+    $('#vehicle_type_id').on('change', function() {
+        var selectedVehicleType = $(this).val();
+
+        // Empty the current goods list
+        $('#goods_id').empty();
+
+        $.ajax({
+            url: "{{ url('getGoodsByVehicleType')}}/" + selectedVehicleType,
+            type: 'GET',
+            success: function(data) {
+                if (data.goods.length > 0) {
+                    // Iterate through the goods data and append options to the select element
+                    $.each(data.goods, function(index, good) {
+                        $('#goods_id').append($('<option>', {
+                            value: good.id,
+                            text: good.name_arabic
+                        }));
+                    });
+                } else {
+                    // No goods found message
+                    $('#goods_id').append($('<option>', {
+                        value: '',
+                        text: "{{ trans('shipments.goods_not_found') }}"
+                    }));
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.error("Error fetching goods data:", errorThrown);
+            }
+        });
+    });
+});
+
+
+</script>
+
+@endsection
+
