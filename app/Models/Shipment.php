@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Shipment extends Model
 {
@@ -23,6 +24,7 @@ class Shipment extends Model
     protected $primaryKey = 'id';
     protected $keyType = 'string';
     public $incrementing = false;
+    public $timestamps = true;
 
 
     /**
@@ -153,10 +155,10 @@ class Shipment extends Model
      * @param  string  $value
      * @return array
      */
-    // public function getCreatedAtAttribute($value)
-    // {
-    //     return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
-    // }
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('Y-m-d g:i A');
+    }
 
     // /**
     //  * Get updated_at in array format
@@ -164,9 +166,24 @@ class Shipment extends Model
     //  * @param  string  $value
     //  * @return array
     //  */
-    // public function getUpdatedAtAttribute($value)
+    public function getUpdatedAtAttribute($value)
+    {
+        return  Carbon::createFromFormat($this->getDateFormat(), $value)->format('Y-m-d g:i A');
+    }
+
+    // public function getSerialNumberAttribute()
     // {
-    //     return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
+    //     $today = now()->format('Ymd');
+    //     $lastShipment = Shipment::whereDate('created_at', now())->latest()->first();
+
+    //     if ($lastShipment && $lastShipment->created_at->format('Ymd') === $today) {
+    //         $lastNumber = intval(substr($lastShipment->serial_number, -4));
+    //         $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
+    //     } else {
+    //         $newNumber = '0001';
+    //     }
+
+    //     return $today . $newNumber;
     // }
 
 }

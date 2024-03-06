@@ -13,6 +13,7 @@ use App\Models\Contract;
 use App\Models\ContractDetail;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use Illuminate\Support\Carbon;
 
 
  
@@ -34,23 +35,19 @@ class ShipmentService {
         ]);
        $Shipment_id = DB::getPdo()->lastInsertId();
 
+       $currentDateTime = Carbon::now()->format('Y-m-d H:i:s');
+
+          Shipment::where('id', $Shipment_id)->update(['created_at' => $currentDateTime]);
     //    create serial number by date and id of query
         Shipment::updateOrCreate(
             [
                'id' => $Shipment_id
            ],[
-            'serial_number'  =>  date('Ymd').$Shipment_id,
+            'serial_number'  => $data['account_id'].'-'.$data['loading_city_id'].'-'.$data ['unloading_city_id'].'-'.$this->getSerialNumberAttribute(),
            
        
           ]);
-        Shipment::updateOrCreate(
-            [
-               'id' => $Shipment_id
-           ],[
-            'serial_number'  =>  date('Ymd').$Shipment_id,
-           
-       
-          ]);
+        
 
           StatusChange::create([
             'shipment_id' => $Shipment_id,
@@ -147,21 +144,20 @@ class ShipmentService {
  
     
 
-     public static function generateSerialNumber()
+     public function getSerialNumberAttribute()
      {
-         $today = Carbon::today()->toDateString();
-         $lastShipment = static::whereDate('shipment_date', $today)->latest('id')->first();
- 
-         if ($lastShipment) {
-             $lastTransactionNumber = intval($lastShipment->transaction_number);
-             $nextTransactionNumber = $lastTransactionNumber + 1;
+         $today = Carbon::now()->format('Ymd');
+         $lastShipment = Shipment::whereDate('created_at',Carbon::now())->latest()->first();
+       
+        $lastCreatteAt =Carbon::parse($lastShipment->created_at)->format('Ymd');
+         if ($lastShipment && $lastCreatteAt === $today) {
+             $lastNumber = intval(substr($lastShipment->serial_number, -4));
+             $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
          } else {
-             $nextTransactionNumber = 1;
+             $newNumber = '0001';
          }
  
-         $serialNumber = $today . '-' . str_pad($nextTransactionNumber, 4, '0', STR_PAD_LEFT);
- 
-         return $serialNumber;
+         return $today . $newNumber;
      }
 
   
