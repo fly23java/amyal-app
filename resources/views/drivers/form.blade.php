@@ -78,9 +78,10 @@
     <div class="col-lg-10 col-xl-9">
         <select class="form-select   select2   form-control{{ $errors->has('vehicle_id') ? ' is-invalid' : '' }}" id="vehicle_id" name="vehicle_id" required="true">
         	    <option value="" style="display: none;" {{ old('vehicle_id', optional($driver)->vehicle_id ?: '') == '' ? 'selected' : '' }} disabled selected>{{ trans('drivers.vehicle_id__placeholder') }}</option>
-        	@foreach ($Vehicles as $key => $Vehicle)
-			    <option value="{{ $key }}" {{ old('vehicle_id', optional($driver)->vehicle_id) == $key ? 'selected' : '' }}>
-			    	{{ $Vehicle }}
+        	   
+                @foreach ($Vehicles as $key => $Vehicle)
+			    <option value="{{ $Vehicle->id }}" {{ old('vehicle_id', optional($driver)->vehicle_id) == $Vehicle->id ? 'selected' : '' }}>
+                 {{ $Vehicle->right_letter }}  {{ $Vehicle->middle_letter }}  {{ $Vehicle->left_letter }}  {{ $Vehicle->plate }}
 			    </option>
 			@endforeach
         </select>

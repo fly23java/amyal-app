@@ -35,7 +35,7 @@ class DriversController extends Controller
     public function create()
     {
         $Accounts = Account::pluck('name_arabic','id')->all();
-$Vehicles = Vehicle::pluck('owner_name','id')->all();
+        $Vehicles = Vehicle::all();
         
         return view('drivers.create', compact('Accounts','Vehicles'));
     }
@@ -97,7 +97,7 @@ $Vehicles = Vehicle::pluck('owner_name','id')->all();
     {
         $driver = Driver::findOrFail($id);
         $Accounts = Account::pluck('name_arabic','id')->all();
-$Vehicles = Vehicle::pluck('owner_name','id')->all();
+        $Vehicles = Vehicle::all();
 
         return view('drivers.edit', compact('driver','Accounts','Vehicles'));
     }
