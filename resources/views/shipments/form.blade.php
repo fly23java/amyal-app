@@ -1,17 +1,17 @@
 
 <div class="mb-3 row">
-    <label for="user_id" class="col-form-label text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.user_id') }}</label>
+    <label for="account_id" class="col-form-label text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.user_id') }}</label>
     <div class="col-lg-10 col-xl-9">
-        <select class="form-select   select2   form-control{{ $errors->has('user_id') ? ' is-invalid' : '' }}" id="user_id" name="user_id" required="true">
+        <select class="form-select   select2   form-control{{ $errors->has('account_id') ? ' is-invalid' : '' }}" id="account_id" name="account_id" required="true">
         	    <option value="" style="display: none;" {{ old('user_id', optional($shipment)->user_id ?: '') == '' ? 'selected' : '' }} disabled selected>{{ trans('shipments.user_id__placeholder') }}</option>
-        	@foreach ($Users as $key => $User)
-			    <option value="{{ $key }}" {{ old('user_id', optional($shipment)->user_id) == $key ? 'selected' : '' }}>
-			    	{{ $User }}
+        	@foreach ($Accounts as $key => $Account)
+			    <option value="{{ $key }}" {{ old('account_id', optional($shipment)->account_id) == $key ? 'selected' : '' }}>
+			    	{{ $Account }}
 			    </option>
 			@endforeach
         </select>
         
-        {!! $errors->first('user_id', '<div class="invalid-feedback">:message</div>') !!}
+        {!! $errors->first('account_id', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
 

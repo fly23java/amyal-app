@@ -2,7 +2,7 @@
                     <thead>
                         <tr>
                             <th>{{ trans('shipments.serial_number') }}</th>
-                            <th>{{ trans('shipments.user_id') }}</th>
+                            <th>{{ trans('shipments.account') }}</th>
                             <th>{{ trans('shipments.loading_city_id') }}</th>
                             <th>{{ trans('shipments.unloading_city_id') }}</th>
                             <th>{{ trans('shipments.vehicle_type_id') }}</th>
@@ -19,7 +19,7 @@
                     @foreach($shipments as $shipment)
                         <tr>
                             <td class="align-middle">{{ $shipment->serial_number }}</td>
-                            <td class="align-middle">{{ $shipment->getAUserName($shipment->user_id)->name }}</td>
+                            <td class="align-middle">{{ $shipment->getAccountName($shipment->account_id)->name_arabic }}</td>
                             <td class="align-middle">{{ $shipment->getCityName($shipment->loading_city_id)->name_arabic }}</td>
                             <td class="align-middle">{{  $shipment->getCityName($shipment->unloading_city_id)->name_arabic  }}</td>
                             <td class="align-middle">{{ optional($shipment->VehicleType)->name_arabic }}</td>

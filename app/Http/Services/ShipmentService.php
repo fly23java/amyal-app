@@ -12,6 +12,7 @@ use App\Models\Vehicle;
 use App\Models\Contract;
 use App\Models\ContractDetail;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 
  
@@ -20,8 +21,9 @@ class ShipmentService {
     public function store($data)
     {
 
+       
         DB::table('shipments')->insert([
-            'user_id'  =>  $data['user_id'],
+            'account_id'  =>  $data['account_id'],
             'loading_city_id' =>  $data['loading_city_id'],
             'unloading_city_id' => $data ['unloading_city_id'],
             'vehicle_type_id' =>$data ['vehicle_type_id'],
@@ -53,7 +55,7 @@ class ShipmentService {
           StatusChange::create([
             'shipment_id' => $Shipment_id,
             'status_id' => 1, // Change here
-            'user_id' => $data['user_id'],
+            'user_id' =>Auth::user()->id,
         ]);
 
 

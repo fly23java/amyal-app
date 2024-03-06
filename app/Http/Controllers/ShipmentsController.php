@@ -9,6 +9,7 @@ use App\Models\Goods;
 use App\Models\Shipment;
 use App\Models\Status;
 use App\Models\StatusChange;
+use App\Models\Account;
 use App\Models\User;
 use App\Models\VehicleType;
 use App\Models\Contract;
@@ -55,14 +56,14 @@ class ShipmentsController extends Controller
      */
     public function create()
     {
-        $Accounts = Account::pluck('name','id')->all();
+        $Accounts = Account::pluck('name_arabic','id')->all();
         $Users = User::pluck('name','id')->all();
         $Cities = City::pluck('name_arabic','id')->all();
         $VehicleTypes = VehicleType::pluck('name_arabic','id')->all();
         $Goods = Goods::pluck('name_arabic','id')->all();
         $Statuses = Status::pluck('name_arabic','id')->all();
         
-        return view('shipments.create', compact('Users','Cities','Cities','VehicleTypes','Goods','Statuses','Users'));
+        return view('shipments.create', compact('Accounts','Users','Cities','Cities','VehicleTypes','Goods','Statuses','Users'));
     }
 
     /**
@@ -78,9 +79,9 @@ class ShipmentsController extends Controller
         $data = $request->getData();
 
         // dd($request->id);
-        // dd($data);
+        // dd($request->all());
 
-        (new ShipmentService())->store($data);
+        (new ShipmentService())->store($request->all());
        
         return redirect()->route('shipments.shipment.index')
             ->with('success_message', trans('shipments.model_was_added'));
@@ -110,13 +111,14 @@ class ShipmentsController extends Controller
     public function edit($id)
     {
         $shipment = Shipment::findOrFail($id);
+        $Accounts = Account::pluck('name_arabic','id')->all();
         $Users = User::pluck('name','id')->all();
         $Cities = City::pluck('name_arabic','id')->all();
         $VehicleTypes = VehicleType::pluck('name_arabic','id')->all();
         $Goods = Goods::pluck('name_arabic','id')->all();
         $Statuses = Status::pluck('name_arabic','id')->all();
 
-        return view('shipments.edit', compact('shipment','Users','Cities','Cities','VehicleTypes','Goods','Statuses','Users'));
+        return view('shipments.edit', compact('Accounts','shipment','Users','Cities','Cities','VehicleTypes','Goods','Statuses','Users'));
     }
 
     /**
@@ -131,9 +133,9 @@ class ShipmentsController extends Controller
     {
         
         $data = $request->getData();
-        
+        // dd($request->all());
         $shipment = Shipment::findOrFail($id);
-        $shipment->update($data);
+        $shipment->update($request->all());
 
         return redirect()->route('shipments.shipment.index')
             ->with('success_message', trans('shipments.model_was_updated'));  
