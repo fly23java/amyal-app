@@ -278,6 +278,15 @@ Route::group([
           ->name('contracts.contract.update');
      Route::delete('/contract/{contract}',[ContractsController::class, 'destroy'])
           ->name('contracts.contract.destroy');
+     Route::get('/contract/vehicle_types',[ContractsController::class, 'vehicleTypes'])
+          ->name('contracts.contract.vehicleTypes');
+     Route::get('/contract/fetchGoods',[ContractsController::class, 'fetchGoods'])
+          ->name('contracts.contract.fetchGoods');
+     Route::get('/contract/fetchCity',[ContractsController::class, 'fetchCity'])
+          ->name('contracts.contract.fetchCity');
+
+     Route::get('/contracts/details/{id}', [ContractsController::class, 'getContractDetails'])
+          ->name('contracts.contract.details');
  });
  
  Route::group([

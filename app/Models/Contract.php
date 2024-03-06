@@ -20,9 +20,9 @@ class Contract extends Model
     *
     * @var string
     */
-    protected $primaryKey = 'id';
-    protected $keyType = 'string';
-    public $incrementing = false;
+    // protected $primaryKey = 'id';
+    // protected $keyType = 'string';
+    // public $incrementing = false;
 
 
     /**
@@ -68,7 +68,7 @@ class Contract extends Model
      */
     public function contractDetail()
     {
-        return $this->hasOne('App\Models\ContractDetail','contract_id','id');
+        return $this->hasMany('App\Models\ContractDetail','contract_id','id');
     }
 
 

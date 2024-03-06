@@ -67,7 +67,7 @@ class GoodsType extends Model
      */
     public function good()
     {
-        return $this->hasOne('App\Models\Good','goods_type_id','id');
+        return $this->hasMany('App\Models\Goods','goods_type_id','id');
     }
 
     /**
