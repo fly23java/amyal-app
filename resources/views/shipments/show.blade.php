@@ -42,7 +42,7 @@
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.vehicle_type_id') }}</dt>
             <dd class="col-lg-10 col-xl-9">{{ optional($shipment->VehicleType)->name_arabic }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.goods_id') }}</dt>
-            <dd class="col-lg-10 col-xl-9">{{ optional($shipment->Good)->name_arabic }}</dd>
+            <dd class="col-lg-10 col-xl-9">{{ optional($shipment->Goods)->name_arabic }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.status_id') }}</dt>
             <dd class="col-lg-10 col-xl-9">{{ optional($shipment->Status)->name_arabic }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.price') }}</dt>

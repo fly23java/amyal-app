@@ -24,104 +24,72 @@
         @if(count($shipments) == 0)
             <div class="card-body text-center">
                 <h4>{{ trans('shipments.none_available') }}</h4>
+
+            
             </div>
         @else
         <div class="card-body p-0">
             <div class="table-responsive">
 
-                <table class="table table-striped  zero-configuration">
-                    <thead>
-                        <tr>
-                            <th>{{ trans('shipments.serial_number') }}</th>
-                            <th>{{ trans('shipments.user_id') }}</th>
-                            <th>{{ trans('shipments.loading_city_id') }}</th>
-                            <th>{{ trans('shipments.unloading_city_id') }}</th>
-                            <th>{{ trans('shipments.vehicle_type_id') }}</th>
-                         
-                            <!-- <th>{{ trans('shipments.status_id') }}</th> -->
-                            <th>{{ trans('shipments.carrir') }}</th>
-                            <th>{{ trans('shipments.supervisor_user_id') }}</th>
-                           
+            
+                        <!-- Basic Tabs starts -->
+                        <div class="col-xl-12 col-lg-12">
+                            <div class="card">
+                                
+                                <div class="card-body">
+                                    <ul class="nav nav-tabs" role="tablist">
 
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($shipments as $shipment)
-                        <tr>
-                            <td class="align-middle">{{ $shipment->serial_number }}</td>
-                            <td class="align-middle">{{ $shipment->getAUserName($shipment->user_id)->name }}</td>
-                            <td class="align-middle">{{ $shipment->getCityName($shipment->loading_city_id)->name_arabic }}</td>
-                            <td class="align-middle">{{  $shipment->getCityName($shipment->unloading_city_id)->name_arabic  }}</td>
-                            <td class="align-middle">{{ optional($shipment->VehicleType)->name_arabic }}</td>
-                            
-                            <!-- <td class="align-middle badge badge-pill badge-light-warning  mt-1">{{ optional($shipment->Status)->name_arabic }}</td> -->
-                            <td class="align-middle">
-                            @if (!empty($shipment->shipmentDeliveryDetail->shipment_id))
-                                {{ ($shipment->getCarrir($shipment->id)->name_arabic)  }}
-                            @endif
-                            </td>
-                            <td class="align-middle">{{ optional($shipment->User)->name }}</td>
-                            
-
-                            <td class="text-end">
-
-                                <form method="POST" action="{!! route('shipments.shipment.destroy', $shipment->id) !!}" accept-charset="UTF-8">
-                                <input name="_method" value="DELETE" type="hidden">
-                                {{ csrf_field() }}
-                                     <div class="btn-group btn-group-sm" role="group">
-                                     
-                                        <div class="dropdown">
-                                                    <button type="button" class="btn btn-secondary  text-white dropdown-toggle hide-arrow" data-toggle="dropdown">
-                                                         <i class="fa-solid fa-table-list"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                       
-                                                         <a class="dropdown-item"  id="test_hima"  data-id="{{ $shipment->id  }}" data-toggle="modal" data-target="#modals-slide-in">
-                                                            <i data-feather="plus" class="mr-50"></i>
-                                                            <span>{{ trans('main.add_carrir') }}</span>
-                                                        </a>
-                                                         <a class="dropdown-item"   id="statuses_edit"  data-id="{{ $shipment->id  }}" data-toggle="modal" data-target="#modals-statuses-update">
-                                                            <i data-feather="plus" class="mr-50"></i>
-                                                            <span>{{ trans('statuses.edit') }}</span>
-                                                        </a>
-                                                         <a class="dropdown-item" href="{{ route('print_waybills.print_waybill.generateInvoice', $shipment->id ) }}">
-                                                            <i data-feather="plus" class="mr-50"></i>
-                                                            <span>{{ trans('main.testprint') }}</span>
-                                                        </a>
-                                                         <a class="dropdown-item"  id="shipment_delivery" data-id="{{ $shipment->id  }}" data-toggle="modal" data-target="#models-shipment-delivery" >
-                                                            <i data-feather="plus" class="mr-50"></i>
-                                                            <span>{{ trans('main.shipment_delivery') }}</span>
-                                                        </a>
-                                                       
-                                                        
-                                                         
-                                                    </div>
-                                        </div>
-
-                                        <a class="btn btn-secondary" href="{{ route('shipments.shipment.show', $shipment->id ) }}">
-                                        <i class="fa-solid fa-eye"></i>
-                                          
-                                        </a>
-                                        <a class="btn btn-secondary" href="{{ route('shipments.shipment.edit', $shipment->id ) }}">
-                                            <i class="fa-solid fa-edit"></i>
-                                            
-                                        </a>
-                                    </div>
+                                    <li class="nav-item">
+                                        
+                                            <a class="nav-link active tab-shipment " id="home-tab{{ $Status->id }}" data-id="{{ $Status->id }}" data-toggle="tab" href="#home{{ $Status->id }}" aria-controls="home{{ $Status->id }}" role="tab" aria-selected="true">
+                                            <span class="badge badge-light-success badge-pill ml-auto mr-1">{{ $Status->shipment_count }}</span>
+                                                {{ $Status->name_arabic }} 
+                                            </a>
+                                        </li>
+                                    @foreach ( $Status->childStatus  as   $stats )
                                         
 
-                                       
+                                        <li class="nav-item">
+                                        
+                                            <a class="nav-link tab-shipment " id="home-tab{{ $stats->id }}" data-id="{{ $stats->id }}" data-toggle="tab" href="#home{{ $stats->id }}" aria-controls="home{{ $stats->id }}" role="tab" aria-selected="true">
+                                                    <span class="badge badge-light-success badge-pill ml-auto mr-1">
+                                                        @foreach ( $Statuses  as   $stats1 )
+                                                            @if ($stats->id == $stats1->id)
+                                                                {{ $stats1->shipment_count }}
+                                                            @endif
+                                                        @endforeach
+                                                    </span>
+                                            {{ $stats->name_arabic }} 
+                                            
+                                            </a>
+                                        </li>
+                                     @endforeach
+                                        
+                                   
+                                      
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane  active" id="home{{ $Status->id }}" aria-labelledby="home-tab{{ $Status->id }}" role="tabpanel">
+                                               
+                                        </div>
+                                        @foreach ( $Status->childStatus as   $stats )
+                                        <div class="tab-pane" id="home{{ $stats->id }}" aria-labelledby="home-tab{{ $stats->id }}" role="tabpanel">
+                                                
+                                        </div>
+                                        @endforeach
+                                    
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Basic Tabs ends -->
 
-                                </form>
-                                
-                            </td>
-                           
-                        </tr>
-                      
-                    @endforeach
-                    </tbody>
-                </table>
+                  
+                    
+                
+                            
+
+             
 
             </div>
 
@@ -149,5 +117,51 @@
 
 
 
+@endsection
+
+
+@section('script')  
+<script>
+    $(document).ready(function () {
+        // Handle tab click event
+        activeTabs();
+
+        function activeTabs() {
+          var id =1;  
+        var data={
+            'id': 1
+        };
+            $.ajax({
+                type: "GET",
+                url: config.routes.retrunShipmentInTabsByStatus,
+                data : data,
+                dataType: "json",
+                success: function (response) {
+                    // console.log(response);
+                    $('#home'+id).html("");
+                    var table = $('.zero-configuration2').DataTable();
+                    table.destroy();
+                    // Now you can safely reinitialize the DataTable
+                  
+
+                        $('#home'+id).append(response.data);
+                       
+                        $('.zero-configuration2').DataTable({
+                            "drawCallback": function () {
+                                $('.previous').addClass('btn btn-sm btn-dark');
+                                $('.paginate_button ').addClass('btn btn-sm btn-primary');
+                    
+                                $('.next').addClass('btn btn-sm btn-dark');
+                                $('div.dataTables_filter input').addClass('form-control');
+                                $('.dataTables_length').addClass('d-none');
+                    
+                    
+                                 
+                            } , order: [[3, 'desc']]  });
+                }
+            });
+         }
+    });
+</script>
 
 @endsection

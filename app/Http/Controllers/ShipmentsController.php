@@ -41,11 +41,11 @@ class ShipmentsController extends Controller
     public function index()
     {
         $Vehicles = Vehicle::all();
-        $Status = Status::findOrFail(1);
-
+        $Status = Status::withCount('shipment')->findOrFail(1);
+        $Statuses = Status::withCount('shipment')->get(); 
         // dd($Status->shipment());
         $shipments = Shipment::orderBy('serial_number', 'desc')->get();
-        return view('shipments.index', compact('shipments' ,'Vehicles','Status'));
+        return view('shipments.index', compact('shipments' ,'Vehicles','Status','Statuses'));
     }
 
     /**
@@ -55,6 +55,7 @@ class ShipmentsController extends Controller
      */
     public function create()
     {
+        $Accounts = Account::pluck('name','id')->all();
         $Users = User::pluck('name','id')->all();
         $Cities = City::pluck('name_arabic','id')->all();
         $VehicleTypes = VehicleType::pluck('name_arabic','id')->all();

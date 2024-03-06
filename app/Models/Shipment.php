@@ -32,7 +32,7 @@ class Shipment extends Model
      */
     protected $fillable = [
                   'serial_number',
-                  'user_id',
+                  'account_id',
                   'loading_city_id',
                   'unloading_city_id',
                   'loading_location',
@@ -64,6 +64,10 @@ class Shipment extends Model
      *
      * @return App\Models\User
      */
+    public function Account()
+    {
+        return $this->belongsTo('App\Models\Account','account_id','id');
+    }
     public function User()
     {
         return $this->belongsTo('App\Models\User','supervisor_user_id','id');

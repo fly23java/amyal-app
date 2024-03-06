@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
             $table->string('serial_number')->nullable();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('account_id');
             $table->unsignedBigInteger('loading_city_id');
             $table->string('loading_location')->nullable();
             $table->unsignedBigInteger('unloading_city_id');
@@ -30,7 +30,7 @@ return new class extends Migration
             $table->unsignedBigInteger('supervisor_user_id')->nullable();
            
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('account_id')->references('id')->on('accounts');
             $table->foreign('loading_city_id')->references('id')->on('cities');
             $table->foreign('unloading_city_id')->references('id')->on('cities');
             $table->foreign('status_id')->references('id')->on('statuses');

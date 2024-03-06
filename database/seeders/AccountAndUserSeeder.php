@@ -27,7 +27,7 @@ class AccountAndUserSeeder extends Seeder
         $account->users()->create([
             'name' => 'شركة اميال',
             'email' => 'admin@admin.com',
-            // 'account_id' => $account->id,
+            'account_id' => $account->id,
             'password' =>  Hash::make('12345678'),
             'type' =>  'admin',
             'status' => 'active',

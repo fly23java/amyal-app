@@ -41,5 +41,9 @@ class Account extends Model
     {
         return $this->hasMany(Driver::class);
     }
+    public function Shipments()
+    {
+        return $this->hasMany(Shipment::class);
+    }
 
 }

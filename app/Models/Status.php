@@ -70,7 +70,7 @@ class Status extends Model
      */
     public function shipment()
     {
-        return $this->hasOne('App\Models\Shipment','status_id','id');
+        return $this->hasMany('App\Models\Shipment','status_id','id');
     }
 
     /**
