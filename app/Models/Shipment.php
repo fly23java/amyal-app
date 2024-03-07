@@ -21,10 +21,7 @@ class Shipment extends Model
     *
     * @var string
     */
-    protected $primaryKey = 'id';
-    protected $keyType = 'string';
-    public $incrementing = false;
-    public $timestamps = true;
+ 
 
 
     /**
@@ -171,19 +168,6 @@ class Shipment extends Model
     //     return  Carbon::createFromFormat($this->getDateFormat(), $value)->format('Y-m-d g:i A');
     // }
 
-    // public function getSerialNumberAttribute()
-    // {
-    //     $today = now()->format('Ymd');
-    //     $lastShipment = Shipment::whereDate('created_at', now())->latest()->first();
 
-    //     if ($lastShipment && $lastShipment->created_at->format('Ymd') === $today) {
-    //         $lastNumber = intval(substr($lastShipment->serial_number, -4));
-    //         $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
-    //     } else {
-    //         $newNumber = '0001';
-    //     }
-
-    //     return $today . $newNumber;
-    // }
 
 }

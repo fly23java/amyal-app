@@ -1,7 +1,0 @@
-1
-
-php artisan resource-file:from-database ShipmentDeliveryDetail --translation-for=en,ar --force
-
-2
-
-php artisan create:resources ShipmentDeliveryDetail --translation-for=en,ar  --with-form-request --force

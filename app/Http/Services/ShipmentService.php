@@ -23,41 +23,50 @@ class ShipmentService {
     {
 
        
-        DB::table('shipments')->insert([
-            'account_id'  =>  $data['account_id'],
-            'loading_city_id' =>  $data['loading_city_id'],
-            'unloading_city_id' => $data ['unloading_city_id'],
-            'vehicle_type_id' =>$data ['vehicle_type_id'],
-            'goods_id' => $data ['goods_id'],
-            'price' => $data ['price'],
-            'status_id' => 1 ,
-            
-        ]);
-       $Shipment_id = DB::getPdo()->lastInsertId();
+        try {
 
-       $currentDateTime = Carbon::now()->format('Y-m-d H:i:s');
-
-          Shipment::where('id', $Shipment_id)->update(['created_at' => $currentDateTime]);
-    //    create serial number by date and id of query
-        Shipment::updateOrCreate(
-            [
-               'id' => $Shipment_id
-           ],[
-            'serial_number'  => $data['account_id'].'-'.$data['loading_city_id'].'-'.$data ['unloading_city_id'].'-'.$this->getSerialNumberAttribute(),
            
-       
-          ]);
-        
-
-          StatusChange::create([
-            'shipment_id' => $Shipment_id,
-            'status_id' => 1, // Change here
-            'user_id' =>Auth::user()->id,
-        ]);
-
-
-
-          return true;
+            // dd($lastShipment);
+            $newSerialeNamewer =$this->getSerialNumberAttribute();
+            // Insert the shipment record
+            $shipment = Shipment::create([
+                'account_id' => $data['account_id'],
+                'loading_city_id' => $data['loading_city_id'],
+                'unloading_city_id' => $data['unloading_city_id'],
+                'vehicle_type_id' => $data['vehicle_type_id'],
+                'goods_id' => $data['goods_id'],
+                'price' => $data['price'],
+                'status_id' => 1,
+            ]);
+            // dd($shipment);
+            // Get the shipment ID
+            $shipmentId = $shipment->id;
+    
+            // Create the serial number
+            $serialNumber = $data['account_id'] . '-' . $data['loading_city_id'] . '-' . $data['unloading_city_id'] . '-' . Carbon::parse($shipment->created_at)->format('Ymd'). $newSerialeNamewer;
+            
+          
+          
+            // Update the shipment record with the serial number
+            
+            Shipment::updateOrCreate(
+                ['id' => $shipmentId], // The criteria to find the existing record, usually based on primary key
+                ['serial_number' => $serialNumber] // The data to update or create
+            );
+            
+            // Shipment::where('id', $shipmentId)->update(['serial_number'  => $serialNumber]);
+            // Create the status change record
+            StatusChange::create([
+                'shipment_id' => $shipmentId,
+                'status_id' => 1,
+                'user_id' => auth()->user()->id,
+            ]);
+    
+            return true;
+        } catch (\Exception $e) {
+            // Handle exceptions (log, notify, etc.)
+            return false;
+        }
 
      }
 
@@ -151,17 +160,24 @@ class ShipmentService {
      public function getSerialNumberAttribute()
      {
          $today = Carbon::now()->format('Ymd');
-         $lastShipment = Shipment::whereDate('created_at',Carbon::now())->latest()->first();
-       
-        $lastCreatteAt =Carbon::parse($lastShipment->created_at)->format('Ymd');
+         $lastShipment = Shipment::orderBy('id' , 'DESC')->first();
+         if($lastShipment){
+            $lastCreatteAt =Carbon::parse($lastShipment->created_at)->format('Ymd');
+         }
+      
          if ($lastShipment && $lastCreatteAt === $today) {
-             $lastNumber = intval(substr($lastShipment->serial_number, -4));
+
+            $serialNumber = $lastShipment->serial_number;
+            $lastNumber1 = explode('-', $serialNumber);
+            $desiredPart = end($lastNumber1);
+             $lastNumber = intval(substr($desiredPart, -4)) ;
              $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
+            
          } else {
              $newNumber = '0001';
          }
  
-         return $today . $newNumber;
+          return $newNumber;
      }
 
   
