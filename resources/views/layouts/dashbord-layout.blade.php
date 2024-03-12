@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="amyale system">
     <meta name="keywords" content="amyale system">
-
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 
     <meta name="author" content="PIXINVENT">
     
