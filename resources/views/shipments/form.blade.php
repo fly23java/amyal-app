@@ -63,11 +63,11 @@
         {!! $errors->first('vehicle_type_id', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
-
-<div class="mb-3 row">
+    <input id="old_goods_id" value="{{optional($shipment)->goods_id}}"  style="display:none"/>
+    <div class="mb-3 row">
     <label for="goods_id" class="col-form-label text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.goods_id') }}</label>
     <div class="col-lg-10 col-xl-9">
-        <select class="form-select  form-control{{ $errors->has('goods_id') ? ' is-invalid' : '' }}" id="goods_id" name="goods_id" required="true">
+        <select class="form-select  form-control{{ $errors->has('goods_id') ? ' is-invalid' : '' }}" id="goods_id" name="goods_id" required="true" value="">
         	    <option value="" style="display: none;" {{ old('goods_id', optional($shipment)->goods_id ?: '') == '' ? 'selected' : '' }} disabled selected>{{ trans('shipments.goods_id__placeholder') }}</option>
         	
         </select>

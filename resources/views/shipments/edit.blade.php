@@ -70,9 +70,9 @@ $(document).ready(function() {
                 }));
             });
 
-           
+            old_goods = $('#old_goods_id').val();
             // Select the pre-existing value if it matches any option
-                var preSelectedValue = $('#goods_id').data('pre-selected') || '';
+                var preSelectedValue = old_goods || '';
                 $('#goods_id option[value="' + preSelectedValue + '"]').prop('selected', true);
 
         } else {
