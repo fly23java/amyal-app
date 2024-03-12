@@ -87,7 +87,7 @@ th{
               </th>
             
                 <tr>
-                    <td> {{ trans('bill.company_name') }} {{ $shipment->getAUserName($shipment->user_id)->name }}</td>
+                    <td> {{ trans('bill.company_name') }} {{ $shipment->getAccountName($shipment->account_id)->name_arabic}}</td>
                 </tr>
            
             <tr>
