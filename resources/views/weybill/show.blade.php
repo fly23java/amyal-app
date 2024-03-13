@@ -116,7 +116,7 @@
 			<div class="wcdiv" style="left:67.88pt; top:72pt;">
 				<div class="wcdiv" style="clip:rect(0pt,126.53pt,98.5pt,0.38pt);">
 					<div class="wcdiv" style="left:0.38pt;">
-						<span class="wcspan wctext002" style="color:#ff0000; left:7.390000000000001pt; top:28.44pt; line-height:13.41pt;font-size:12px">{{$shipment->serial_number}}</span>
+						<span class="wcspan wctext002" style="color:#ff0000; left:7.390000000000001pt; top:28.44pt; line-height:13.41pt;font-size:11px">{{$shipment->serial_number}}</span>
 					</div>
 				</div>
 				<div class="wcdiv" style="left:126.9pt; clip:rect(0pt,101.63pt,98.5pt,0.38pt);">
