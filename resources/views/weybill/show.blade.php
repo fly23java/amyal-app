@@ -126,7 +126,7 @@
 			<div class="wcdiv" style="left:67.88pt; top:72pt;">
 				<div class="wcdiv" style="clip:rect(0pt,126.53pt,98.5pt,0.38pt);">
 					<div class="wcdiv" style="left:0.38pt;">
-						<span class="wcspan wctext002" style="color:#ff0000; left:7.390000000000001pt; top:28.44pt; line-height:13.41pt;">{{$shipment->serial_number}}</span>
+						<span class="wcspan wctext002" style="color:#ff0000; left:7.390000000000001pt; top:28.44pt; line-height:13.41pt;font-size:15px">{{$shipment->serial_number}}</span>
 					</div>
 				</div>
 				<div class="wcdiv" style="left:126.9pt; clip:rect(0pt,101.63pt,98.5pt,0.38pt);">
@@ -409,7 +409,7 @@
 					</div>
 					<div class="wcdiv" style="left:343.5pt; clip:rect(1pt,177.75pt,22.35pt,0.5pt);">
 						<div class="wcdiv" style="left:5pt; top:6pt; direction:rtl;">
-							<span class="wcspan wctext001" style="font-size:9pt; left:103.64pt; top:0.29pt; line-height:10.05pt;">{{ $shipment->getAccountName($shipment->account_id)->name_arabic}}</span>
+							<span class="wcspan wctext001" style="font-size:9pt; left:70.64pt; top:0.29pt; line-height:10.05pt;">{{ $shipment->getAccountName($shipment->account_id)->name_arabic}}</span>
 						</div>
 					</div>
 					<div class="wcdiv" style="left:521.25pt; clip:rect(1pt,35.5pt,22.35pt,0pt);">
@@ -480,7 +480,7 @@
 					</div>
 					<div class="wcdiv" style="left:57pt; clip:rect(1pt,129pt,25.8pt,0pt);">
 						<div class="wcdiv" style="left:5pt; top:6pt; direction:rtl;">
-							<span class="wcspan wctext001" style="font-size:11pt; left:91.78pt; top:0.36pt; line-height:12.29pt;">{{  $shipment->getCityName($shipment->unloading_city_id)->name_arabic  }} </span>
+							<span class="wcspan wctext001" style="font-size:11pt; left:70.78pt; top:0.36pt; line-height:12.29pt;">{{  $shipment->getCityName($shipment->unloading_city_id)->name_arabic  }} </span>
 						</div>
 					</div>
 					<div class="wcdiv" style="left:186pt; clip:rect(1pt,52.75pt,25.8pt,0pt);">
@@ -497,7 +497,7 @@
 					</div>
 					<div class="wcdiv" style="left:343.5pt; clip:rect(1pt,177.75pt,25.8pt,0.5pt);">
 						<div class="wcdiv" style="left:5pt; top:6pt; direction:rtl;">
-							<span class="wcspan wctext001" style="font-size:11pt; left:144.6pt; top:0.36pt; line-height:12.29pt;">{{$shipment->getCityName($shipment->loading_city_id)->name_arabic }}</span>
+							<span class="wcspan wctext001" style="font-size:11pt; left:129.6pt; top:0.36pt; line-height:12.29pt;">{{$shipment->getCityName($shipment->loading_city_id)->name_arabic }}</span>
 						</div>
 					</div>
 					<div class="wcdiv" style="left:521.25pt; clip:rect(1pt,35.5pt,25.8pt,0pt);">
@@ -585,7 +585,7 @@
 								</div>
 								<div class="wcdiv" style="left:36pt; clip:rect(1pt,138.75pt,33.65pt,0pt);">
 									<div class="wcdiv" style="left:5pt; top:6pt; direction:rtl;">
-										<span class="wcspan wctext001" style="font-size:11pt; left:63.64pt; top:0.36pt; line-height:12.29pt;">{{ $vehicle->Driver->name_arabic }}</span>
+										<span class="wcspan wctext001" style="font-size:8pt; left:5pt; top:0.36pt; line-height:12.29pt;">{{ $vehicle->Driver->name_arabic }}</span>
 									</div>
 								</div>
 								<div class="wcdiv" style="left:174.75pt; clip:rect(1pt,45.25pt,33.65pt,0pt);">
@@ -604,7 +604,7 @@
 								</div>
 								<div class="wcdiv" style="left:36pt; clip:rect(1pt,138.75pt,33.65pt,0pt);">
 									<div class="wcdiv" style="left:5pt; top:6pt;">
-										<span class="wcspan wctext001" style="font-size:11pt; left:0pt; top:0.36pt; line-height:12.29pt;">{{ $vehicle->Driver->identity_number }}</span>
+										<span class="wcspan wctext001" style="font-size:8pt; left:0pt; top:0.36pt; line-height:12.29pt;">{{ $vehicle->Driver->identity_number }}</span>
 									</div>
 								</div>
 								<div class="wcdiv" style="left:174.75pt; clip:rect(1pt,45.25pt,33.65pt,0pt);">
@@ -620,7 +620,7 @@
 									</div>
 								</div>
 								<div class="wcdiv" style="left:35.95pt; top:0.95pt; width:138.65pt; height:31.55pt; background-color:#efefef; border:solid 0.1pt #efefef;">
-                                <span class="wcspan wctext001" style="font-size:11pt; left:0pt; top:0.36pt; line-height:12.29pt;">{{ $vehicle->Driver->phone }}</span>
+                                <span class="wcspan wctext001" style="    font-size: 10pt;left: 11pt;top: 7.359999999999999pt;line-height: 12.29pt;">{{ $vehicle->Driver->phone }}</span>
                                 </div>
 								<div class="wcdiv" style="left:174.75pt; clip:rect(1pt,45.25pt,33.65pt,0pt);">
 									<div class="wcdiv" style="left:5pt; top:6pt; direction:rtl;">
