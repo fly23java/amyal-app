@@ -34,7 +34,7 @@
     <div class="card-body">
         <dl class="row">
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.user_id') }}</dt>
-            <dd class="col-lg-10 col-xl-9">{{ $shipment->getAUserName($shipment->user_id)->name }}</dd>
+            <dd class="col-lg-10 col-xl-9">{{ $shipment->getAccountName($shipment->account_id)->name_arabic  }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.loading_city_id') }}</dt>
             <dd class="col-lg-10 col-xl-9">{{ $shipment->getCityName($shipment->loading_city_id)->name_arabic }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('shipments.unloading_city_id') }}</dt>

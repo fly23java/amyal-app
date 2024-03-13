@@ -71,7 +71,7 @@
         	    <option value="" style="display: none;" {{ old('goods_id', optional($shipment)->goods_id ?: '') == '' ? 'selected' : '' }} disabled selected>{{ trans('shipments.goods_id__placeholder') }}</option>
         	
         </select>
-        <div class="invalid-feedback goods_error">Please select your country</div>
+       
         
         {!! $errors->first('goods_id', '<div class="invalid-feedback">:message</div>') !!}
     </div>
