@@ -36,8 +36,8 @@ class PrintWaybillController extends Controller
         // $pdf->save('pdf/test.pdf');
         
         // Return as response
-        return $pdf->download($shipment->serial_number.'.pdf');
-        // return $pdf->stream();
+        // return $pdf->download($shipment->serial_number.'.pdf');
+        return $pdf->stream();
 
     
         

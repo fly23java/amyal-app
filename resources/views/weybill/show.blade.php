@@ -41,17 +41,7 @@
             margin:10pt auto 10pt auto;
             overflow:hidden;
         }
-        @media print {
-            body {
-                margin:0pt;
-                padding:0pt;
-            }
-            .wcpage {
-                page-break-after:always;
-                margin:0pt;
-                padding:0pt;
-            }
-        }
+      
         .wctext001 {
             font-family:'Arial';
             font-style:normal;
