@@ -116,7 +116,7 @@
 			<div class="wcdiv" style="left:67.88pt; top:72pt;">
 				<div class="wcdiv" style="clip:rect(0pt,126.53pt,98.5pt,0.38pt);">
 					<div class="wcdiv" style="left:0.38pt;">
-						<span class="wcspan wctext002" style="color:#ff0000; left:7.390000000000001pt; top:28.44pt; line-height:13.41pt;font-size:15px">{{$shipment->serial_number}}</span>
+						<span class="wcspan wctext002" style="color:#ff0000; left:7.390000000000001pt; top:28.44pt; line-height:13.41pt;font-size:10px">{{$shipment->serial_number}}</span>
 					</div>
 				</div>
 				<div class="wcdiv" style="left:126.9pt; clip:rect(0pt,101.63pt,98.5pt,0.38pt);">
@@ -628,8 +628,8 @@
 								</div>
 								<div class="wcdiv" style="left:36pt; clip:rect(1pt,138.75pt,33.65pt,0pt);">
 									<div class="wcdiv" style="left:5pt; top:6pt; direction:rtl;">
-										<span class="wcspan wctext001" style="font-size:11pt; left:105.53pt; top:0.36pt; line-height:12.29pt;">{{ $vehicle->right_letter }}  {{$vehicle->middle_letter }} {{ $vehicle->left_letter}}   </span>
-										<span class="wcspan wctext001" style="font-size:11pt; left:81.06pt; top:0.36pt; direction:ltr; line-height:12.29pt;">{{ $vehicle->plate }} </span>
+										<span class="wcspan wctext001" style="font-size:11pt; left:95.53pt; top:0.36pt; line-height:12.29pt;">{{ $vehicle->right_letter }}  {{$vehicle->middle_letter }} {{ $vehicle->left_letter}}   </span>
+										<span class="wcspan wctext001" style="font-size:11pt; left:75.06pt; top:0.36pt; direction:ltr; line-height:12.29pt;">{{ $vehicle->plate }} </span>
 									</div>
 								</div>
 								<div class="wcdiv" style="left:174.75pt; clip:rect(1pt,45.25pt,33.65pt,0pt);">
