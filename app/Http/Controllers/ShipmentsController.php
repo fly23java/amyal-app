@@ -19,8 +19,9 @@ use App\Models\Vehicle;
 use Exception;
 use View;
 use Auth;
-
+use  App\Mail\CreateShipmentMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 
 use App\Http\Services\ShipmentService;
@@ -74,18 +75,29 @@ class ShipmentsController extends Controller
      * @return \Illuminate\Http\RedirectResponse | \Illuminate\Routing\Redirector
      */
     public function store(ShipmentsFormRequest $request)
-    {
-        
-        $data = $request->getData();
+        {
+            $data = $request->getData();
 
-        // dd($request->id);
-        // dd($request->all());
+            $shipmentService = new ShipmentService();
+            $data = $shipmentService->store($request->all());
 
-        (new ShipmentService())->store($request->all());
-       
-        return redirect()->route('shipments.shipment.index')
-            ->with('success_message', trans('shipments.model_was_added'));
-    }
+            if ($data['shipmentId']) {
+                $basicAdminAccount = Account::where('type', 'admin')->first();
+
+                $activeAdminUsers = User::where('type', 'admin')
+                                        ->where('status', 'active')
+                                        ->get();
+
+                $shipmentData = $shipmentService->prepareShipmentData($data['shipmentId']);
+
+                Mail::to('ibrahim.m@amyal.sa')
+                    ->cc($activeAdminUsers->pluck('email')->toArray())
+                    ->queue(new CreateShipmentMail($shipmentData));
+            }
+
+            return redirect()->route('shipments.shipment.index')
+                ->with('success_message', trans('shipments.model_was_added'));
+        }
 
     /**
      * Display the specified shipment.

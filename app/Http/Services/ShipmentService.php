@@ -13,6 +13,8 @@ use App\Models\Contract;
 use App\Models\ContractDetail;
 use Illuminate\Support\Facades\DB;
 use Auth;
+
+
 use Illuminate\Support\Carbon;
 
 
@@ -24,11 +26,7 @@ class ShipmentService {
 
        
         try {
-
-           
-            // dd($lastShipment);
-            $newSerialeNamewer =$this->getSerialNumberAttribute();
-            // Insert the shipment record
+            // إنشاء الشحنة
             $shipment = Shipment::create([
                 'account_id' => $data['account_id'],
                 'loading_city_id' => $data['loading_city_id'],
@@ -38,35 +36,30 @@ class ShipmentService {
                 'price' => $data['price'],
                 'status_id' => 1,
             ]);
-            // dd($shipment);
-            // Get the shipment ID
+        
+            // الحصول على معرف الشحنة
             $shipmentId = $shipment->id;
-    
-            // Create the serial number
-            $serialNumber = $data['account_id'] . '-' . $data['loading_city_id'] . '-' . $data['unloading_city_id'] . '-' . Carbon::parse($shipment->created_at)->format('Ymd'). $newSerialeNamewer;
-            
-          
-          
-            // Update the shipment record with the serial number
-            
-            Shipment::updateOrCreate(
-                ['id' => $shipmentId], // The criteria to find the existing record, usually based on primary key
-                ['serial_number' => $serialNumber] // The data to update or create
-            );
-            
-            // Shipment::where('id', $shipmentId)->update(['serial_number'  => $serialNumber]);
-            // Create the status change record
+        
+            // إنشاء رقم تسلسلي
+            $serialNumber = $data['account_id'] . '-' . $data['loading_city_id'] . '-' . $data['unloading_city_id'] . '-' . Carbon::parse($shipment->created_at)->format('Ymd'). $this->getSerialNumberAttribute();
+        
+            // تحديث الشحنة بالرقم التسلسلي
+            Shipment::where('id', $shipmentId)->update(['serial_number'  => $serialNumber]);
+        
+            // إنشاء تغيير في الحالة
             StatusChange::create([
                 'shipment_id' => $shipmentId,
                 'status_id' => 1,
                 'user_id' => auth()->user()->id,
             ]);
-    
-            return true;
+        
+            // إرجاع الشحنة بعد الإنشاء والتحديث وإنشاء التغيير في الحالة مع القيمة true
+            return ['shipmentId' => $shipmentId, 'success' => true];
         } catch (\Exception $e) {
-            // Handle exceptions (log, notify, etc.)
-            return false;
+            // التعامل مع الاستثناءات (تسجيل، إعلام، إلخ) وإرجاع القيمة false في حالة الفشل
+            return ['success' => false, 'error_message' => $e->getMessage()];
         }
+        
 
      }
 
@@ -180,6 +173,32 @@ class ShipmentService {
           return $newNumber;
      }
 
+
+     public function prepareShipmentData($shipmentId)
+    {
+        // احصل على كائن الشحنة باستخدام معرف الشحنة
+        $shipment = Shipment::findOrFail($shipmentId);
+
+        // إعداد البيانات
+        $data = [
+            'id' => $shipmentId,
+            'serial_number' => $shipment->serial_number,
+            'account_id' => $shipment->getAccountName($shipment->account_id)->name_arabic,
+            'loadingCity' => $shipment->getCityName($shipment->loading_city_id)->name_arabic,
+            'unloadingCity' => $shipment->getCityName($shipment->unloading_city_id)->name_arabic,
+            'vehicleType' => optional($shipment->VehicleType)->name_arabic,
+            'goods' => optional($shipment->Goods)->name_arabic,
+            'status' => optional($shipment->Status)->name_arabic,
+            'price' => $shipment->price,
+            'carrierPrice' => $shipment->carrier_price,
+            'supervisorUserId' => optional($shipment->User)->name,
+            'carrir' => !empty($shipment->shipmentDeliveryDetail->shipment_id) ? $shipment->getCarrir($shipment->id)->name_arabic : null,
+            'createdAt' => $shipment->created_at,
+            'updatedAt' => $shipment->updated_at,
+        ];
+
+        return $data;
+    }
   
 
 }
