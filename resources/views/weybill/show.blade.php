@@ -629,7 +629,7 @@
 								<div class="wcdiv" style="left:36pt; clip:rect(1pt,138.75pt,33.65pt,0pt);">
 									<div class="wcdiv" style="left:5pt; top:6pt; direction:rtl;">
 										<span class="wcspan wctext001" style="font-size:11pt; left:80.53pt; top:0.36pt; line-height:12.29pt;">{{ $vehicle->right_letter }}  {{$vehicle->middle_letter }} {{ $vehicle->left_letter}}   </span>
-										<span class="wcspan wctext001" style="font-size:11pt; left:65.06pt; top:0.36pt; direction:ltr; line-height:12.29pt;">{{ $vehicle->plate }} </span>
+										<span class="wcspan wctext001" style="font-size:11pt; left:60.06pt; top:0.36pt; direction:ltr; line-height:12.29pt;">{{ $vehicle->plate }} </span>
 									</div>
 								</div>
 								<div class="wcdiv" style="left:174.75pt; clip:rect(1pt,45.25pt,33.65pt,0pt);">
