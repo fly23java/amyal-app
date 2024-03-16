@@ -48,8 +48,8 @@
                             <td class="align-middle">{{ optional($contractDetail->Contract)->contract_title }}</td>
                             <td class="align-middle">{{ optional($contractDetail->VehicleType)->name_arabic }}</td>
                             <td class="align-middle">{{ optional($contractDetail->Goods)->name_arabic }}</td>
-                            <td class="align-middle">{{ optional($contractDetail->City)->name_arabic }}</td>
-                            <td class="align-middle">{{ optional($contractDetail->City)->name_arabic }}</td>
+                            <td class="align-middle">{{ optional($contractDetail->getCityName($contractDetail->loading_city_id))->name_arabic }}</td>
+                            <td class="align-middle">{{  optional($contractDetail->getCityName($contractDetail->dispersal_city_id))->name_arabic }} </td>
                             <td class="align-middle">{{ $contractDetail->price }}</td>
 
                             <td class="text-end">

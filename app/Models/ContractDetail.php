@@ -93,6 +93,10 @@ class ContractDetail extends Model
         return $this->belongsTo('App\Models\City','dispersal_city_id','id');
     }
 
+    public function getCityName($data)
+    {
+        return City::where('id',$data)->first();
+    }
     /**
      * Get the User for this model.
      *
