@@ -60,7 +60,7 @@ class DriversController extends Controller
             'email'  => $data['email'],
             'password' => $data['password'],
             'phone' => $data['phone'],
-            'identity_number' => $data['name_arabic'],
+            'identity_number' => $data['identity_number'],
             'date_of_birth_gregorian' => date("Y-m-d H:i:s", strtotime($data['date_of_birth_gregorian'])),
 
             'account_id' => $data['account_id'],

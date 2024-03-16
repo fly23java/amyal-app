@@ -25,12 +25,12 @@ class DriversFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name_arabic' => 'nullable|string|min:0|max:255',
+            'name_arabic' => 'required|string|min:0|max:255',
             'name_english' => 'nullable|string|min:0|max:255',
             'email' => 'nullable|string|min:0|max:255',
             'password' => 'nullable|string|min:0|max:255',
-            'phone' => 'nullable|string|min:0|max:255',
-            'identity_number' => 'nullable|string|min:0|max:255',
+            'phone' => 'required|string|min:0|max:255',
+            'identity_number' => 'required|string|min:0|max:255',
             'date_of_birth_hijri' => 'nullable|date_format:Y-m-d',
             'date_of_birth_gregorian' => 'nullable|date_format:Y-m-d',
             'account_id' => 'required|numeric|min:0',
