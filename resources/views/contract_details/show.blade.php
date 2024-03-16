@@ -38,7 +38,7 @@
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('contract_details.vehicle_type_id') }}</dt>
             <dd class="col-lg-10 col-xl-9">{{ optional($contractDetail->VehicleType)->name_arabic }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('contract_details.goods_id') }}</dt>
-            <dd class="col-lg-10 col-xl-9">{{ optional($contractDetail->Good)->name_arabic }}</dd>
+            <dd class="col-lg-10 col-xl-9">{{ optional($contractDetail->Goods)->name_arabic }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('contract_details.loading_city_id') }}</dt>
             <dd class="col-lg-10 col-xl-9">{{ optional($contractDetail->City)->name_arabic }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">{{ trans('contract_details.dispersal_city_id') }}</dt>
