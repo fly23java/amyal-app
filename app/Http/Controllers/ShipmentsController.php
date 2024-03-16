@@ -163,8 +163,10 @@ class ShipmentsController extends Controller
     public function destroy($id)
     {
         try {
-            $shipment = Shipment::findOrFail($id);
-            $shipment->delete();
+            $shipment = Shipment::findOrFail($id)->delete();;
+            // $shipment->StatusChange()->delete();
+            // $shipment->shipmentDeliveryDetail()->delete();
+            // $shipment->delete();
 
             return redirect()->route('shipments.shipment.index')
                 ->with('success_message', trans('shipments.model_was_deleted'));

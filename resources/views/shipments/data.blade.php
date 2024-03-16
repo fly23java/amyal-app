@@ -60,7 +60,7 @@
                                                         </a>
                                                         
                                                        
-                                                        
+                                                                        
                                                          
                                                     </div>
                                         </div>
@@ -73,6 +73,10 @@
                                             <i class="fa-solid fa-edit"></i>
                                             
                                         </a>
+
+                                        <button type="submit" class="btn btn-danger" title="{{ trans('shipments.delete') }}" onclick="return confirm(&quot;{{ trans('goods.confirm_delete') }}&quot;)">
+                                                            <span class="fa-regular fa-trash-can" aria-hidden="true"></span>
+                                                        </button>
                                     </div>
                                         
 
