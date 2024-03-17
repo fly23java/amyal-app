@@ -25,6 +25,9 @@ use App\Http\Controllers\ReturnPricesController;
 use App\Http\Controllers\RetrunShipmentInTabsByStatusController;
 use App\Http\Controllers\VehicleGoodsExtractorController;
 
+use App\Http\Controllers\PricesController;
+use App\Http\Controllers\PriceDetailsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -433,3 +436,52 @@ Route::group([
  Route::get('/getGoodsByVehicleType/{selectedVehicleType}', [VehicleGoodsExtractorController::class, 'getGoodsByVehicleType'])->name('getGoodsByVehicleType');
 
 
+
+ Route::group([
+     'prefix' => 'prices',
+ ], function () {
+     Route::get('/', [PricesController::class, 'index'])
+          ->name('prices.price.index');
+     Route::get('/create', [PricesController::class, 'create'])
+          ->name('prices.price.create');
+     Route::get('/show/{price}',[PricesController::class, 'show'])
+          ->name('prices.price.show');
+     Route::get('/{price}/edit',[PricesController::class, 'edit'])
+          ->name('prices.price.edit');
+     Route::post('/', [PricesController::class, 'store'])
+          ->name('prices.price.store');
+     Route::put('price/{price}', [PricesController::class, 'update'])
+          ->name('prices.price.update');
+     Route::delete('/price/{price}',[PricesController::class, 'destroy'])
+          ->name('prices.price.destroy');
+ 
+      Route::get('/price/vehicle_types',[PricesController::class, 'vehicleTypes'])
+          ->name('prices.price.vehicleTypes');
+     Route::get('/price/fetchGoods',[PricesController::class, 'fetchGoods'])
+          ->name('prices.price.fetchGoods');
+ 
+     Route::get('/price/fetchCity',[PricesController::class, 'fetchCity'])
+          ->name('prices.price.fetchCity');
+ 
+     Route::get('/prices/details/{id}', [PricesController::class, 'getPriceDetails'])
+          ->name('prices.price.details');
+ });
+ 
+ Route::group([
+     'prefix' => 'price_details',
+ ], function () {
+     Route::get('/', [PriceDetailsController::class, 'index'])
+          ->name('price_details.price_detail.index');
+     Route::get('/create', [PriceDetailsController::class, 'create'])
+          ->name('price_details.price_detail.create');
+     Route::get('/show/{priceDetail}',[PriceDetailsController::class, 'show'])
+          ->name('price_details.price_detail.show');
+     Route::get('/{priceDetail}/edit',[PriceDetailsController::class, 'edit'])
+          ->name('price_details.price_detail.edit');
+     Route::post('/', [PriceDetailsController::class, 'store'])
+          ->name('price_details.price_detail.store');
+     Route::put('price_detail/{priceDetail}', [PriceDetailsController::class, 'update'])
+          ->name('price_details.price_detail.update');
+     Route::delete('/price_detail/{priceDetail}',[PriceDetailsController::class, 'destroy'])
+          ->name('price_details.price_detail.destroy');
+ });
