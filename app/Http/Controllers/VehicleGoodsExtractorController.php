@@ -14,23 +14,33 @@ class VehicleGoodsExtractorController extends Controller
     //
 
 
-    public function getGoodsByVehicleType($vehicle_type_id)
-    {
-       
-       
-        $vehicleType = VehicleType::findOrFail($vehicle_type_id);
-       
-        $goodsTypeIds = $vehicleType->goodsTypes->pluck('id');
-        // dd($goodsTypeIds);
-        $goods = Goods::whereIn('goods_type_id', $goodsTypeIds)->get();
 
 
+    public function getGoodsByVehicleType(Request $request, $vehicle_type_id)
+            {
+                try {
+                    // التحقق من وجود نوع المركبة
+                    $vehicleType = VehicleType::findOrFail($vehicle_type_id);
 
-       
+                    // استخراج معرفات أنواع البضائع التي يدعمها نوع المركبة
+                    $goodsTypeIds = $vehicleType->goodsTypes->pluck('id');
 
-        return response()->json([
-            'goods' => $goods,
-            
-        ]);
-    }
+                    // استقبال معطى account_id من الطلب
+                    $account_id = $request->input('account_id');
+
+                    // الحصول على البضائع ذات الأنواع التي يدعمها نوع المركبة والتي تنتمي إلى الحساب المعطى
+                    $goods = Goods::whereIn('goods_type_id', $goodsTypeIds)
+                        ->where('account_id', $account_id)
+                        ->get();
+
+                    // إرجاع البضائع كاستجابة JSON
+                    return response()->json([
+                        'goods' => $goods,
+                    ]);
+                } catch (\Exception $e) {
+                    // إرجاع رسالة الخطأ في حالة عدم وجود نوع المركبة
+                    return response()->json(['error' => 'Vehicle type not found'], 404);
+                }
+            }
+
 }

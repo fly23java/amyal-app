@@ -48,39 +48,55 @@
 @section('script')
 <script>
 $(document).ready(function() {
+    // تخزين القيم السابقة لكل عنصر
+    var prevVehicleType = $('#vehicle_type_id').val();
+    var prevAccountId = $('#account_id').val();
+
     // Listen for changes in the vehicle type
-    $('#vehicle_type_id').on('change', function() {
-        var selectedVehicleType = $(this).val();
+    $('#vehicle_type_id, #account_id').on('change', function() {
+        var selectedVehicleType = $('#vehicle_type_id').val();
+        var account_id = $('#account_id').val();
 
-        // Empty the current goods list
-        $('#goods_id').empty();
+        // التحقق من تغيير في vehicle_type_id أو account_id
+        if (selectedVehicleType !== prevVehicleType || account_id !== prevAccountId) {
+            // تخزين القيم الجديدة كقيم سابقة للاستخدام في المرة القادمة
+            prevVehicleType = selectedVehicleType;
+            prevAccountId = account_id;
 
-        $.ajax({
-            url: "{{ url('getGoodsByVehicleType')}}/" + selectedVehicleType,
-            type: 'GET',
-            success: function(data) {
-                if (data.goods.length > 0) {
-                    // Iterate through the goods data and append options to the select element
-                    $.each(data.goods, function(index, good) {
-                        $('#goods_id').append($('<option>', {
-                            value: good.id,
-                            text: good.name_arabic
-                        }));
-                    });
-                } else {
-                    // No goods found message
-                    $('#goods_id').append($('<option>', {
-                        value: '',
-                        text: "{{ trans('shipments.goods_not_found') }}"
-                    }));
-                }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                console.error("Error fetching goods data:", errorThrown);
+            // Empty the current goods list
+            $('#goods_id').empty();
+            if (selectedVehicleType && account_id) {
+                $.ajax({
+                    url: "{{ route('getGoodsByVehicleType', ['selectedVehicleType' => ':selectedVehicleType']) }}".replace(':selectedVehicleType', selectedVehicleType),
+                    type: 'GET',
+                    data: { account_id: account_id }, // Pass account_id as data
+                    success: function(data) {
+                        if (data && data.goods && data.goods.length > 0) {
+                            // Iterate through the goods data and append options to the select element
+                            $.each(data.goods, function(index, good) {
+                                $('#goods_id').append($('<option>', {
+                                    value: good.id,
+                                    text: good.name_arabic
+                                }));
+                            });
+                        } else {
+                            // No goods found message
+                            $('#goods_id').append($('<option>', {
+                                value: '',
+                                text: "{{ trans('shipments.goods_not_found') }}"
+                            }));
+                        }
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        console.error("Error fetching goods data:", errorThrown);
+                    }
+                });
             }
-        });
+        }
     });
 });
+
+
 
 
 </script>

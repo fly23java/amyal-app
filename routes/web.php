@@ -430,4 +430,6 @@ Route::group([
  });
 
 
- Route::get('/getGoodsByVehicleType/{vehicleType}', [VehicleGoodsExtractorController::class, 'getGoodsByVehicleType']);
+ Route::get('/getGoodsByVehicleType/{selectedVehicleType}', [VehicleGoodsExtractorController::class, 'getGoodsByVehicleType'])->name('getGoodsByVehicleType');
+
+

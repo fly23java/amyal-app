@@ -49,14 +49,58 @@
 
 @section('script')
 <script>
-$(document).ready(function() {
-    function fetchGoodsByVehicleType(selectedVehicleType) {
+   $(document).ready(function() {
+    // Store initial values for vehicle_type_id and account_id on page load
+    var initialVehicleType = $('#vehicle_type_id').val();
+    var initialAccountId = $('#account_id').val();
+
+    // Execute initial value check
+    checkInitialValues(initialVehicleType, initialAccountId);
+
+    // Listen for changes in the vehicle type and account_id
+    $('#vehicle_type_id, #account_id').on('change', function() {
+        var selectedVehicleType = $('#vehicle_type_id').val();
+        var account_id = $('#account_id').val();
+
+        // Execute initial value check
+        checkInitialValues(selectedVehicleType, account_id);
+    });
+
+    // Function to check initial values
+    function checkInitialValues(selectedVehicleType, account_id) {
+        var initialVehicleType = $('#vehicle_type_id').data('initial-value');
+        var initialAccountId = $('#account_id').data('initial-value');
+
+        // Check for changes in vehicle_type_id or account_id values
+        if (selectedVehicleType !== initialVehicleType || account_id !== initialAccountId) {
+            // If values have changed, perform required action
+            console.log("Values have changed:");
+            console.log("New vehicle_type_id: " + selectedVehicleType);
+            console.log("New account_id: " + account_id);
+
+            // Here you can call the function to fetch goods or any other necessary action
+            fetchGoodsByVehicleType(selectedVehicleType, account_id)
+                .done(function(data) {
+                    populateGoodsSelect(data.goods);
+                })
+                .fail(function(xhr, textStatus, errorThrown) {
+                    console.error("Error fetching goods data:", errorThrown);
+                });
+        } else {
+            console.log("Values are still the same.");
+        }
+    }
+
+    // Function to fetch goods by vehicle type and populate the select list
+    function fetchGoodsByVehicleType(selectedVehicleType, account_id) {
         return $.ajax({
-            url: "{{ url('getGoodsByVehicleType')}}/" + selectedVehicleType,
-            type: 'GET'
+            url: "{{ route('getGoodsByVehicleType', ['selectedVehicleType' => ':selectedVehicleType']) }}".replace(':selectedVehicleType', selectedVehicleType),
+            type: 'GET',
+            data: { account_id: account_id },
         });
     }
 
+    // Function to populate the goods select list
     function populateGoodsSelect(goodsData) {
         // Empty the current goods list
         $('#goods_id').empty();
@@ -70,11 +114,9 @@ $(document).ready(function() {
                 }));
             });
 
-            old_goods = $('#old_goods_id').val();
             // Select the pre-existing value if it matches any option
-                var preSelectedValue = old_goods || '';
-                $('#goods_id option[value="' + preSelectedValue + '"]').prop('selected', true);
-
+            var preSelectedValue = $('#old_goods_id').val() || '';
+            $('#goods_id option[value="' + preSelectedValue + '"]').prop('selected', true);
         } else {
             // No goods found message
             $('#goods_id').append($('<option>', {
@@ -84,28 +126,13 @@ $(document).ready(function() {
         }
     }
 
-    // Listen for changes in the vehicle type
-    $('#vehicle_type_id').on('change', function() {
-        var selectedVehicleType = $(this).val();
-
-        // Fetch goods data and handle it with a promise
-        var goodsPromise = fetchGoodsByVehicleType(selectedVehicleType);
-
-        $.when(goodsPromise)
-            .done(function(data) {
-                populateGoodsSelect(data.goods);
-            })
-            .fail(function(xhr, textStatus, errorThrown) {
-                console.error("Error fetching goods data:", errorThrown);
-            });
-    });
-
     // Trigger change event for #vehicle_type_id if it has a pre-existing value
     var preSelectedVehicleType = $('#vehicle_type_id').val();
     if (preSelectedVehicleType) {
         $('#vehicle_type_id').trigger('change');
     }
 });
+
 
 </script>
 
