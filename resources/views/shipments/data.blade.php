@@ -10,7 +10,7 @@
                           
                             <th>{{ trans('shipments.carrir') }}</th>
                             <th>{{ trans('shipments.supervisor_user_id') }}</th>
-                           
+                        
 
                             <th></th>
                         </tr>

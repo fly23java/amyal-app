@@ -26,6 +26,7 @@ class ShipmentService {
 
        
         try {
+            $newserialnumber = $this->getSerialNumberAttribute();
             // إنشاء الشحنة
             $shipment = Shipment::create([
                 'account_id' => $data['account_id'],
@@ -35,13 +36,16 @@ class ShipmentService {
                 'goods_id' => $data['goods_id'],
                 'price' => $data['price'],
                 'status_id' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ]);
+            
         
             // الحصول على معرف الشحنة
             $shipmentId = $shipment->id;
         
             // إنشاء رقم تسلسلي
-            $serialNumber = $data['account_id'] . '-' . $data['loading_city_id'] . '-' . $data['unloading_city_id'] . '-' . Carbon::parse($shipment->created_at)->format('Ymd'). $this->getSerialNumberAttribute();
+            $serialNumber = $data['account_id'] . '-' . $data['loading_city_id'] . '-' . $data['unloading_city_id'] . '-' . Carbon::parse($shipment->created_at)->format('Ymd'). $newserialnumber;
         
             // تحديث الشحنة بالرقم التسلسلي
             Shipment::where('id', $shipmentId)->update(['serial_number'  => $serialNumber]);

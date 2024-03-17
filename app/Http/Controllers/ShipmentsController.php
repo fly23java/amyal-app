@@ -22,7 +22,7 @@ use Auth;
 use  App\Mail\CreateShipmentMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-
+use Illuminate\Support\Carbon;
 
 use App\Http\Services\ShipmentService;
 use Illuminate\Support\Facades\DB;
@@ -42,6 +42,8 @@ class ShipmentsController extends Controller
   
     public function index()
     {
+
+     
         $Vehicles = Vehicle::all();
         $Status = Status::withCount('shipment')->findOrFail(1);
         $Statuses = Status::withCount('shipment')->get(); 
@@ -81,19 +83,19 @@ class ShipmentsController extends Controller
             $shipmentService = new ShipmentService();
             $data = $shipmentService->store($request->all());
 
-            if ($data['shipmentId']) {
-                $basicAdminAccount = Account::where('type', 'admin')->first();
+            // if ($data['shipmentId']) {
+            //     $basicAdminAccount = Account::where('type', 'admin')->first();
 
-                $activeAdminUsers = User::where('type', 'admin')
-                                        ->where('status', 'active')
-                                        ->get();
+            //     $activeAdminUsers = User::where('type', 'admin')
+            //                             ->where('status', 'active')
+            //                             ->get();
 
-                $shipmentData = $shipmentService->prepareShipmentData($data['shipmentId']);
+            //     $shipmentData = $shipmentService->prepareShipmentData($data['shipmentId']);
 
-                Mail::to('ibrahim.m@amyal.sa')
-                    ->cc($activeAdminUsers->pluck('email')->toArray())
-                    ->queue(new CreateShipmentMail($shipmentData));
-            }
+            //     Mail::to('ibrahim.m@amyal.sa')
+            //         ->cc($activeAdminUsers->pluck('email')->toArray())
+            //         ->queue(new CreateShipmentMail($shipmentData));
+            // }
 
             return redirect()->route('shipments.shipment.index')
                 ->with('success_message', trans('shipments.model_was_added'));
