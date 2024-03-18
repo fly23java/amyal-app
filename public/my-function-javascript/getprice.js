@@ -4,7 +4,7 @@ $(document).ready(function(){
 
 $(document).on('change', '#create_shipment_form', function(e) {
    
-  
+//   console.log('true')
   
    
     if($('#account_id').val() && 
@@ -21,7 +21,7 @@ $(document).on('change', '#create_shipment_form', function(e) {
             'goods_id' : $('#goods_id').val(),
           
         };
-      
+       
         $.ajax({
             url:  config.routes.createShipmentForm,
             method: 'get',

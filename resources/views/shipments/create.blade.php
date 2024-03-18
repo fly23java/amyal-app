@@ -72,6 +72,7 @@ $(document).ready(function() {
                     data: { account_id: account_id }, // Pass account_id as data
                     success: function(data) {
                         if (data && data.goods && data.goods.length > 0) {
+                            $('#goods_id').append($('<option>{{ trans("contract_details.goods_id__placeholder") }}</option>'));
                             // Iterate through the goods data and append options to the select element
                             $.each(data.goods, function(index, good) {
                                 $('#goods_id').append($('<option>', {

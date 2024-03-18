@@ -74,9 +74,9 @@
         // Check for changes in vehicle_type_id or account_id values
         if (selectedVehicleType !== initialVehicleType || account_id !== initialAccountId) {
             // If values have changed, perform required action
-            console.log("Values have changed:");
-            console.log("New vehicle_type_id: " + selectedVehicleType);
-            console.log("New account_id: " + account_id);
+            // console.log("Values have changed:");
+            // console.log("New vehicle_type_id: " + selectedVehicleType);
+            // console.log("New account_id: " + account_id);
 
             // Here you can call the function to fetch goods or any other necessary action
             fetchGoodsByVehicleType(selectedVehicleType, account_id)
@@ -106,6 +106,7 @@
         $('#goods_id').empty();
 
         if (goodsData.length > 0) {
+            $('#goods_id').append($('<option>{{ trans("contract_details.goods_id__placeholder") }}</option>'));
             // Iterate through the goods data and append options to the select element
             $.each(goodsData, function(index, good) {
                 $('#goods_id').append($('<option>', {
