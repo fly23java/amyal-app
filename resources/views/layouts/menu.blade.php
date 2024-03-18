@@ -34,15 +34,15 @@
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class=" nav-item"><a class="d-flex align-items-center" href="index.html"><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Dashboards</span><span class="badge badge-light-warning badge-pill ml-auto mr-1">2</span></a>
-                    <ul class="menu-content">
-                        <li><a class="d-flex align-items-center" href="dashboard-analytics.html"><i data-feather="circle"></i><span class="menu-item" data-i18n="Analytics">Analytics</span></a>
-                        </li>
-                        <li><a class="d-flex align-items-center" href="dashboard-ecommerce.html"><i data-feather="circle"></i><span class="menu-item" data-i18n="eCommerce">eCommerce</span></a>
-                        </li>
-                    </ul>
+               
+                <li class=" nav-item">
+                    <a class="d-flex align-items-center" href="{{ route('home') }}">
+                    <i data-feather="home"></i>
+                    <span class="menu-title text-truncate" data-i18n="mail">
+                    {{ trans('main.home') }}
+                    </span>
+                </a>
                 </li>
-                
                <!-- Start contract -->
                <li class=" nav-item"><a class="d-flex align-items-center" href="#">
                     <i data-feather='clipboard'></i>
