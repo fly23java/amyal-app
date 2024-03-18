@@ -35,7 +35,12 @@ class VehiclesController extends Controller
     public function create()
     {
         $VehicleTypes = VehicleType::pluck('name_arabic','id')->all();
-        $Accounts = Account::pluck('name_arabic','id')->all();
+       
+        $Accounts = Account::where(function ($query) {
+            $query->where('type', 'business_carrier');
+                  
+        })
+        ->pluck('name_arabic', 'id');
         
         return view('vehicles.create', compact('VehicleTypes','Accounts'));
     }
@@ -83,7 +88,11 @@ class VehiclesController extends Controller
     {
         $vehicle = Vehicle::findOrFail($id);
         $VehicleTypes = VehicleType::pluck('name_arabic','id')->all();
-        $Accounts = Account::pluck('name_arabic','id')->all();
+        $Accounts = Account::where(function ($query) {
+            $query->where('type', 'business_carrier');
+                  
+        })
+        ->pluck('name_arabic', 'id');
 
         return view('vehicles.edit', compact('vehicle','VehicleTypes','Accounts'));
     }
