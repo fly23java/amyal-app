@@ -36,8 +36,12 @@ class GoodsController extends Controller
     public function create()
     {
         $GoodsTypes = GoodsType::pluck('name_arabic','id')->all();
-$Units = Unit::pluck('name_arabic','id')->all();
-$Accounts = Account::pluck('name_arabic','id')->all();
+        $Units = Unit::pluck('name_arabic','id')->all();
+        $Accounts = Account::where(function ($query) {
+            $query->where('type', 'individual_shipper')
+                ->orWhere('type', 'business_shipper');
+        })
+        ->pluck('name_arabic', 'id');
         
         return view('goods.create', compact('GoodsTypes','Units','Accounts'));
     }
@@ -86,7 +90,11 @@ $Accounts = Account::pluck('name_arabic','id')->all();
         $goods = Goods::findOrFail($id);
         $GoodsTypes = GoodsType::pluck('name_arabic','id')->all();
         $Units = Unit::pluck('name_arabic','id')->all();
-        $Accounts = Account::pluck('name_arabic','id')->all();
+        $Accounts = Account::where(function ($query) {
+            $query->where('type', 'individual_shipper')
+                  ->orWhere('type', 'business_shipper');
+        })
+        ->pluck('name_arabic', 'id');
 
         return view('goods.edit', compact('goods','GoodsTypes','Units','Accounts'));
     }

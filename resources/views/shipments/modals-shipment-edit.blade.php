@@ -1,4 +1,4 @@
-<div class="modal modal-slide-in new-user-modal fade" id="modals-slide-in">
+                        <div class="modal modal-slide-in new-user-modal fade" id="modals-slide-in">
                             <div class="modal-dialog">
                                 <form class="add-new-user modal-content pt-0"  method="POST" action="{{ route('shipments.shipment.getAddVehcileToShipment') }}" id="create_shipment_details_form">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
@@ -18,6 +18,9 @@
                                                   <option >  {{ trans('shipment_delivery_details.vehicle_id__placeholder') }} </option> 
                                             </select>
                                         </div>
+                                    </div>
+                                    <div id="shipmentCrarierPrice"  class="modal-body flex-grow-1">
+                                        
                                     </div>
                                     <div class="modal-body flex-grow-1">
                                         <div class="form-group">

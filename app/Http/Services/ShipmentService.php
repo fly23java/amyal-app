@@ -110,20 +110,34 @@ class ShipmentService {
         //  dd($vehicle);  
         $Contract = Contract::where('receiver_id',$vehicle['account_id'])->first();
         // dd($Contract);
-        $contractDetail = ContractDetail::where('contract_id' , $Contract['id'])
+        if(empty($Contract)){
+            return response()->json(['error' => true]);
+        }else{
+            $contractDetail = ContractDetail::where('contract_id' , $Contract['id'])
             ->where( 'loading_city_id', $shipment['loading_city_id'])
             ->where( 'dispersal_city_id' ,$shipment['unloading_city_id'])
             ->where( 'vehicle_type_id' , $shipment['vehicle_type_id'])
-            ->where( 'goods_id'  , $shipment['goods_id'])
+          
             ->first();
-      
-            if($contractDetail) {
+             // ->where( 'goods_id'  , $shipment['goods_id'])
+            if(empty($contractDetail)) {
                 return response()->json([
-                'success' => 'true',
-                'price' =>$contractDetail['price']
-                ]);
+                    'success' => true,
+                    'price' => false,
+                    
+                    ]);
+            }else{
+                return response()->json([
+                    'success' => 'true',
+                    'price' => true,
+                    'contractprice' =>$contractDetail['price']
+                    ]);
             }
+        }
+      
               
+
+            
          
      }
      public function shipmentDetails($data)

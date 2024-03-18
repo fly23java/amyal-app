@@ -202,7 +202,7 @@ class ShipmentsController extends Controller
         // dd($request->all());
         $shipment = Shipment::findOrFail($request->id);
         if(empty($shipment->shipmentDeliveryDetail->vehicle_id)){
-            return response()->json(['error' => 'this not insert data']);
+            return response()->json(['error' => true]);
         }else{
             return response()->json(
                 [
