@@ -59,7 +59,11 @@ class ShipmentsController extends Controller
      */
     public function create()
     {
-        $Accounts = Account::pluck('name_arabic','id')->all();
+        $Accounts = Account::where(function ($query) {
+            $query->where('type', 'individual_shipper')
+                  ->orWhere('type', 'business_shipper');
+        })
+        ->pluck('name_arabic', 'id');
         $Users = User::pluck('name','id')->all();
         $Cities = City::pluck('name_arabic','id')->all();
         $VehicleTypes = VehicleType::pluck('name_arabic','id')->all();
@@ -125,7 +129,11 @@ class ShipmentsController extends Controller
     public function edit($id)
     {
         $shipment = Shipment::findOrFail($id);
-        $Accounts = Account::pluck('name_arabic','id')->all();
+        $Accounts = Account::where(function ($query) {
+            $query->where('type', 'individual_shipper')
+                  ->orWhere('type', 'business_shipper');
+        })
+        ->pluck('name_arabic', 'id');
         $Users = User::pluck('name','id')->all();
         $Cities = City::pluck('name_arabic','id')->all();
         $VehicleTypes = VehicleType::pluck('name_arabic','id')->all();
