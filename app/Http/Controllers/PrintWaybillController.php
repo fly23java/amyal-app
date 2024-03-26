@@ -36,6 +36,7 @@ class PrintWaybillController extends Controller
 
         $vehicle = Vehicle::findOrFail($shipment->shipmentDeliveryDetail->vehicle_id);
 
+      
        
         $top = mt_rand(60, 80);
         $right = mt_rand(30, 60);
@@ -48,7 +49,7 @@ class PrintWaybillController extends Controller
         ];
         $html = \View::make('weybill.show', $data)->render();
 
-        $pdf = SnappyPdf::loadHTML($html)->setOption('enable-local-file-access', true);
+        // $pdf = SnappyPdf::loadHTML($html)->setOption('enable-local-file-access', true);
 
 
 
