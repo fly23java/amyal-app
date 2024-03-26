@@ -130,7 +130,7 @@ a[x-apple-data-detectors] {
                        </table></td>
                      </tr>
                      <tr>
-                      <td align="right" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px;direction:rtl">رقم الوثيقة&nbsp; &nbsp;&nbsp;{{ $shipment->serial_number }}</p></td>
+                      <td align="right" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px;direction:rtl">رقم الوثيقة<br>{{ $shipment->serial_number }}</p></td>
                      </tr>
                    </table></td>
                  </tr>
@@ -138,15 +138,12 @@ a[x-apple-data-detectors] {
                   <td align="center" style="padding:0;Margin:0;width:173px">
                    <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                      <tr>
-                      <td align="right" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px;direction:rtl">تاريخ الاستلام:&nbsp;&nbsp;{{ $shipment->created_at }}</p></td>
+                      <td align="right" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px;direction:rtl">تاريخ الاستلام:<br>{{ $shipment->created_at }}</p></td>
                      </tr>
                    </table></td>
                  </tr>
                </table><!--[if mso]></td></tr></table><![endif]--></td>
-             </tr>
-           
-           
-             </tr>
+         
              <tr>
               <td align="left" dir="ltr" style="padding:0;Margin:0;padding-top:20px;padding-left:20px;padding-right:20px"><!--[if mso]><table style="width:560px" cellpadding="0" cellspacing="0"><tr><td style="width:270px" valign="top"><![endif]-->
                <table cellpadding="0" cellspacing="0" class="es-left" align="left" role="none" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left">
@@ -208,7 +205,7 @@ a[x-apple-data-detectors] {
                      <tr>
                       <td align="right" style="padding:0;Margin:0">
                        <ul style="direction:rtl">
-                        <li style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;Margin-bottom:15px;margin-left:0;color:#333333;font-size:14px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px;direction:rtl">لوحة المركبة:   {{ $vehicle->plate }}  {{ $vehicle->right_letter }}  {{$vehicle->middle_letter }} {{ $vehicle->left_letter}} </p></li>
+                        <li style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;Margin-bottom:15px;margin-left:0;color:#333333;font-size:14px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px;direction:rtl">لوحة المركبة:   {{ $vehicle->right_letter }}  {{$vehicle->middle_letter }} {{ $vehicle->left_letter}}   {{ $vehicle->plate }}   </p></li>
                         <li style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;Margin-bottom:15px;margin-left:0;color:#333333;font-size:14px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px;direction:rtl">نوع لوحة المركبة&nbsp;&nbsp;نقل عام</p></li>
                        </ul></td>
                      </tr>
@@ -362,6 +359,8 @@ a[x-apple-data-detectors] {
               </table>
      </tr>
    </table>
+
+   <p>تنزيل البوليصة <a href="{{ $pdf_file_full_Path }}">here</a>.</p>
   </div>
  </body>
 </html>

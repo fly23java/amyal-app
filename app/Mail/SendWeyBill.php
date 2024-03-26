@@ -9,27 +9,30 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class CreateShipmentMail extends Mailable
+class SendWeyBill extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $accountId;
-    public $loadingCityId;
-    public $unloadingCityId;
-    public $vehicleTypeId;
-    public $goodsId;
-    public $serial_number;
-   
+    public $shipment;
+    public $vehicle;
+    public $pdfFilePath;
 
-    public function __construct($data)
+    /**
+     * Create a new message instance.
+     *
+     * @return void
+     */
+    public function __construct($data,$pdfFilePath,$vehicle)
     {
         // تعيين البيانات المرسلة
-        $this->accountId = $data['account_id'];
-        $this->loadingCityId = $data['loadingCity'];
-        $this->unloadingCityId = $data['unloadingCity'];
-        $this->vehicleTypeId = $data['vehicleType'];
-        $this->goodsId = $data['goods'];
-        $this->serial_number = $data['serial_number'];
+        $this->shipment = $data;
+        // $this->loadingCityId = $data['loadingCity'];
+        // $this->unloadingCityId = $data['unloadingCity'];
+        // $this->vehicleTypeId = $data['vehicleType'];
+        // $this->goodsId = $data['goods'];
+        // $this->serial_number = $data['serial_number'];
+        $this->pdfFilePath = $pdfFilePath;
+        $this->vehicle = $vehicle;
        
         
     }
@@ -42,7 +45,7 @@ class CreateShipmentMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: $this->serial_number
+            subject: $this->shipment->serial_number
         );
     }
 
@@ -54,14 +57,11 @@ class CreateShipmentMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'emails.new_shipment',
+            view: 'emails.send_weybill',
             with: [
-                'accountId' => $this->accountId,
-                'loadingCityId' => $this->loadingCityId,
-                'unloadingCityId' => $this->unloadingCityId,
-                'vehicleTypeId' => $this->vehicleTypeId,
-                'goodsId' => $this->goodsId,
-                'serial_number' => $this->serial_number
+                'shipment' => $this->shipment,
+                'vehicle' => $this->vehicle,
+                'pdf_file_full_Path' => $this->pdfFilePath
                
             ]
         );

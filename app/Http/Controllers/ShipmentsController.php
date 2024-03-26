@@ -23,6 +23,7 @@ use  App\Mail\CreateShipmentMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\File;
 
 use App\Http\Services\ShipmentService;
 use Illuminate\Support\Facades\DB;
@@ -83,10 +84,10 @@ class ShipmentsController extends Controller
     public function store(ShipmentsFormRequest $request)
         {
             $data = $request->getData();
-
+           
             $shipmentService = new ShipmentService();
             $data = $shipmentService->store($request->all());
-
+           
             if ($data['shipmentId']) {
                 $basicAdminAccount = Account::where('type', 'admin')->first();
 
@@ -221,7 +222,7 @@ class ShipmentsController extends Controller
     public function getAddVehcileToShipment(Request $request)
     {
 
-    //    dd($request->all());
+      
        request()->validate([
        
         "supervisor_user_id" => 'required',
@@ -229,6 +230,8 @@ class ShipmentsController extends Controller
         "vehicle_id" => 'required',
         "carrier_price" => 'required',
          ]);
+
+    
          $shipment = Shipment::findOrFail($request->shipment_id);
          $shipment->update([
                 
@@ -236,17 +239,19 @@ class ShipmentsController extends Controller
                 "supervisor_user_id" => Auth::user()->id,
                 
             ]);
-            // dd($shipment);
-            if(!empty($request->shipment_delivery_detail_id)){
-                $shipment->ShipmentDeliveryDetail()->updateOrCreate([
-                    "vehicle_id" => $request->vehicle_id,
-                    ]);
-            }else{
-
-                $shipment->ShipmentDeliveryDetail()->updateOrCreate([
-                    "vehicle_id" => $request->vehicle_id,
-                    ]);
+          
+            $shipmentDeliveryDetail = ShipmentDeliveryDetail::updateOrCreate(
+                ['shipment_id' => $request->shipment_id],
+                ['vehicle_id' => $request->vehicle_id]
+            );
+            
+            // dd($shipmentDeliveryDetail);  
+            $filePath = public_path('pdf/' . $shipment->serial_number . '.pdf');
+            if (File::exists($filePath)) {
+                // If the file exists, attempt to delete it
+                unlink($filePath);
             }
+            
 
             return redirect()->route('shipments.shipment.index')
                 ->with('success_message', trans('shipment_delivery_details.model_was_updated'));
