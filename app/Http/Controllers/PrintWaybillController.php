@@ -49,12 +49,13 @@ class PrintWaybillController extends Controller
         ];
         $html = \View::make('weybill.show', $data)->render();
 
-        $pdf = SnappyPdf::loadHTML($html)->setOption('enable-local-file-access', true);
+        $pdf = SnappyPdf::loadHTML($html);
+        // ->setOption('enable-local-file-access', true);
 
 
 
         // Save the PDF to a file
-        $pdf->save($pdfFilePath);
+        // $pdf->save($pdfFilePath);
 
         if ($shipment->id) {
             $basicAdminAccount = Account::where('type', 'admin')->first();
