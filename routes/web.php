@@ -44,7 +44,7 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-     return view('shipments.test');
+     return view('reports.invoices_report');
 });
 
 Auth::routes();

@@ -82,6 +82,7 @@
     <link rel="stylesheet" href="{{  asset('app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css') }}">
     <link rel="stylesheet" href="{{  asset('app-assets/css-rtl/plugins/forms/pickers/form-flat-pickr.css') }}">
     <link rel="stylesheet" href="{{  asset('app-assets/css-rtl/plugins/forms/pickers/form-pickadate.css') }}">
+    <link rel="stylesheet" href="{{  asset('app-assets/vendors/css/extensions/toastr.min.css') }}">
 
 
    
@@ -574,6 +575,7 @@
 
     <script src="{{ asset('app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js') }}"></script>
     <script src="{{ asset('app-assets/js/scripts/forms/pickers/form-pickers.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/extensions/toastr.min.js') }}"></script>
 
     
 

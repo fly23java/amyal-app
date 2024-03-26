@@ -175,9 +175,11 @@ class ShipmentsController extends Controller
         try {
             $shipment = Shipment::findOrFail($id);
          
-            $shipment->shipmentDeliveryDetail->delete();
-           
-            $shipment->delete();
+           if ($shipment->shipmentDeliveryDetail) {
+                $shipment->shipmentDeliveryDetail->delete();
+            }
+            
+           $shipment->delete();
 
             return redirect()->route('shipments.shipment.index')
                 ->with('success_message', trans('shipments.model_was_deleted'));

@@ -10,6 +10,18 @@
         </div>
     @endif
 
+    @if(Session::has('success_message'))
+        <script>
+            // toastr.success("{{ Session::get('success_message') }}");
+            // $(document).ready( function () {
+            //     toastr['success']('{{ Session::get('success_message') }}', 'Success!', {
+            //         closeButton: true,
+            //         tapToDismiss: false,
+            //         rtl: isRtl
+            //         });
+            // });
+        </script>
+    @endif
 
 
     <div class="card text-bg-theme">
