@@ -26,7 +26,7 @@ class PrintWaybillController extends Controller
     public function generateInvoice($id)
     {
         $shipment = Shipment::findOrFail($id);
-        
+        $vehicle = Vehicle::findOrFail($shipment->shipmentDeliveryDetail->vehicle_id);
         // Define the absolute path to the directory where you want to save the PDF file
         $pdfDirectory = public_path('pdf');
         
@@ -44,7 +44,7 @@ class PrintWaybillController extends Controller
         // Check if the PDF file already exists
         if (!File::exists($pdfFilePath)) {
             // Load HTML content into SnappyPdf and generate PDF
-            $vehicle = Vehicle::findOrFail($shipment->shipmentDeliveryDetail->vehicle_id);
+           
             $top = mt_rand(60, 80);
             $right = mt_rand(30, 60);
             $data = [
