@@ -360,7 +360,7 @@ a[x-apple-data-detectors] {
      </tr>
    </table>
 
-   <p>تنزيل البوليصة <a href="{{ env('APP_URL') }}/{{ $shipment->serial_number }}">اضغط هنا لللنزيل</a>.</p>
+   <p>تنزيل البوليصة <a href="{{ env('APP_URL') }}/{{ $shipment->serial_number }}.pdf">اضغط هنا للتنزيل</a>.</p>
 
   </div>
  </body>
