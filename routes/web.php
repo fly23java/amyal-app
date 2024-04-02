@@ -27,6 +27,7 @@ use App\Http\Controllers\VehicleGoodsExtractorController;
 
 use App\Http\Controllers\PricesController;
 use App\Http\Controllers\PriceDetailsController;
+use App\Http\Controllers\ShipmentNotActiveController;
 
 /*
 |--------------------------------------------------------------------------
@@ -401,6 +402,17 @@ Route::group([
           ->name('retrun_shipment_in_tabs_by_status.retrun_shipment_in_tabs_by_status.retrunShipmentInTabsByStatus');
       
       
+});
+
+Route::group([
+     'prefix' => 'shipment_not_actives',
+ ], function () {
+   
+     Route::get('/',[ShipmentNotActiveController::class, 'index'])
+          ->name('shipment_not_actives.shipment_not_active.index');
+     Route::get('/retrunShipmentInTabsByStatus',[ShipmentNotActiveController::class, 'retrunShipmentInTabsByStatus'])
+          ->name('shipment_not_actives.shipment_not_active.retrunShipmentInTabsByStatus');
+
 });
 
 

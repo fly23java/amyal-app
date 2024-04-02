@@ -78,6 +78,17 @@
                 </li>
 
                  <!-- END : end shipment -->
+                <!-- Degin : shipment not active -->
+                <li class="nav-item">
+                    <a class="d-flex align-items-center" href="{{ route('shipment_not_actives.shipment_not_active.index') }}">
+                        <i data-feather='alert-octagon'></i>
+                        <span class="menu-title text-truncate" data-i18n="Country">
+                        {{ trans('main.shipment_not_active') }}
+                        </span>
+                    </a>
+                </li>
+
+                 <!-- END : end shipment not active -->
                 <!-- Degin : Contry and cities -->
              
 

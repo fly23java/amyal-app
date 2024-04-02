@@ -5,6 +5,7 @@ return [
      'contracts' => 'العقود',
      'contract_details' => 'تفاصيل العقد',
      'shipments' => 'الشحنات',
+     'shipment_not_active' => 'الشحنات غير النشطة',
      'vehicle_types' => 'أنواع المركبات',
      'vehicles' => 'مركبات',
      'drivers' => 'السائقون',
@@ -25,5 +26,6 @@ return [
      'add_carrir' => 'اضافةالناقل',
      'reset' => 'إعادة ضبط',
      'testprint' => 'طباعة البوليصة',
+     
 
 ];
