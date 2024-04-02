@@ -19,6 +19,7 @@ return [
     'unloading_city_id__placeholder' => 'اختر مدينة التفريغ',
     'unloading_location' => 'موقع التفريغ',
     'unloading_location__placeholder' => 'أدخل موقع التفريغ هنا...',
+    'vehicle_id' => 'المركبة',
     'vehicle_type_id' => 'نوع المركبة',
     'vehicle_type_id__placeholder' => 'اختر نوع المركبة',
     'goods_id' => 'البضائع',

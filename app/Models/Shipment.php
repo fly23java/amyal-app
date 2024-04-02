@@ -95,6 +95,8 @@ class Shipment extends Model
         return Account::where('id', $Vehicle['account_id'])->first();
         // return Vehicle::where('id',$shipmentDeliveryDetail['vehicle_id'])->first();
     }
+
+   
     /**
      * Get the City for this model.
      *

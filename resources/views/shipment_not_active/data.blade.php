@@ -6,7 +6,7 @@
             <th>{{ trans('shipments.loading_city_id') }}</th>
             <th>{{ trans('shipments.unloading_city_id') }}</th>
             <th>{{ trans('shipments.vehicle_type_id') }}</th>
-            <th>{{ trans('shipments.carrir') }}</th>
+            <th>{{ trans('shipments.vehicle_type') }}</th>
             <th>{{ trans('shipments.supervisor_user_id') }}</th>
             <th></th>
         </tr>
@@ -21,7 +21,10 @@
             <td class="align-middle">{{ optional($shipment->VehicleType)->name_arabic }}</td>
             <td class="align-middle">
                 @empty ($shipment->shipmentDeliveryDetail)
-                    {{ ($shipment->getCarrir($shipment->id)->name_arabic) }}
+                    {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->right_letter) }}
+                    {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->middle_letter) }}
+                    {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->left_letter) }}
+                    {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->plate) }}
                 @endempty
             </td>
             <td class="align-middle">{{ optional($shipment->User)->name }}</td>
