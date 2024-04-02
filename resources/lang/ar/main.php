@@ -6,6 +6,7 @@ return [
      'contract_details' => 'تفاصيل العقد',
      'shipments' => 'الشحنات',
      'shipment_not_active' => 'الشحنات غير النشطة',
+     'finished_shipment' => 'الشحنات المنتهية',
      'vehicle_types' => 'أنواع المركبات',
      'vehicles' => 'مركبات',
      'drivers' => 'السائقون',
@@ -26,6 +27,8 @@ return [
      'add_carrir' => 'اضافةالناقل',
      'reset' => 'إعادة ضبط',
      'testprint' => 'طباعة البوليصة',
+     'shipment_without_delivery_document' => 'لم يتم ارفاق مستند التسليم',
+     'shipment_with_delivery_document' => ' تم ارفاق مستند التسليم',
      
 
 ];

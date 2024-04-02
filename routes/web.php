@@ -28,6 +28,7 @@ use App\Http\Controllers\VehicleGoodsExtractorController;
 use App\Http\Controllers\PricesController;
 use App\Http\Controllers\PriceDetailsController;
 use App\Http\Controllers\ShipmentNotActiveController;
+use App\Http\Controllers\ShipmentsCompletedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -403,6 +404,19 @@ Route::group([
       
       
 });
+
+Route::group([
+     'prefix' => 'shipment_completeds',
+ ], function () {
+   
+     Route::get('/',[ShipmentsCompletedController::class, 'index'])
+          ->name('shipment_completeds.shipment_completed.index');
+         
+          Route::get('/shipmentsWithOutDeliveryDocumentOnly',[ShipmentsCompletedController::class, 'shipmentsWithOutDeliveryDocumentOnly'])
+          ->name('shipment_completeds.shipment_completed.shipmentsWithOutDeliveryDocumentOnly');
+
+});
+
 
 Route::group([
      'prefix' => 'shipment_not_actives',
