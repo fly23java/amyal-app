@@ -6,16 +6,30 @@
 <style>
         /* يخفي العناصر غير المرغوب في طباعتها */
         @media print {
-            .btn-primary {
-                display: none;
-            }
-            .breadcrumb-header {
-                display: none;
-            }
-            .no-print {
-                display: none;
-            }
+        /* تنسيق الزر عند الطباعة */
+        .btn-print {
+            display: none; /* يخفي الزر عند الطباعة */
         }
+        
+        /* تنسيق مربع الملخص عند الطباعة */
+        .summary-box {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        #shipmentForm{
+            display: none;
+        }
+        .no-print{
+            display: none;
+        }
+        .text-end{
+            display: none;
+        }
+    }
     </style>
 @endsection
 @section('content')
@@ -43,7 +57,7 @@
             <div class="my-auto">
                 <div class="d-flex">
                     <h4 class="content-title mb-0 my-auto">التقارير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ تقرير
-                        الفواتير</span>
+                        التقرير العام</span>
                 </div>
             </div>
         </div>
