@@ -55,11 +55,12 @@ class ReportShipmentController extends Controller
 
 
                 $accountName = Account::find($request->account_id)->name_arabic;
+                $accountType = Account::find($request->account_id)->type;
                 $status = Status::find($request->status_id)->name_arabic;
                 $startDate = $request->start_date;
                 $endDate = $request->end_date;
             // dd($shipments);
         // إعادة النتائج كاستجابة JSON مثلاً
-        return view('reports.invoices_report', compact('shipments','Accounts','Statuses', 'accountName', 'status', 'startDate', 'endDate'));
+        return view('reports.invoices_report', compact('shipments','Accounts','Statuses', 'accountType' ,'accountName', 'status', 'startDate', 'endDate'));
     }
 }

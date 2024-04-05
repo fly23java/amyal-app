@@ -147,9 +147,11 @@
         </div>
         <button class="no-print" onclick="window.print()">طباعة التقرير</button>
 
+       
+
     </div>
 
-           <table class="table table-striped zero-configuration">
+           <table  id="myTable" class="table table-striped">
                 <thead>
                     <tr>
                         <th>{{ trans('shipments.serial_number') }}</th>
@@ -158,6 +160,14 @@
                         <th>{{ trans('shipments.unloading_city_id') }}</th>
                         <th>{{ trans('shipments.vehicle_type_id') }}</th>
                         <th>{{ trans('shipments.vehicle_id') }}</th>
+                        @if($accountType == 'business_shipper' || $accountType == 'individual_shipper')
+                        <th>{{ trans('shipments.price') }}</th>
+                        @endif
+                        @if($accountType == 'individual_carrier' || $accountType == 'business_carrier')
+                        <th>{{ trans('shipments.carrier_price') }}</th>
+                        <th>{{ trans('shipments.driver') }}</th>
+                        <th>{{ trans('shipments.phone') }}</th>
+                        @endif
                         <th>{{ trans('shipments.supervisor_user_id') }}</th>
                         <th></th>
                     </tr>
@@ -170,6 +180,8 @@
                         <td class="align-middle">{{ $shipment->getCityName($shipment->loading_city_id)->name_arabic }}</td>
                         <td class="align-middle">{{ $shipment->getCityName($shipment->unloading_city_id)->name_arabic }}</td>
                         <td class="align-middle">{{ optional($shipment->VehicleType)->name_arabic }}</td>
+                        
+
                         <td class="align-middle">
                             @if (!empty($shipment->shipmentDeliveryDetail->shipment_id))
                                 {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->right_letter) }}
@@ -178,7 +190,26 @@
                                 {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->plate) }}
                             @endif
                         </td>
-                        <td class="align-middle">{{ optional($shipment->User)->name }}</td>
+
+                        @if($accountType == 'business_shipper' || $accountType == 'individual_shipper')
+                            <td class="align-middle">{{ $shipment->price }}</td>
+                        @endif
+                        @if($accountType == 'individual_carrier' || $accountType == 'business_carrier')
+                            <td class="align-middle">{{ $shipment->carrier_price }}</td>
+                            <td class="align-middle">
+                                    @if (!empty($shipment->shipmentDeliveryDetail->shipment_id))
+                                        {{ optional($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->driver)->name_arabic }}
+                                    @endif
+                            </td>
+                            <td class="align-middle">
+                                    @if (!empty($shipment->shipmentDeliveryDetail->shipment_id))
+                                        {{ optional($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->driver)->phone }}
+                                    @endif
+                            </td>
+
+                            
+                        @endif
+                        <td class="align-middle">{{ optional($shipment->User)->name_arabic }}</td>
                         <td class="text-end">
                             <a class="btn btn-primary" data-toggle="collapse" href="#shipmentDetails{{ $shipment->id }}" role="button" aria-expanded="false" aria-controls="shipmentDetails{{ $shipment->id }}">
                                 <i data-feather='arrow-down'></i>
@@ -250,56 +281,5 @@
 @section('script')
 
 
-<!-- <script>
-    $(document).ready(function() {
-            $('#searchBtn').click(function(e) {
-                e.preventDefault();
-                var form = $('#shipmentForm');
-                var url = form.attr('action');
-                var data = form.serialize();
-
-                $.ajax({
-                    type: 'GET',
-                    url: "{{ route('reports.report.shipmentByStautasResult') }}",
-                    data: data,
-                    success: function(response) {
-                        // Handle success response here
-                        updateTable(response.shipments);
-                    },
-                    error: function(xhr, status, error) {
-                        // Handle error here
-                        console.log(xhr.responseText);
-                    }
-                });
-            });
-
-            function updateTable(shipments) {
-                var tableBody = $('#shipmentTable tbody');
-                tableBody.empty(); // Clear existing data
-
-                shipments.forEach(function(shipment) {
-                    var row = '<tr>' +
-                                '<td>' + shipment.serial_number + '</td>' +
-                                '<td>' + shipment.account_name + '</td>' +
-                                '<td>' + shipment.loading_city_name + '</td>' +
-                                '<td>' + shipment.unloading_city_name + '</td>' +
-                                '<td>' + shipment.vehicle_type_name + '</td>' +
-                                '<td>';
-                    // Append vehicle details
-                    if (shipment.shipmentDeliveryDetail) {
-                        row += shipment.shipmentDeliveryDetail.vehicle.right_letter + ' ' +
-                            shipment.shipmentDeliveryDetail.vehicle.middle_letter + ' ' +
-                            shipment.shipmentDeliveryDetail.vehicle.left_letter + ' ' +
-                            shipment.shipmentDeliveryDetail.vehicle.plate;
-                    }
-                    row += '</td>' +
-                        '<td>' + // Add buttons here if needed +
-                        '</tr>';
-                    tableBody.append(row);
-                });
-            }
-        });
-</script>
- -->
 
 @endsection
