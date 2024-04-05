@@ -52,7 +52,7 @@
                                                 </a>
                                             </div>
                                         </div>
-                                        <a class="btn btn-secondary" href="{{ route('shipments.shipment.show', $shipment->id) }}">
+                                        <a class="btn btn-secondary"  data-toggle="collapse" href="#shipmentDetails{{ $shipment->id }}" role="button" aria-expanded="false" aria-controls="shipmentDetails{{ $shipment->id }}"">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
                                         <a class="btn btn-secondary" href="{{ route('shipments.shipment.edit', $shipment->id) }}">
@@ -65,6 +65,54 @@
                                 </form>
                             </td>
                         </tr>
+                        <tr class="collapse" id="shipmentDetails{{ $shipment->id }}">
+                        <td colspan="8">
+                            <div class="shipment-details">
+                            <ul>
+                                <li><strong>{{ trans('shipments.user_id') }}:</strong> {{ $shipment->getAccountName($shipment->account_id)->name_arabic }}</li>
+                                <li><strong>{{ trans('shipments.loading_city_id') }}:</strong> {{ $shipment->getCityName($shipment->loading_city_id)->name_arabic }}</li>
+                                <li><strong>{{ trans('shipments.unloading_city_id') }}:</strong> {{ $shipment->getCityName($shipment->unloading_city_id)->name_arabic }}</li>
+                                <li><strong>{{ trans('shipments.vehicle_type_id') }}:</strong> {{ optional($shipment->VehicleType)->name_arabic }}</li>
+                                <li><strong>{{ trans('shipments.goods_id') }}:</strong> {{ optional($shipment->Goods)->name_arabic }}</li>
+                                <li><strong>{{ trans('shipments.status_id') }}:</strong> {{ optional($shipment->Status)->name_arabic }}</li>
+                                <li><strong>{{ trans('shipments.price') }}:</strong> {{ $shipment->price }}</li>
+                                <li><strong>{{ trans('shipments.carrier_price') }}:</strong> {{ $shipment->carrier_price }}</li>
+                                <li><strong>{{ trans('shipments.supervisor_user_id') }}:</strong> {{ optional($shipment->User)->name }}</li>
+                                <li><strong>{{ trans('shipments.carrir') }}:</strong>
+                                    @if (!empty($shipment->shipmentDeliveryDetail->shipment_id))
+                                        {{ ($shipment->getCarrir($shipment->id)->name_arabic) }}
+                                    @endif
+                                </li>
+                                <li><strong>{{ trans('shipments.vehicle_id') }}:</strong>
+                                    @if (!empty($shipment->shipmentDeliveryDetail->shipment_id))
+                                        {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->right_letter) }}
+                                        {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->middle_letter) }}
+                                        {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->left_letter) }}
+                                        {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->plate) }}
+                                    @endif
+                                </li>
+                                <li><strong>{{ trans('shipments.driver') }}:</strong>
+                                    @if (!empty($shipment->shipmentDeliveryDetail->shipment_id))
+                                        {{ optional($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->driver)->name_arabic }}
+                                    @endif
+                                </li>
+                                <li><strong>{{ trans('shipments.phone') }}:</strong>
+                                    @if (!empty($shipment->shipmentDeliveryDetail->shipment_id))
+                                        {{ optional($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->driver)->phone }}
+                                    @endif
+                                </li>
+                                <li><strong>{{ trans('shipments.identity_number') }}:</strong>
+                                    @if (!empty($shipment->shipmentDeliveryDetail->shipment_id))
+                                        {{ optional($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->driver)->identity_number }}
+                                    @endif
+                                </li>
+                                <li><strong>{{ trans('shipments.created_at') }}:</strong> {{ $shipment->created_at }}</li>
+                                <li><strong>{{ trans('shipments.updated_at') }}:</strong> {{ $shipment->updated_at }}</li>
+                            </ul>
+
+                            </div>
+                        </td>
+                    </tr>
                         @endforeach
                     </tbody>
                 </table>
