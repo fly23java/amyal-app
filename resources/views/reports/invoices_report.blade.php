@@ -4,6 +4,29 @@
 
 @section('style')
 <style>
+    .total-price-container {
+        width: 100%;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    .total-price-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .total-price {
+        font-size: 20px;
+        font-weight: bold;
+        color: black;
+    }
+</style>
+<style>
         /* يخفي العناصر غير المرغوب في طباعتها */
         @media print {
         /* تنسيق الزر عند الطباعة */
@@ -168,7 +191,7 @@
                         @if($accountType == 'individual_carrier' || $accountType == 'business_carrier')
                         <th>{{ trans('shipments.carrier_price') }}</th>
                         <th>{{ trans('shipments.driver') }}</th>
-                        <th>{{ trans('shipments.phone') }}</th>
+                        
                         @endif
                         <th>{{ trans('shipments.supervisor_user_id') }}</th>
                         <th></th>
@@ -205,11 +228,7 @@
                                         {{ optional($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->driver)->name_arabic }}
                                     @endif
                             </td>
-                            <td class="align-middle">
-                                    @if (!empty($shipment->shipmentDeliveryDetail->shipment_id))
-                                        {{ optional($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->driver)->phone }}
-                                    @endif
-                            </td>
+                            
 
                             
                         @endif
@@ -271,8 +290,24 @@
                     </tr>
                     @endforeach
     </tbody>
+
+
 </table>
 
+    <div class="total-price-container">
+        <div class="total-price-title"> 
+            اجمالي الاسعار
+            <br>
+            من تاريخ
+            <br>
+            {{ $startDate }}
+            <br>  
+            الي تاريخ
+            <br>  
+            {{$endDate}}
+        </div>
+        <div class="total-price">{{ $totalPrice }}</div>
+    </div>
 @endif
    <!-- Basic table -->
                 

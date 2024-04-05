@@ -53,6 +53,8 @@ class ReportShipmentController extends Controller
             ->whereBetween('created_at', [$startDate, $endDate])
             ->where('status_id', $statusId)
             ->get();
+            $totalPrice = $shipments->sum('price');
+
         }elseif(($getAccount->type == 'individual_carrier' || $getAccount->type == 'business_carrier')){
             $vehicleIds = Vehicle::where('account_id', $accountId)->orderBy('id', 'asc')->pluck('id');
             $shipments = Shipment::whereBetween('created_at', [$startDate, $endDate])
@@ -61,6 +63,7 @@ class ReportShipmentController extends Controller
                 $query->whereIn('vehicle_id', $vehicleIds);
             })
             ->get();
+            $totalPrice = $shipments->sum('carrier_price');
         
 
         }
@@ -73,6 +76,6 @@ class ReportShipmentController extends Controller
                 $endDate = $request->end_date;
             // dd($shipments);
         // إعادة النتائج كاستجابة JSON مثلاً
-        return view('reports.invoices_report', compact('shipments','Accounts','Statuses', 'accountType' ,'accountName', 'status', 'startDate', 'endDate'));
+        return view('reports.invoices_report', compact('shipments','Accounts','Statuses','totalPrice', 'accountType' ,'accountName', 'status', 'startDate', 'endDate'));
     }
 }
