@@ -14,11 +14,32 @@
     <meta name="author" content="PIXINVENT">
     
     <title>amyal-system</title>
+    <style>
+        
+    .shipment-details {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+       
+    }
+
+    .shipment-details ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .shipment-details ul li {
+        margin-bottom: 5px;
+    }
+</style>
+    </style>
         <style>
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap');
         </style>
   
     <style>
+
+        
       @font-face {
             font-family: "Cairo";
             src: url("{{ asset('Cairo-VariableFont_slnt.ttf') }}");

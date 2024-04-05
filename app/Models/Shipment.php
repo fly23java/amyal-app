@@ -86,7 +86,8 @@ class Shipment extends Model
     }
     public function getVehicle($data)
     {
-        return Vehicle::where('id',$data)->first();
+        return Vehicle::findOrFail($data);
+
     }
     public function getCarrir($data)
     {

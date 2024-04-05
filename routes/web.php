@@ -30,6 +30,8 @@ use App\Http\Controllers\PriceDetailsController;
 use App\Http\Controllers\ShipmentNotActiveController;
 use App\Http\Controllers\ShipmentsCompletedController;
 
+use App\Http\Controllers\ReportShipmentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,9 +47,9 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/test', function () {
-     return view('reports.invoices_report');
-});
+// Route::get('/test', function () {
+//      return view('reports.invoices_report');
+// });
 
 Auth::routes();
 
@@ -415,6 +417,9 @@ Route::group([
           Route::get('/shipmentsWithOutDeliveryDocumentOnly',[ShipmentsCompletedController::class, 'shipmentsWithOutDeliveryDocumentOnly'])
           ->name('shipment_completeds.shipment_completed.shipmentsWithOutDeliveryDocumentOnly');
 
+          Route::get('/shipmentsWithDeliveryDocumentOnly',[ShipmentsCompletedController::class, 'shipmentsWithDeliveryDocumentOnly'])
+          ->name('shipment_completeds.shipment_completed.shipmentsWithDeliveryDocumentOnly');
+
 });
 
 
@@ -510,4 +515,13 @@ Route::group([
           ->name('price_details.price_detail.update');
      Route::delete('/price_detail/{priceDetail}',[PriceDetailsController::class, 'destroy'])
           ->name('price_details.price_detail.destroy');
+ });
+ Route::group([
+     'prefix' => 'reports',
+ ], function () {
+     Route::get('/', [ReportShipmentController::class, 'index'])
+          ->name('reports.report.index');
+     Route::get('/shipmentByStautasResult', [ReportShipmentController::class, 'shipmentByStautasResult'])
+          ->name('reports.report.shipmentByStautasResult');
+   
  });

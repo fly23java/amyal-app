@@ -247,6 +247,28 @@
                     </ul>
                 </li>
 
+                <li class=" nav-item"><a class="d-flex align-items-center" href="#">
+                        <i data-feather='file-text'></i>
+                    <span class="menu-title text-truncate" data-i18n="Components">
+                    {{ trans('main.reports') }}
+                    </span></a>
+                    <ul class="menu-content">
+                       
+                            <li>
+                                <a class="d-flex align-items-center" href="{{ route('reports.report.index') }}">
+                                    <i data-feather='grid'></i>
+                                    <span class="menu-title text-truncate" data-i18n="Country">
+                                    {{ trans('main.general_report') }}
+                                    </span>
+                                </a>
+                            </li>
+                            
+                        
+                           
+                       
+                    </ul>
+                </li>
+
                 
                 <!-- END : Contry and cities -->
                

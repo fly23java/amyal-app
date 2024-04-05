@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\File;
 use App\Http\Services\ShipmentService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\DataTables\ShipmentDataTable;
 
 class ShipmentsCompletedController extends Controller
 {
@@ -33,6 +34,8 @@ class ShipmentsCompletedController extends Controller
     {
         $this->middleware('auth');
     }
+
+
     public function index()
     {
 
@@ -82,6 +85,31 @@ class ShipmentsCompletedController extends Controller
 
         $shipments = Shipment::whereHas('shipmentDeliveryDetail', function ($query) {
             $query->whereNull('delivery_document');
+        })
+        ->where('status_id', 4)
+        ->withCount('shipmentDeliveryDetail')
+        ->get();
+        $data = response()->view('shipment_completed.data', [
+           
+            'shipments' => $shipments,
+        ])->getContent();
+        
+        return response()->json([
+            'data'  =>$data,
+        ]);
+    }
+    public function shipmentsWithDeliveryDocumentOnly(Request $request)
+    {
+        
+       
+
+        // dd($Status->shipment());
+        // $shipments = Shipment::where('status_id' ,$Status->id)->get();
+        // $data = view('shipments.data', compact('shipments' ,'Vehicles','Status'))->render();
+
+
+        $shipments = Shipment::whereHas('shipmentDeliveryDetail', function ($query) {
+            $query->whereNotNull('delivery_document');
         })
         ->where('status_id', 4)
         ->withCount('shipmentDeliveryDetail')

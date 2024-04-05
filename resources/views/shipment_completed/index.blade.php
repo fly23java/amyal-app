@@ -53,7 +53,7 @@
                                         </li>
                                         <li class="nav-item">
                                         
-                                            <a class="nav-link tab-shipment2 " id="tab-shipmentsWithDeliveryDocumentOnly" data-id="shipmentsWithDeliveryDocumentOnly" data-toggle="tab" href="#shipmentsWithDeliveryDocumentOnly" aria-controls="shipmentsWithDeliveryDocumentOnly" role="tab" aria-selected="true">
+                                            <a class="nav-link tab-shipmentsWithDeliveryDocumentOnly " id="tab-shipmentsWithDeliveryDocumentOnly" data-id="shipmentsWithDeliveryDocumentOnly" data-toggle="tab" href="#shipmentsWithDeliveryDocumentOnly" aria-controls="shipmentsWithDeliveryDocumentOnly" role="tab" aria-selected="true">
                                                     <span class="badge badge-light-success badge-pill ml-auto mr-1">
                                                       
                                                                 {{ $shipmentsWithDeliveryDocumentOnly }}
@@ -122,6 +122,16 @@
 
 
 @section('script')  
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.min.css">
+<!-- DataTables Buttons CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
+
+  
+        <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
 <script>
   
 
@@ -133,16 +143,11 @@
         e.preventDefault();
 
         // Get the tab content ID based on the data-id attribute
-        var id = $(this).data('id');
-
-        var data = {
-            'id': id
-        };
 
         $.ajax({
             type: "GET",
             url: "{{ route('shipment_completeds.shipment_completed.shipmentsWithOutDeliveryDocumentOnly') }}",
-            data: data,
+          
             dataType: "json",
             success: function (response) {
                 $('#shipmentsWithOutDeliveryDocumentOnly').html("");
@@ -150,17 +155,75 @@
                 table.destroy();
 
                 $('#shipmentsWithOutDeliveryDocumentOnly').append(response.data);
-
-                $('.zero-configuration3').DataTable({
-                    "drawCallback": function () {
+                
+                $('.zero-configuration3').DataTable( {
+                    dom: 'lBfrtip',
+                    buttons: [
+                        {
+                            extend: 'print',
+                            exportOptions: { columns: ':visible' },
+                            className: 'btn btn-sm btn-primary' // Custom class for styling
+                        }
+                    ],
+                    language: {
+                        buttons: { print: 'طباعة' }
+                    },
+                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                    drawCallback: function () {
                         $('.previous').addClass('btn btn-sm btn-dark');
                         $('.paginate_button').addClass('btn btn-sm btn-primary');
                         $('.next').addClass('btn btn-sm btn-dark');
                         $('div.dataTables_filter input').addClass('form-control');
                         $('.dataTables_length').addClass('d-none');
-                    },
-                    order: [[3, 'desc']]
+                    }
                 });
+
+            }
+        });
+    });
+
+
+
+
+    $('.tab-shipmentsWithDeliveryDocumentOnly').on('click', function (e) {
+        e.preventDefault();
+
+        // Get the tab content ID based on the data-id attribute
+
+        $.ajax({
+            type: "GET",
+            url: "{{ route('shipment_completeds.shipment_completed.shipmentsWithDeliveryDocumentOnly') }}",
+            
+            dataType: "json",
+            success: function (response) {
+                $('#shipmentsWithDeliveryDocumentOnly').html("");
+                var table = $('.zero-configuration3').DataTable();
+                table.destroy();
+
+                $('#shipmentsWithDeliveryDocumentOnly').append(response.data);
+                
+                $('.zero-configuration3').DataTable( {
+                    dom: 'lBfrtip',
+                    buttons: [
+                        {
+                            extend: 'print',
+                            exportOptions: { columns: ':visible' },
+                            className: 'btn btn-sm btn-primary' // Custom class for styling
+                        }
+                    ],
+                    language: {
+                        buttons: { print: 'طباعة' }
+                    },
+                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                    drawCallback: function () {
+                        $('.previous').addClass('btn btn-sm btn-dark');
+                        $('.paginate_button').addClass('btn btn-sm btn-primary');
+                        $('.next').addClass('btn btn-sm btn-dark');
+                        $('div.dataTables_filter input').addClass('form-control');
+                        $('.dataTables_length').addClass('d-none');
+                    }
+                });
+
             }
         });
     });

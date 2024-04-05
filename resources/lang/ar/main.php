@@ -29,6 +29,8 @@ return [
      'testprint' => 'طباعة البوليصة',
      'shipment_without_delivery_document' => 'لم يتم ارفاق مستند التسليم',
      'shipment_with_delivery_document' => ' تم ارفاق مستند التسليم',
+     'reports' => 'التقارير',
+     'general_report' => 'تقرير عام',
      
 
 ];

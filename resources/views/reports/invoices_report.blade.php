@@ -56,137 +56,180 @@
            <div class="row">
                 <div class="col-12">
                     <div class="card-header pb-0">
-                        <form action="/Search_invoices" method="POST" role="search" autocomplete="off">
-                            {{ csrf_field() }}
-            
+                    <form id="shipmentForm" action="{{ route('reports.report.shipmentByStautasResult') }}" method="GET" role="search" autocomplete="off">
+                        {{ csrf_field() }}
+
+                        <div class="row">
                             <div class="col-lg-3">
-                                <label class="rdiobox">
-                                    <input checked name="rdio" type="radio" value="1" id="type_div"> <span>بحث بنوع
-                                        الفاتورة</span></label>
+                                <label for="account_id">الحساب</label>
+                                <select class="form-select select2 form-control{{ $errors->has('account_id') ? ' is-invalid' : '' }}" id="account_id" name="account_id" required="true">
+                                    @foreach ($Accounts as $key => $Account)
+                                    <option value="{{ $key }}">
+                                        {{ $Account }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                                {!! $errors->first('account_id', '<div class="invalid-feedback">:message</div>') !!}
                             </div>
-            
-                            <div class="col-lg-3 mg-t-20 mg-lg-t-0">
-                                <label class="rdiobox"><input name="rdio" value="2" type="radio"><span>بحث برقم الفاتورة
-                                    </span></label>
-                            </div><br><br>
-            
-                            <div class="row">
-            
-                                <div class="col-lg-3 mg-t-20 mg-lg-t-0" id="type">
-                                    <p class="mg-b-10">تحديد نوع الفواتير</p>
-                                    <select class="form-control select2" name="type" required>
-                                        <option value="{{ $type ?? 'حدد نوع الفواتير' }}" selected>
-                                            {{ $type ?? 'حدد نوع الفواتير' }}
-                                        </option>
-                                        <option value="مدفوعة">الفواتير المدفوعة</option>
-                                        <option value="غير مدفوعة">الفواتير الغير مدفوعة</option>
-                                        <option value="مدفوعة جزئيا">الفواتير المدفوعة جزئيا</option>
-                                    </select>
-                                </div><!-- col-4 -->
-            
-                                <div class="col-lg-3 mg-t-20 mg-lg-t-0" id="invoice_number">
-                                    <p class="mg-b-10">البحث برقم الفاتورة</p>
-                                    <input type="text" class="form-control" id="invoice_number" name="invoice_number">
-                                </div><!-- col-4 -->
-            
-                                <div class="col-lg-3" id="start_at">
-                                    <label for="exampleFormControlSelect1">من تاريخ</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <i class="fas fa-calendar-alt"></i>
-                                            </div>
-                                        </div>
-                                        <input class="form-control fc-datepicker" value="{{ $start_at ?? '' }}" name="start_at" placeholder="YYYY-MM-DD" type="text">
-                                    </div><!-- input-group -->
-                                </div>
-            
-                                <div class="col-lg-3" id="end_at">
-                                    <label for="exampleFormControlSelect1">الي تاريخ</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <i class="fas fa-calendar-alt"></i>
-                                            </div>
-                                        </div>
-                                        <input class="form-control fc-datepicker" name="end_at" value="{{ $end_at ?? '' }}" placeholder="YYYY-MM-DD" type="text">
-                                    </div><!-- input-group -->
-                                </div>
-                            </div><br>
-            
-                            <div class="row">
-                                <div class="col-sm-1 col-md-1">
-                                    <button class="btn btn-primary btn-block">بحث</button>
+
+                            <div class="col-lg-3">
+                                <label for="start_date">التاريخ البداء:</label>
+                                <div class="form-group mb-0">
+                                    <input type="text" class="form-control flatpickr-disabled-range flatpickr-input" data-column="5" id="start_date" placeholder="StartDate to EndDate" data-column-index="4" name="start_date" />
                                 </div>
                             </div>
-                        </form>
+
+                            <div class="col-lg-3">
+                                <label for="end_date">التاريخ النهاية:</label>
+                                <div class="form-group mb-0">
+                                    <input type="text" class="form-control flatpickr-disabled-range flatpickr-input" data-column="5" id="end_date" placeholder="StartDate to EndDate" data-column-index="4" name="end_date" />
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <label for="status_id">الحالة</label>
+                                <select class="form-select select2 form-control{{ $errors->has('status_id') ? ' is-invalid' : '' }}" id="status_id" name="status_id" required="true">
+                                    @foreach ($Statuses as $key => $Status)
+                                    <option value="{{ $key }}">
+                                        {{ $Status }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                                {!! $errors->first('status_id', '<div class="invalid-feedback">:message</div>') !!}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-1 col-md-2">
+                                <button id="searchBtn" class="btn btn-primary btn-block">بحث</button>
+                            </div>
+                        </div>
+                    </form>
                     </div>
                 </div>
             </div>
             
-            <div class="card-body">
-                <div class="table-responsive">
-                    @if (isset($details))
-                        <table id="example" class="table key-buttons text-md-nowrap" style=" text-align: center">
-                            <thead>
-                                <tr>
-                                    <th class="border-bottom-0">#</th>
-                                    <th class="border-bottom-0">رقم الفاتورة</th>
-                                    <th class="border-bottom-0">تاريخ القاتورة</th>
-                                    <th class="border-bottom-0">تاريخ الاستحقاق</th>
-                                    <th class="border-bottom-0">المنتج</th>
-                                    <th class="border-bottom-0">القسم</th>
-                                    <th class="border-bottom-0">الخصم</th>
-                                    <th class="border-bottom-0">نسبة الضريبة</th>
-                                    <th class="border-bottom-0">قيمة الضريبة</th>
-                                    <th class="border-bottom-0">الاجمالي</th>
-                                    <th class="border-bottom-0">الحالة</th>
-                                    <th class="border-bottom-0">ملاحظات</th>
+         
+           
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $i = 0; ?>
-                                @foreach ($details as $invoice)
-                                    <?php $i++; ?>
-                                    <tr>
-                                        <td>{{ $i }}</td>
-                                        <td>{{ $invoice->invoice_number }} </td>
-                                        <td>{{ $invoice->invoice_Date }}</td>
-                                        <td>{{ $invoice->Due_date }}</td>
-                                        <td>{{ $invoice->product }}</td>
-                                        <td><a
-                                                href="{{ url('InvoicesDetails') }}/{{ $invoice->id }}">{{ $invoice->section->section_name }}</a>
-                                        </td>
-                                        <td>{{ $invoice->Discount }}</td>
-                                        <td>{{ $invoice->Rate_VAT }}</td>
-                                        <td>{{ $invoice->Value_VAT }}</td>
-                                        <td>{{ $invoice->Total }}</td>
-                                        <td>
-                                            @if ($invoice->Value_Status == 1)
-                                                <span class="text-success">{{ $invoice->Status }}</span>
-                                            @elseif($invoice->Value_Status == 2)
-                                                <span class="text-danger">{{ $invoice->Status }}</span>
-                                            @else
-                                                <span class="text-warning">{{ $invoice->Status }}</span>
-                                            @endif
-
-                                        </td>
-
-                                        <td>{{ $invoice->note }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-
-                    @endif
-                </div>
-            </div>
+               
+                
         </div>
     </div>
 </div>
 <!-- row closed -->
 </div>
+
+
+   <!-- Basic table -->
+@if (isset($shipments) && count($shipments) > 0)
+    <div class="summary-box">
+        <h1>تقرير الشحنات</h1>
+        <div class="summary" style="border: 1px solid #ccc; border-radius: 10px; padding: 10px; margin-bottom: 20px; display: flex; gap: 10px;">
+            <p style="margin: 0 10px;">اسم الحساب: {{ $accountName }}</p>
+            <p style="margin: 0 10px;">عدد الشحنات: {{ count($shipments) }}</p>
+            <p style="margin: 0 10px;">الحالة: {{ $status }}</p>
+            <p style="margin: 0 10px;">تاريخ البداية: {{ $startDate }}</p>
+            <p style="margin: 0 10px;">تاريخ النهاية: {{ $endDate }}</p>
+        </div>
+
+
+    </div>
+
+           <table class="table table-striped zero-configuration">
+                <thead>
+                    <tr>
+                        <th>{{ trans('shipments.serial_number') }}</th>
+                        <th>{{ trans('shipments.account') }}</th>
+                        <th>{{ trans('shipments.loading_city_id') }}</th>
+                        <th>{{ trans('shipments.unloading_city_id') }}</th>
+                        <th>{{ trans('shipments.vehicle_type_id') }}</th>
+                        <th>{{ trans('shipments.vehicle_id') }}</th>
+                        <th>{{ trans('shipments.supervisor_user_id') }}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($shipments as $shipment)
+                    <tr>
+                        <td class="align-middle">{{ $shipment->serial_number }}</td>
+                        <td class="align-middle">{{ $shipment->getAccountName($shipment->account_id)->name_arabic }}</td>
+                        <td class="align-middle">{{ $shipment->getCityName($shipment->loading_city_id)->name_arabic }}</td>
+                        <td class="align-middle">{{ $shipment->getCityName($shipment->unloading_city_id)->name_arabic }}</td>
+                        <td class="align-middle">{{ optional($shipment->VehicleType)->name_arabic }}</td>
+                        <td class="align-middle">
+                            @if (!empty($shipment->shipmentDeliveryDetail->shipment_id))
+                                {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->right_letter) }}
+                                {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->middle_letter) }}
+                                {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->left_letter) }}
+                                {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->plate) }}
+                            @endif
+                        </td>
+                        <td class="align-middle">{{ optional($shipment->User)->name }}</td>
+                        <td class="text-end">
+                            <a class="btn btn-primary" data-toggle="collapse" href="#shipmentDetails{{ $shipment->id }}" role="button" aria-expanded="false" aria-controls="shipmentDetails{{ $shipment->id }}">
+                                <i data-feather='arrow-down'></i>
+                                اضاهات الشحنة
+                            </a>
+                        </td>
+                    </tr>
+                    <tr class="collapse" id="shipmentDetails{{ $shipment->id }}">
+                        <td colspan="8">
+                            <div class="shipment-details">
+                            <ul>
+                                <li><strong>{{ trans('shipments.user_id') }}:</strong> {{ $shipment->getAccountName($shipment->account_id)->name_arabic }}</li>
+                                <li><strong>{{ trans('shipments.loading_city_id') }}:</strong> {{ $shipment->getCityName($shipment->loading_city_id)->name_arabic }}</li>
+                                <li><strong>{{ trans('shipments.unloading_city_id') }}:</strong> {{ $shipment->getCityName($shipment->unloading_city_id)->name_arabic }}</li>
+                                <li><strong>{{ trans('shipments.vehicle_type_id') }}:</strong> {{ optional($shipment->VehicleType)->name_arabic }}</li>
+                                <li><strong>{{ trans('shipments.goods_id') }}:</strong> {{ optional($shipment->Goods)->name_arabic }}</li>
+                                <li><strong>{{ trans('shipments.status_id') }}:</strong> {{ optional($shipment->Status)->name_arabic }}</li>
+                                <li><strong>{{ trans('shipments.price') }}:</strong> {{ $shipment->price }}</li>
+                                <li><strong>{{ trans('shipments.carrier_price') }}:</strong> {{ $shipment->carrier_price }}</li>
+                                <li><strong>{{ trans('shipments.supervisor_user_id') }}:</strong> {{ optional($shipment->User)->name }}</li>
+                                <li><strong>{{ trans('shipments.carrir') }}:</strong>
+                                    @if (!empty($shipment->shipmentDeliveryDetail->shipment_id))
+                                        {{ ($shipment->getCarrir($shipment->id)->name_arabic) }}
+                                    @endif
+                                </li>
+                                <li><strong>{{ trans('shipments.vehicle_id') }}:</strong>
+                                    @if (!empty($shipment->shipmentDeliveryDetail->shipment_id))
+                                        {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->right_letter) }}
+                                        {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->middle_letter) }}
+                                        {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->left_letter) }}
+                                        {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->plate) }}
+                                    @endif
+                                </li>
+                                <li><strong>{{ trans('shipments.driver') }}:</strong>
+                                    @if (!empty($shipment->shipmentDeliveryDetail->shipment_id))
+                                        {{ optional($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->driver)->name_arabic }}
+                                    @endif
+                                </li>
+                                <li><strong>{{ trans('shipments.phone') }}:</strong>
+                                    @if (!empty($shipment->shipmentDeliveryDetail->shipment_id))
+                                        {{ optional($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->driver)->phone }}
+                                    @endif
+                                </li>
+                                <li><strong>{{ trans('shipments.identity_number') }}:</strong>
+                                    @if (!empty($shipment->shipmentDeliveryDetail->shipment_id))
+                                        {{ optional($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->driver)->identity_number }}
+                                    @endif
+                                </li>
+                                <li><strong>{{ trans('shipments.created_at') }}:</strong> {{ $shipment->created_at }}</li>
+                                <li><strong>{{ trans('shipments.updated_at') }}:</strong> {{ $shipment->updated_at }}</li>
+                            </ul>
+
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+    </tbody>
+</table>
+
+@endif
+   <!-- Basic table -->
+                
+                
+                <!--/ Basic table -->
 <!-- Container closed -->
 </div>
 <!-- main-content closed -->
@@ -194,35 +237,56 @@
 @section('script')
 
 
-
-<script>
-    var date = $('.fc-datepicker').datepicker({
-        dateFormat: 'yy-mm-dd'
-    }).val();
-
-</script>
-
-<script>
+<!-- <script>
     $(document).ready(function() {
+            $('#searchBtn').click(function(e) {
+                e.preventDefault();
+                var form = $('#shipmentForm');
+                var url = form.attr('action');
+                var data = form.serialize();
 
-        $('#invoice_number').hide();
+                $.ajax({
+                    type: 'GET',
+                    url: "{{ route('reports.report.shipmentByStautasResult') }}",
+                    data: data,
+                    success: function(response) {
+                        // Handle success response here
+                        updateTable(response.shipments);
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error here
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
 
-        $('input[type="radio"]').click(function() {
-            if ($(this).attr('id') == 'type_div') {
-                $('#invoice_number').hide();
-                $('#type').show();
-                $('#start_at').show();
-                $('#end_at').show();
-            } else {
-                $('#invoice_number').show();
-                $('#type').hide();
-                $('#start_at').hide();
-                $('#end_at').hide();
+            function updateTable(shipments) {
+                var tableBody = $('#shipmentTable tbody');
+                tableBody.empty(); // Clear existing data
+
+                shipments.forEach(function(shipment) {
+                    var row = '<tr>' +
+                                '<td>' + shipment.serial_number + '</td>' +
+                                '<td>' + shipment.account_name + '</td>' +
+                                '<td>' + shipment.loading_city_name + '</td>' +
+                                '<td>' + shipment.unloading_city_name + '</td>' +
+                                '<td>' + shipment.vehicle_type_name + '</td>' +
+                                '<td>';
+                    // Append vehicle details
+                    if (shipment.shipmentDeliveryDetail) {
+                        row += shipment.shipmentDeliveryDetail.vehicle.right_letter + ' ' +
+                            shipment.shipmentDeliveryDetail.vehicle.middle_letter + ' ' +
+                            shipment.shipmentDeliveryDetail.vehicle.left_letter + ' ' +
+                            shipment.shipmentDeliveryDetail.vehicle.plate;
+                    }
+                    row += '</td>' +
+                        '<td>' + // Add buttons here if needed +
+                        '</tr>';
+                    tableBody.append(row);
+                });
             }
         });
-    });
-
 </script>
-
+ -->
 
 @endsection
