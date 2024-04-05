@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Account;
 use App\Models\Status;
+use App\Models\Vehicle;
 
 use App\Models\Shipment;
 
@@ -46,13 +47,24 @@ class ReportShipmentController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
         $statusId = $request->input('status_id');
-
-         // تنفيذ الاستعلام للبحث في جدول الشحنات باستخدام نموذج الشحنة
+        $getAccount = Account::find($accountId);
+        if($getAccount->type == 'business_shipper' || $getAccount->type == 'individual_shipper'){
             $shipments = Shipment::where('account_id', $accountId)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->where('status_id', $statusId)
             ->get();
+        }elseif(($getAccount->type == 'individual_carrier' || $getAccount->type == 'business_carrier')){
+            $vehicleIds = Vehicle::where('account_id', $accountId)->orderBy('id', 'asc')->pluck('id');
+            $shipments = Shipment::whereBetween('created_at', [$startDate, $endDate])
+            ->where('status_id', $statusId)
+            ->whereHas('shipmentDeliveryDetail', function ($query) use ($vehicleIds) {
+                $query->whereIn('vehicle_id', $vehicleIds);
+            })
+            ->get();
+        
 
+        }
+         
 
                 $accountName = Account::find($request->account_id)->name_arabic;
                 $accountType = Account::find($request->account_id)->type;

@@ -155,7 +155,9 @@
                 <thead>
                     <tr>
                         <th>{{ trans('shipments.serial_number') }}</th>
+                        @if($accountType == 'business_shipper' || $accountType == 'individual_shipper')
                         <th>{{ trans('shipments.account') }}</th>
+                        @endif
                         <th>{{ trans('shipments.loading_city_id') }}</th>
                         <th>{{ trans('shipments.unloading_city_id') }}</th>
                         <th>{{ trans('shipments.vehicle_type_id') }}</th>
@@ -176,7 +178,9 @@
                     @foreach($shipments as $shipment)
                     <tr>
                         <td class="align-middle">{{ $shipment->serial_number }}</td>
+                        @if($accountType == 'business_shipper' || $accountType == 'individual_shipper')
                         <td class="align-middle">{{ $shipment->getAccountName($shipment->account_id)->name_arabic }}</td>
+                        @endif
                         <td class="align-middle">{{ $shipment->getCityName($shipment->loading_city_id)->name_arabic }}</td>
                         <td class="align-middle">{{ $shipment->getCityName($shipment->unloading_city_id)->name_arabic }}</td>
                         <td class="align-middle">{{ optional($shipment->VehicleType)->name_arabic }}</td>
@@ -209,7 +213,7 @@
 
                             
                         @endif
-                        <td class="align-middle">{{ optional($shipment->User)->name_arabic }}</td>
+                        <td class="align-middle">{{ optional($shipment->User)->name }}</td>
                         <td class="text-end">
                             <a class="btn btn-primary" data-toggle="collapse" href="#shipmentDetails{{ $shipment->id }}" role="button" aria-expanded="false" aria-controls="shipmentDetails{{ $shipment->id }}">
                                 <i data-feather='arrow-down'></i>
