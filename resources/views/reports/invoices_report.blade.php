@@ -1,34 +1,22 @@
 @extends('layouts.dashbord-layout')
-@section('css')
-    <!-- Internal Data table css -->
-    <link href="{{ URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
-    <link href="{{ URL::asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" />
-    <link href="{{ URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
 
-    <!-- Internal Spectrum-colorpicker css -->
-    <link href="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.css') }}" rel="stylesheet">
 
-    <!-- Internal Select2 css -->
-    <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
 
-@section('title')
-    تقرير الفواتير - مورا سوفت للادارة الفواتير
-@stop
-@endsection
-@section('page-header')
-<!-- breadcrumb -->
-<div class="breadcrumb-header justify-content-between">
-    <div class="my-auto">
-        <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">التقارير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ تقرير
-                الفواتير</span>
-        </div>
-    </div>
-</div>
-<!-- breadcrumb -->
+@section('style')
+<style>
+        /* يخفي العناصر غير المرغوب في طباعتها */
+        @media print {
+            .btn-primary {
+                display: none;
+            }
+            .breadcrumb-header {
+                display: none;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
 @endsection
 @section('content')
 
@@ -46,10 +34,19 @@
     </div>
 @endif
 
+
 <!-- row -->
 <div class="row">
 
     <div class="col-xl-12">
+        <div class="breadcrumb-header justify-content-between">
+            <div class="my-auto">
+                <div class="d-flex">
+                    <h4 class="content-title mb-0 my-auto">التقارير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ تقرير
+                        الفواتير</span>
+                </div>
+            </div>
+        </div>
         <div class="card mg-b-20">
 
 
@@ -131,8 +128,10 @@
             <p style="margin: 0 10px;">الحالة: {{ $status }}</p>
             <p style="margin: 0 10px;">تاريخ البداية: {{ $startDate }}</p>
             <p style="margin: 0 10px;">تاريخ النهاية: {{ $endDate }}</p>
-        </div>
 
+            
+        </div>
+        <button class="no-print" onclick="window.print()">طباعة التقرير</button>
 
     </div>
 

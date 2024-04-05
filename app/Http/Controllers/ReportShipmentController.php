@@ -25,12 +25,21 @@ class ReportShipmentController extends Controller
     public function shipmentByStautasResult(Request $request){
         $Accounts = Account::pluck('name_arabic','id')->all();
         $Statuses = Status::pluck('name_arabic','id')->all();
-        // $request->validate([
-        //     'account_id' => 'required',
-        //     'start_date' => 'required|date',
-        //     'end_date' => 'required|date',
-        //     'status_id' => 'required',
-        // ]);
+        $request->validate([
+            'account_id' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'status_id' => 'required',
+        ], [
+            'account_id.required' => 'الحساب مطلوب',
+            'start_date.required' => 'تاريخ البداية مطلوب',
+            'start_date.date' => 'تاريخ البداية يجب أن يكون تاريخاً صحيحاً',
+            'end_date.required' => 'تاريخ النهاية مطلوب',
+            'end_date.date' => 'تاريخ النهاية يجب أن يكون تاريخاً صحيحاً',
+            'status_id.required' => 'الحالة مطلوبة',
+        ]);
+        
+        
     
         // dd($request->all());
         $accountId = $request->input('account_id');

@@ -14,6 +14,8 @@
     <meta name="author" content="PIXINVENT">
     
     <title>amyal-system</title>
+
+    @yield('style')
     <style>
         
     .shipment-details {
