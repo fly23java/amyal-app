@@ -168,7 +168,8 @@
 
             
         </div>
-        <button class="no-print" onclick="window.print()">طباعة التقرير</button>
+        <button class="no-print" onclick="printReport('{{ $accountName }}_{{ $startDate }}_{{ $endDate }}')">طباعة التقرير</button>
+
 
        
 
@@ -319,6 +320,13 @@
 @endsection
 @section('script')
 
-
+<script>
+    function printReport(fileName) {
+        var originalTitle = document.title; // احتفظ بالعنوان الأصلي
+        document.title = fileName; // قم بتغيير العنوان ليكون اسم الملف المحدد
+        window.print(); // قم بطباعة التقرير
+        document.title = originalTitle; // استعد العنوان الأصلي بعد الطباعة
+    }
+</script>
 
 @endsection
