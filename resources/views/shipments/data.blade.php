@@ -1,34 +1,45 @@
-<table class="table table-striped zero-configuration2">
-                    <thead>
-                        <tr>
-                            <th>{{ trans('shipments.serial_number') }}</th>
-                            <th>{{ trans('shipments.account') }}</th>
-                            <th>{{ trans('shipments.loading_city_id') }}</th>
-                            <th>{{ trans('shipments.unloading_city_id') }}</th>
-                            <th>{{ trans('shipments.vehicle_type_id') }}</th>
-                            <th>{{ trans('shipments.vehicle_id') }}</th>
-                            <th>{{ trans('shipments.supervisor_user_id') }}</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($shipments as $shipment)
-                        <tr>
-                            <td class="align-middle">{{ $shipment->serial_number }}</td>
-                            <td class="align-middle">{{ $shipment->getAccountName($shipment->account_id)->name_arabic }}</td>
-                            <td class="align-middle">{{ $shipment->getCityName($shipment->loading_city_id)->name_arabic }}</td>
-                            <td class="align-middle">{{ $shipment->getCityName($shipment->unloading_city_id)->name_arabic }}</td>
-                            <td class="align-middle">{{ optional($shipment->VehicleType)->name_arabic }}</td>
-                            <td class="align-middle">
-                                @if (!empty($shipment->shipmentDeliveryDetail->shipment_id))
-                                    {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->right_letter) }}
-                                    {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->middle_letter) }}
-                                    {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->left_letter) }}
-                                    {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->plate) }}
-                                @endif
-                            </td>
-                            <td class="align-middle">{{ optional($shipment->User)->name }}</td>
-                            <td class="text-end">
+<table class="table table-striped " id="shipmentTable">
+    <thead>
+        <tr>
+             <th>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="selectAllCheckbox" onclick="toggleAllCheckboxes()">
+                    <label class="form-check-label" for="selectAllCheckbox">Select All</label>
+                </div>
+            </th>
+            <th>{{ trans('shipments.serial_number') }}</th>
+            <th>{{ trans('shipments.account') }}</th>
+            <th>{{ trans('shipments.loading_city_id') }}</th>
+            <th>{{ trans('shipments.unloading_city_id') }}</th>
+            <th>{{ trans('shipments.vehicle_type_id') }}</th>
+            <th>{{ trans('shipments.vehicle_id') }}</th>
+            <th>{{ trans('shipments.supervisor_user_id') }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($shipments as $shipment)
+        <tr data-toggle="collapse" data-target="#shipmentDetails{{ $shipment->id }}" class="clickable">
+             <td>
+                <div class="form-check">
+                    <input class="form-check-input shipmentCheckbox" type="checkbox" id="shipmentCheckbox{{ $shipment->id }}">
+                </div>
+            </td>
+            <td class="align-middle">{{ $shipment->serial_number }}</td>
+            <td class="align-middle">{{ $shipment->getAccountName($shipment->account_id)->name_arabic }}</td>
+            <td class="align-middle">{{ $shipment->getCityName($shipment->loading_city_id)->name_arabic }}</td>
+            <td class="align-middle">{{ $shipment->getCityName($shipment->unloading_city_id)->name_arabic }}</td>
+            <td class="align-middle">{{ optional($shipment->VehicleType)->name_arabic }}</td>
+            <td class="align-middle">
+                @if (!empty($shipment->shipmentDeliveryDetail->shipment_id))
+                    {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->right_letter) }}
+                    {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->middle_letter) }}
+                    {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->left_letter) }}
+                    {{ ($shipment->getVehicle($shipment->shipmentDeliveryDetail->vehicle_id)->plate) }}
+                @endif
+            </td>
+            <td class="align-middle">{{ optional($shipment->User)->name }}</td>
+            <td class="text-end">
                                 <form method="POST" action="{!! route('shipments.shipment.destroy', $shipment->id) !!}" accept-charset="UTF-8">
                                     <input name="_method" value="DELETE" type="hidden">
                                     {{ csrf_field() }}
@@ -64,11 +75,11 @@
                                     </div>
                                 </form>
                             </td>
-                        </tr>
-                        <tr class="collapse" id="shipmentDetails{{ $shipment->id }}">
-                        <td colspan="8">
-                            <div class="shipment-details">
-                            <ul>
+        </tr>
+        <tr id="shipmentDetails{{ $shipment->id }}" class="collapse">
+            <td colspan="8">
+                <div class="shipment-details">
+                <ul>
                                 <li><strong>{{ trans('shipments.user_id') }}:</strong> {{ $shipment->getAccountName($shipment->account_id)->name_arabic }}</li>
                                 <li><strong>{{ trans('shipments.loading_city_id') }}:</strong> {{ $shipment->getCityName($shipment->loading_city_id)->name_arabic }}</li>
                                 <li><strong>{{ trans('shipments.unloading_city_id') }}:</strong> {{ $shipment->getCityName($shipment->unloading_city_id)->name_arabic }}</li>
@@ -109,11 +120,9 @@
                                 <li><strong>{{ trans('shipments.created_at') }}:</strong> {{ $shipment->created_at }}</li>
                                 <li><strong>{{ trans('shipments.updated_at') }}:</strong> {{ $shipment->updated_at }}</li>
                             </ul>
-
-                            </div>
-                        </td>
-                    </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                
+                </div>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>

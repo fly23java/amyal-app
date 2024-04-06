@@ -181,7 +181,13 @@
  }
 </style>
    
-   
+   <!-- CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.css">
+
+<!-- JavaScript -->
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.js"></script>
+
     
     <!-- END: Custom CSS-->
 
@@ -648,6 +654,16 @@
 
     
 </script>
+<script>
+    $(document).ready(function() {
+        $('.table').DataTable({
+            "paging": true, // enable pagination
+            "ordering": true, // enable sorting
+            "info": true // enable table information
+            // Add more options as needed
+        });
+    });
+</script>
 
 <script>  
 
@@ -703,7 +719,16 @@ $.ajaxSetup({
      <script src="{{ asset('my-function-javascript/retrunShipmentInTabsByStatus.js') }}"></script>
 
      @yield('script')
- 
+     <script>
+        function toggleAllCheckboxes() {
+            var checkboxes = document.getElementsByClassName('shipmentCheckbox');
+            var selectAllCheckbox = document.getElementById('selectAllCheckbox');
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = selectAllCheckbox.checked;
+            }
+        }
+    </script>
+
 </body>
 <!-- END: Body-->
 
