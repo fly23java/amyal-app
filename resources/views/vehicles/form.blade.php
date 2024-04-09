@@ -55,6 +55,35 @@
     </div>
 </div>
 
+
+<!-- Start Deriver -->
+<div class="mb-3 row">
+    <label for="name_arabic" class="col-form-label text-lg-end col-lg-2 col-xl-3">{{ trans('drivers.driver_name_arabic') }}</label>
+    <div class="col-lg-10 col-xl-9">
+        <input class="form-control{{ $errors->has('driver_name_arabic') ? ' is-invalid' : '' }}" name="driver_name_arabic" type="text" id="driver_name_arabic" value="{{ old('driver_name_arabic', optional($vehicle)->driver->name_arabic) }}" maxlength="255" placeholder="{{ trans('drivers.name_arabic__placeholder') }}">
+        {!! $errors->first('driver_name_arabic', '<div class="invalid-feedback">:message</div>') !!}
+    </div>
+</div>
+
+
+<div class="mb-3 row">
+    <label for="phone" class="col-form-label text-lg-end col-lg-2 col-xl-3">{{ trans('drivers.phone') }}</label>
+    <div class="col-lg-10 col-xl-9">
+        <input class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" type="text" id="phone" value="{{ old('phone', optional($vehicle)->driver->phone) }}" maxlength="255" placeholder="{{ trans('drivers.phone__placeholder') }}">
+        {!! $errors->first('phone', '<div class="invalid-feedback">:message</div>') !!}
+    </div>
+</div>
+
+<div class="mb-3 row">
+    <label for="identity_number" class="col-form-label text-lg-end col-lg-2 col-xl-3">{{ trans('drivers.identity_number') }}</label>
+    <div class="col-lg-10 col-xl-9">
+        <input class="form-control{{ $errors->has('identity_number') ? ' is-invalid' : '' }}" name="identity_number" type="text" id="identity_number" value="{{ old('identity_number', optional($vehicle)->driver->identity_number) }}" min="0" max="255" placeholder="{{ trans('drivers.identity_number__placeholder') }}">
+        {!! $errors->first('identity_number', '<div class="invalid-feedback">:message</div>') !!}
+    </div>
+</div>
+
+<!-- End Deriver -->
+
 <div class="mb-3 row">
     <label for="vehicle_type_id" class="col-form-label text-lg-end col-lg-2 col-xl-3">{{ trans('vehicles.vehicle_type_id') }}</label>
     <div class="col-lg-10 col-xl-9">

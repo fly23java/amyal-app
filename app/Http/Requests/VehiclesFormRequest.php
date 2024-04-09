@@ -33,6 +33,9 @@ class VehiclesFormRequest extends FormRequest
             'left_letter' => 'required|string|min:1|max:1',
             'plate_type' => 'required|numeric|min:-2147483648|max:2147483647',
             'vehicle_type_id' => 'required',
+            'driver_name_arabic' => 'required|string|min:1|max:255', // Driver name
+            'phone' => 'required|string|min:0|max:255',// Driver phone
+            'identity_number' => 'required|string|min:0|max:255', // Driver identity number
             'account_id' => 'required|numeric|min:0',
         ];
 

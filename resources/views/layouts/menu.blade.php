@@ -121,12 +121,12 @@
                                 {{ trans('main.vehicles') }}
                             </span></a>
                         </li>
-                        <li><a class="d-flex align-items-center" href="{{ route('drivers.driver.index') }}">
+                        <!-- <li><a class="d-flex align-items-center" href="{{ route('drivers.driver.index') }}">
                             <i data-feather="circle"></i>
                             <span class="menu-item" data-i18n="Alerts">
                                 {{ trans('main.drivers') }}
                             </span></a>
-                        </li>
+                        </li> -->
                        
                     </ul>
                 </li>

@@ -4,6 +4,7 @@ return [
     'id' => 'Id',
     'id__placeholder' => 'Enter id here...',
     'name_arabic' => 'الاسم عربي',
+    'driver_name_arabic' => 'اسم السواق',
     'name_arabic__placeholder' => 'أدخل الاسم العربي هنا...',
     'name_english' => 'الاسم باللغة الإنجليزية',
     'name_english__placeholder' => 'أدخل الاسم باللغة الإنجليزية هنا...',

@@ -35,11 +35,13 @@
                             <th>{{ trans('vehicles.owner_name') }}</th>
                             <th>{{ trans('vehicles.sequence_number') }}</th>
                             <th>{{ trans('vehicles.plate') }}</th>
-                            <th>{{ trans('vehicles.right_letter') }}</th>
-                            <th>{{ trans('vehicles.middle_letter') }}</th>
-                            <th>{{ trans('vehicles.left_letter') }}</th>
-                            <th>{{ trans('vehicles.plate_type') }}</th>
+                           
                             <th>{{ trans('vehicles.vehicle_type_id') }}</th>
+                            <!-- Start deriver -->
+                            <th>{{ trans('drivers.driver_name_arabic') }}</th>
+                            <th>{{ trans('drivers.phone') }}</th>
+                            <th>{{ trans('drivers.identity_number') }}</th>
+                            <!-- End deriver -->
                             <th>{{ trans('vehicles.account_id') }}</th>
 
                             <th></th>
@@ -50,12 +52,20 @@
                         <tr>
                             <td class="align-middle">{{ $vehicle->owner_name }}</td>
                             <td class="align-middle">{{ $vehicle->sequence_number }}</td>
-                            <td class="align-middle">{{ $vehicle->plate }}</td>
-                            <td class="align-middle">{{ $vehicle->right_letter }}</td>
-                            <td class="align-middle">{{ $vehicle->middle_letter }}</td>
-                            <td class="align-middle">{{ $vehicle->left_letter }}</td>
-                            <td class="align-middle">{{ $vehicle->plate_type }}</td>
+                            <td class="align-middle">
+                                    {{ $vehicle->right_letter }}
+                                    {{ $vehicle->middle_letter }}
+                                    {{ $vehicle->left_letter }}
+                                    {{ $vehicle->plate }}
+                            </td>
+                            
+                          
                             <td class="align-middle">{{$vehicle->Type->name_arabic }}</td>
+                             <!-- Start deriver -->
+                            <td class="align-middle">{{ optional($vehicle->driver)->name_arabic }}</td>
+                            <td class="align-middle">{{ optional($vehicle->driver)->phone }}</td>
+                            <td class="align-middle">{{ optional($vehicle->driver)->identity_number }}</td>
+                            <!-- End deriver -->
                             <td class="align-middle">{{ optional($vehicle->Account)->name_arabic }}</td>
 
                             <td class="text-end">

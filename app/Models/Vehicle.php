@@ -29,7 +29,7 @@ class Vehicle extends Model
     {
         return $this->belongsTo(Account::class);
     }
-    public function Driver()
+    public function driver()
     {
         return $this->hasOne(Driver::class);
     }
