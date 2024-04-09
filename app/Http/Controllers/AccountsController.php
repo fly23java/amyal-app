@@ -46,7 +46,7 @@ class AccountsController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
         $data = $this->getData($request);
         
         Account::create($data);
@@ -94,26 +94,49 @@ class AccountsController extends Controller
      */
     public function update($id, Request $request)
     {
-        // dd($request->all());
-        $data = $this->getData($request);
+        try {
+            // Validate the request data
+           
+            $validatedData = $request->validate([
+                'name_arabic' => 'required|string|min:1|max:255',
+                'name_english' => 'nullable|string|min:0|max:255',
+                'cr_number' => 'nullable|string|min:0|max:255',
+                'bank' => 'nullable|string|min:0|max:255',
+                'iban' => 'nullable|string|min:0|max:255',
+                'account_number' => 'nullable|string|min:0|max:255',
+                'tax_number' => 'nullable|string|min:0|max:255',
+                'tax_value' => 'nullable|string|min:0|max:255',
+                'email' => 'required|string|email|min:1|max:255|unique:accounts,email,' . $id,
+                'type' => 'required|in:admin,individual_shipper,individual_carrier,business_shipper,business_carrier',
+            ]);
         
-        $account = Account::findOrFail($id);
-       
-        $account->update([
-            "name_arabic" => $data['name_arabic'],
-            "name_english" => $data['name_english'],
-            "cr_number" => $data['cr_number'],
-            "bank" => $data['bank'],
-            "iban" => $data['iban'],
-            "account_number" => $data['account_number'],
-            "tax_number" => $data['tax_number'],
-            "tax_value" => $data['tax_value'],
-            "type" =>  $data['type'],
-        ]);
+            // Find the account by ID
+               $account = Account::findOrFail($id);
+           
+             // Update each field on the account model
+                $account->name_arabic = $validatedData['name_arabic'];
+                $account->name_english = $validatedData['name_english'];
+                $account->cr_number = $validatedData['cr_number'];
+                $account->bank = $validatedData['bank'];
+                $account->iban = $validatedData['iban'];
+                $account->account_number = $validatedData['account_number'];
+                $account->tax_number = $validatedData['tax_number'];
+                $account->tax_value = $validatedData['tax_value'];
+                $account->email = $validatedData['email'];
+                $account->type = $validatedData['type'];
 
-        return redirect()->route('accounts.account.index')
-            ->with('success_message', 'Account was successfully updated.');  
+                // Save the updated account
+                $account->save();
+            return redirect()->route('accounts.account.index')
+                ->with('success_message', trans('accounts.model_was_updated'));
+        } catch (Exception $exception) {
+            // Handle any unexpected error
+            return back()->withInput()
+                ->withErrors(['unexpected_error' => trans('accounts.unexpected_error')]);
+        }
     }
+    
+    
 
     /**
      * Remove the specified account from the storage.
@@ -154,7 +177,7 @@ class AccountsController extends Controller
             'cr_number' => 'nullable|string|min:0|max:255',
             'iban' => 'nullable|string|min:0|max:255',
             'account_number' => 'nullable|string|min:0|max:255',
-           
+            'email' => 'required|string|min:1|max:255|unique:accounts,email',
             'tax_number' => 'nullable|numeric|string|min:0|max:255',
             'tax_value' => 'nullable|string|min:0|max:255',
             'type' => 'required', 

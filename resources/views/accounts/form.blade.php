@@ -8,6 +8,14 @@
 </div>
 
 <div class="mb-3 row">
+    <label for="email" class="col-form-label text-lg-end col-lg-2 col-xl-3">{{ trans('users.email') }}</label>
+    <div class="col-lg-10 col-xl-9">
+        <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" type="email" id="email" value="{{ old('email', optional($account)->email) }}" minlength="1" maxlength="255" required="true" placeholder="{{ trans('users.email__placeholder') }}">
+        {!! $errors->first('email', '<div class="invalid-feedback">:message</div>') !!}
+    </div>
+</div>
+
+<div class="mb-3 row">
     <label for="name_english" class="col-form-label text-lg-end col-lg-2 col-xl-3">{{ trans('accounts.name_english') }}</label>
     <div class="col-lg-10 col-xl-9">
         <input class="form-control{{ $errors->has('name_english') ? ' is-invalid' : '' }}" name="name_english" type="text" id="name_english" value="{{ old('name_english', optional($account)->name_english) }}" maxlength="255" placeholder="{{ trans('accounts.name_english__placeholder') }}">

@@ -33,13 +33,10 @@
                     <thead>
                         <tr>
                             <th>{{ trans('accounts.name_arabic') }}</th>
-                            <th>{{ trans('accounts.name_english') }}</th>
-                            <th>{{ trans('accounts.cr_number') }}</th>
-                            <th>{{ trans('accounts.bank') }}</th>
+                            <th>{{ trans('users.email') }}</th>
+                          
                             <th>{{ trans('accounts.iban') }}</th>
-                            <th>{{ trans('accounts.account_number') }}</th>
-                            <th>{{ trans('accounts.tax_number') }}</th>
-                            <th>{{ trans('accounts.tax_value') }}</th>
+                          
                             <th>{{ trans('accounts.type') }}</th>
 
                             <th></th>
@@ -49,13 +46,11 @@
                     @foreach($accounts as $account)
                         <tr>
                             <td class="align-middle">{{ $account->name_arabic }}</td>
-                            <td class="align-middle">{{ $account->name_english }}</td>
-                            <td class="align-middle">{{ $account->cr_number }}</td>
-                            <td class="align-middle">{{ $account->bank }}</td>
+                            <td class="align-middle">{{ $account->email }}</td>
+                          
+                          
                             <td class="align-middle">{{ $account->iban }}</td>
-                            <td class="align-middle">{{ $account->account_number }}</td>
-                            <td class="align-middle">{{ $account->tax_number }}</td>
-                            <td class="align-middle">{{ $account->tax_value }}</td>
+                           
                             <td class="align-middle">{{ $account->type }}</td>
 
                             <td class="text-end">

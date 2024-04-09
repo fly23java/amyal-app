@@ -33,6 +33,7 @@ class AccountsFormRequest extends FormRequest
             'account_number' => 'nullable|numeric|string|min:0|max:255',
             'tax_number' => 'nullable|numeric|string|min:0|max:255',
             'tax_value' => 'nullable|string|min:0|max:255',
+            'email' => 'required|string|min:1|max:255|unique:accounts,email',
             'type' => 'required',
         ];
 
@@ -47,7 +48,7 @@ class AccountsFormRequest extends FormRequest
      */
     public function getData()
     {
-        $data = $this->only(['name_arabic', 'name_english', 'cr_number', 'bank', 'iban', 'account_number', 'tax_number', 'tax_value', 'type']);
+        $data = $this->only(['name_arabic', 'name_english', 'cr_number', 'bank', 'iban', 'account_number', 'tax_number', 'tax_value', 'email' , 'type']);
 
 
 

@@ -28,6 +28,7 @@ class AccountRequest extends FormRequest
             'account_type' =>'required|string',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
+           
         ];
     }
 }
