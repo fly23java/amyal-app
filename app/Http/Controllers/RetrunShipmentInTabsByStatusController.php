@@ -15,6 +15,7 @@ class RetrunShipmentInTabsByStatusController extends Controller
     {
         // dd($id);
         $Vehicles = Vehicle::all();
+        $statueus = Status::all();
         $Status = Status::findOrFail($request->id);
 
         // dd($Status->shipment());
@@ -23,6 +24,7 @@ class RetrunShipmentInTabsByStatusController extends Controller
         $data = view('shipments.data',[
             'Vehicles'=>$Vehicles,
             'Status'=>$Status,
+            'statueus'=>$statueus,
             'shipments'=>$shipments,
             ])->render();
         return response()->json([

@@ -655,14 +655,14 @@
     
 </script>
 <script>
-    $(document).ready(function() {
-        $('.table').DataTable({
-            "paging": true, // enable pagination
-            "ordering": true, // enable sorting
-            "info": true // enable table information
-            // Add more options as needed
-        });
-    });
+    // $(document).ready(function() {
+    //     $('.table').DataTable({
+    //         "paging": true, // enable pagination
+    //         "ordering": true, // enable sorting
+    //         "info": true // enable table information
+    //         // Add more options as needed
+    //     });
+    // });
 </script>
 
 <script>  

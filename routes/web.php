@@ -32,6 +32,9 @@ use App\Http\Controllers\ShipmentsCompletedController;
 
 use App\Http\Controllers\ReportShipmentController;
 
+use App\Http\Controllers\UpdateSelectedFieldsController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -525,3 +528,11 @@ Route::group([
           ->name('reports.report.shipmentByStautasResult');
    
  });
+ Route::group([
+     'prefix' => 'update_selected_fields',
+ ], function () {
+     Route::post('/update-selected-fields', [UpdateSelectedFieldsController::class, 'updateSelectedFields'])->name('update_selected_fields.update_selected_field.updateSelectedFields');
+
+ });
+
+

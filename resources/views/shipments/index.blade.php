@@ -165,3 +165,46 @@
 </script>
 
 @endsection
+
+
+@section('script')
+<script>
+$(document).ready(function() {
+    $('#updateStatusForm').on('submit', function(event) {
+        // Prevent the form from submitting immediately
+        event.preventDefault();
+
+        // Array to store selected shipment IDs
+        var selectedShipments = [];
+
+        // Iterate over the checkboxes to find the selected ones
+        $('.shipmentCheckbox:checked').each(function() {
+            // Add the value (shipment ID) of the selected checkbox to the array
+            selectedShipments.push($(this).val());
+        });
+
+        // Data to be sent via AJAX
+        var formData = {
+            selectedShipments: selectedShipments
+        };
+
+        // AJAX request
+        $.ajax({
+            type: 'POST',
+            url: $(this).attr('action'),
+            data: formData,
+            success: function(response) {
+                // Handle success response here
+                console.log('Form submitted successfully');
+                console.log(response);
+            },
+            error: function(xhr, status, error) {
+                // Handle error response here
+                console.error('Error submitting form:', error);
+            }
+        });
+    });
+});
+
+</script>
+@endsection
