@@ -71,9 +71,9 @@ class PrintWaybillController extends Controller
         $activeAdminUsers = User::where('type', 'admin')->where('status', 'active')->get();
         $pdfFileFullPath = $pdfFilePath;
 
-        Mail::to('ibrahim.m@amyal.sa')
-            ->cc($activeAdminUsers->pluck('email')->toArray())
-            ->queue(new SendWeyBill($shipment, $pdfFileFullPath, $vehicle));
+        // Mail::to('ibrahim.m@amyal.sa')
+        //     ->cc($activeAdminUsers->pluck('email')->toArray())
+        //     ->queue(new SendWeyBill($shipment, $pdfFileFullPath, $vehicle));
 
         // Return the generated PDF as a download response
         return response()->download($pdfFilePath);
