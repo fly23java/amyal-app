@@ -97,9 +97,9 @@ class ShipmentsController extends Controller
 
                 $shipmentData = $shipmentService->prepareShipmentData($data['shipmentId']);
 
-                Mail::to('ibrahim.m@amyal.sa')
-                    ->cc($activeAdminUsers->pluck('email')->toArray())
-                    ->queue(new CreateShipmentMail($shipmentData));
+                // Mail::to('ibrahim.m@amyal.sa')
+                //     ->cc($activeAdminUsers->pluck('email')->toArray())
+                //     ->queue(new CreateShipmentMail($shipmentData));
             }
 
             return redirect()->route('shipments.shipment.index')
