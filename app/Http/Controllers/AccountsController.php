@@ -46,9 +46,11 @@ class AccountsController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+    //    dd($request->all());
+        // $field= $request->all();
+        // dd($field);
         $data = $this->getData($request);
-        
+        // dd($data);
         Account::create($data);
 
         return redirect()->route('accounts.account.index')
@@ -177,9 +179,12 @@ class AccountsController extends Controller
             'cr_number' => 'nullable|string|min:0|max:255',
             'iban' => 'nullable|string|min:0|max:255',
             'account_number' => 'nullable|string|min:0|max:255',
+            // 'email' => 'required',
             'email' => 'required|string|min:1|max:255|unique:accounts,email',
-            'tax_number' => 'nullable|numeric|string|min:0|max:255',
-            'tax_value' => 'nullable|string|min:0|max:255',
+            // 'tax_number' => 'nullable|numeric|string|min:0|max:255',
+            'tax_number' => 'nullable',
+            // 'tax_value' => 'nullable|string|min:0|max:255',
+            'tax_value' => 'nullable',
             'type' => 'required', 
         ];
 

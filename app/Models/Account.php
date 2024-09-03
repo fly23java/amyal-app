@@ -13,6 +13,7 @@ class Account extends Model
         'name_arabic',
         'name_english',
         'cr_number',
+        'email',
         'bank',
         'iban',
         'account_number',
