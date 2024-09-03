@@ -45,18 +45,21 @@ class PrintWaybillController extends Controller
         if (!File::exists($pdfFilePath)) {
             // Load HTML content into SnappyPdf and generate PDF
            
-            $top = mt_rand(60, 80);
-            $right = mt_rand(30, 60);
+            $top = mt_rand(35, 40);
+            $right = mt_rand(20, 25);
             $data = [
                 'shipment' => $shipment,
                 'vehicle' => $vehicle,
                 'top' => $top,
                 'right' => $right,
             ];
+            // return view('weybill.show', $data)->render();
             $html = view('weybill.show', $data)->render();
-            $pdf = SnappyPdf::loadHTML($html)->setOption('enable-local-file-access', true);
-
+            $pdf = SnappyPdf::loadHTML($html)
+            ->setOption('enable-local-file-access', true)
+            ->setOption('no-outline', true);
             // Save the PDF to the specified file path
+            // return $pdf->stream('filename.pdf');
             $pdf->save($pdfFilePath);
         }
 

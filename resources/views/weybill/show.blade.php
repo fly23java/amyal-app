@@ -9,6 +9,13 @@
 		</title>
 	
 	<style>
+		.custom-div {
+            position: relative;
+			left:-2.57pt; 
+			top: 17.49pt;
+			width:59.78pt; 
+			height:58.94pt;
+        }
         @font-face {
             font-family:'Arial';
             font-style:normal;
@@ -106,11 +113,11 @@
 					</div>
 				</div>
 				<div class="wcdiv" style="top:56.83pt; direction:rtl;">
-					<span class="wcspan wctext001" style="font-size:6pt; left:366.65pt; top:8.13pt; line-height:6.7pt;">ﺷﺮﻛﺔ ﻣﻨﺼﺔ ﺃﻣﻴﺎﻝ ﻟﻠﺨﺪﻣﺎﺕ ﺍﻟﻠﻮﺟﺴﺘﻴﺔ ﺱ. ﺕ. </span>
-					<span class="wcspan wctext001" style="font-size:6pt; left:333.28pt; top:8.13pt; direction:ltr; line-height:6.7pt;">1010878504</span>
+					<span class="wcspan wctext001" style="font-size:6pt; left:366.65pt; top:8.13pt; line-height:6.7pt;">--</span>
+					<span class="wcspan wctext001" style="font-size:6pt; left:333.28pt; top:8.13pt; direction:ltr; line-height:6.7pt;"></span>
 				</div>
 				<div class="wcdiv" style="top:72.7pt;">
-					<span class="wcspan wctext001" style="font-size:6pt; left:280.39pt; top:0.2pt; line-height:6.7pt;">Amyal Platform Company For Logistics Services CR: 1010878504</span>
+					<span class="wcspan wctext001" style="font-size:6pt; left:280.39pt; top:0.2pt; line-height:6.7pt;"> </span>
 				</div>
 			</div>
 			<div class="wcdiv" style="left:67.88pt; top:72pt;">
@@ -144,7 +151,7 @@
 			<div class="wcdiv" style="left:432.15pt; top:72pt;">
 				<div class="wcdiv" style="clip:rect(0pt,117.75pt,98.5pt,0pt);">
 					<!-- <img class="wcimg" style="left:32.43pt; top:14.49pt; width:59.78pt; height:58.94pt;" src="1708119800_11531/1708119800_11531-1.png" /> -->
-                    <div  style="left:32.43pt; top:14.49pt; width:59.78pt; height:58.94pt;" >
+                    <div class="custom-div">
                     @include('weybill.header')
                     </div>
 				</div>
@@ -155,16 +162,16 @@
 			<div class="wcdiv" style="left:67.5pt; top:196.7pt;">
 				<span class="wcspan wctext001" style="font-size:6pt; left:0pt; top:0.2pt; line-height:6.7pt;">=</span>
 				<div class="wcdiv" style="left:-40.75pt; top:329.93pt;">
-					<div class="wcdiv" style="left:0.45pt; top:0.95pt; width:195.9pt; height:5.8pt; background-color:#000000; border:solid 0.1pt #000000;">
+					<div class="wcdiv" style="left:0.45pt; top:0.95pt; width:195.9pt; height:5.8pt; background-color:#0857b6; border:solid 0.1pt #0857b6;">
 					</div>
 					<div class="wcdiv" style="clip:rect(1pt,196.5pt,7.9pt,0.5pt);">
 						<div class="wcdiv" style="left:0.5pt;">
 							<span class="wcspan wctext002" style="font-size:6pt; color:#ffffff; left:0pt; top:0.2pt; line-height:6.7pt;">Load</span>
 						</div>
 					</div>
-					<div class="wcdiv" style="left:196.45pt; top:0.95pt; width:156.65pt; height:5.8pt; background-color:#000000; border:solid 0.1pt #000000;">
+					<div class="wcdiv" style="left:196.45pt; top:0.95pt; width:156.65pt; height:5.8pt; background-color:#0857b6; border:solid 0.1pt #0857b6;">
 					</div>
-					<div class="wcdiv" style="left:353.2pt; top:0.95pt; width:200.4pt; height:5.8pt; background-color:#000000; border:solid 0.1pt #000000;">
+					<div class="wcdiv" style="left:353.2pt; top:0.95pt; width:200.4pt; height:5.8pt; background-color:#0857b6; border:solid 0.1pt #0857b6;">
 					</div>
 					<div class="wcdiv" style="left:353.25pt; clip:rect(1pt,200.5pt,7.9pt,0pt);">
 						<div class="wcdiv" style="direction:rtl;">
@@ -236,15 +243,15 @@
 					<div class="wcdiv" style="top:87.9pt;">
 						<div class="wcdiv" style="top:-19pt; clip:rect(1pt,553.75pt,51pt,0.5pt);">
 							<div class="wcdiv" style="left:0.5pt; top:7.9pt; direction:rtl;">
-								<span class="wcspan wctext001" style="font-size:6pt; left:262.15pt; top:0.2pt; line-height:6.7pt;">ﺟﺮﻯ ﻗﻔﻞ ﺍﻟﺸﺎﺣﻨﺔ ﺑﺄﺭﻗﺎﻡ ﺍﻷﻗﻔﺎﻝ ﺍﻟﻤﺬﻛﻮﺭﺓ ﻭﻳﻘﺮ ﺍﻟﻌﻤﻴﻞ ﺃﻥ ﻋﻘﺪ ﺍﻟﺸﺤﻦ ﻫﺬﺍ ﻳﻌﺘﺒﺮ ﺑﻤﺜﺎﺑﺔ ﻋﻘﺪ ﻧﻘﻞ ﻭﻳﻘﺒﻞ ﺍﻟﻌﻤﻴﻞ ﺳﻴﺎﺳﺔ ﻭﺷﺮﻭﻁ ﺷﺮﻛﺔ ﻣﻨﺼﺔ ﺃﻣﻴﺎﻝ ﺱ. ﺕ.  </span>
-								<span class="wcspan wctext001" style="font-size:6pt; left:228.78pt; top:0.2pt; direction:ltr; line-height:6.7pt;">1010878504</span>
+								<!-- <span class="wcspan wctext001" style="font-size:6pt; left:262.15pt; top:0.2pt; line-height:6.7pt;">ﺟﺮﻯ ﻗﻔﻞ ﺍﻟﺸﺎﺣﻨﺔ ﺑﺄﺭﻗﺎﻡ ﺍﻷﻗﻔﺎﻝ ﺍﻟﻤﺬﻛﻮﺭﺓ ﻭﻳﻘﺮ ﺍﻟﻌﻤﻴﻞ ﺃﻥ ﻋﻘﺪ ﺍﻟﺸﺤﻦ ﻫﺬﺍ ﻳﻌﺘﺒﺮ ﺑﻤﺜﺎﺑﺔ ﻋﻘﺪ ﻧﻘﻞ ﻭﻳﻘﺒﻞ ﺍﻟﻌﻤﻴﻞ ﺳﻴﺎﺳﺔ ﻭﺷﺮﻭﻁ ﺷﺮﻛﺔ ﻣﻨﺼﺔ ﺃﻣﻴﺎﻝ ﺱ. ﺕ.  </span>
+								<span class="wcspan wctext001" style="font-size:6pt; left:228.78pt; top:0.2pt; direction:ltr; line-height:6.7pt;"></span>
 								<span class="wcspan wctext001" style="font-size:6pt; left:2.31pt; top:0.2pt; line-height:6.7pt;"> ﺍﻟﺨﺎﺻﺔ ﺑﺎﻟﻨﻘﻞ ﺍﻟﻤﻮﺿﺤﺔ ﺑﺎﻟﺨﻠﻒ ﻓﻴﻤﺎ ﻋﺪﺍ ﻣﺎ ﻳﺘﻔﻖ ﻋﻠﻴﻪ ﺧﻄﻴﺎ ﻭﻳﻘﺒﻞ ﺍﻟﻌﻤﻴﻞ ﺃﺳﻌﺎﺭ ﺷﺮﻛﺔ ﻣﻨﺼﺔ ﺃﻣﻴﺎﻝ ﺍﻟﻤﺘﻔﻖ ﻋﻠﻴﻬﺎ ﻛﺘﺎﺑﻴﺎ </span>
-								<span class="wcspan wctext001" style="font-size:6pt; left:236.77pt; top:7.1pt; line-height:6.7pt;">ﻭﺳﻴﺎﺳﺘﻬﺎ ﺍﻟﻤﺬﻛﻮﺭﺓ ﻓﻲ ﻣﻮﻗﻌﻬﺎ ﺍﻹﻟﻜﺘﺮﻭﻧﻲ.</span>
+								<span class="wcspan wctext001" style="font-size:6pt; left:236.77pt; top:7.1pt; line-height:6.7pt;">ﻭﺳﻴﺎﺳﺘﻬﺎ ﺍﻟﻤﺬﻛﻮﺭﺓ ﻓﻲ ﻣﻮﻗﻌﻬﺎ ﺍﻹﻟﻜﺘﺮﻭﻧﻲ.</span> -->
 							</div>
 							<div class="wcdiv" style="left:0.5pt; top:28.6pt;">
-								<span class="wcspan wctext001" style="font-size:6pt; left:1.65pt; top:0.2pt; line-height:6.7pt;">Trailer was sealed by above seal numbers and the customer understands and agrees that this Shipment Contract is to be considered as mutual agreement of transportation, The client accepts ِAmyal Platform </span>
-								<span class="wcspan wctext001" style="font-size:6pt; left:4.47pt; top:7.1pt; line-height:6.7pt;">co. CR: 1010878504  Standard conditions of haulage (on the rear of the client copy of this Shipment Contract) unless agreed otherwise in writing, the Client accepts Amyal Platform trip rate agreed and their </span>
-								<span class="wcspan wctext001" style="font-size:6pt; left:214.43pt; top:13.99pt; line-height:6.7pt;">terms &amp; condition mentioned in Amyal website. </span>
+								<!-- <span class="wcspan wctext001" style="font-size:6pt; left:1.65pt; top:0.2pt; line-height:6.7pt;">Trailer was sealed by above seal numbers and the customer understands and agrees that this Shipment Contract is to be considered as mutual agreement of transportation, The client accepts ِAmyal Platform </span>
+								<span class="wcspan wctext001" style="font-size:6pt; left:4.47pt; top:7.1pt; line-height:6.7pt;">co. CR:   Standard conditions of haulage (on the rear of the client copy of this Shipment Contract) unless agreed otherwise in writing, the Client accepts Amyal Platform trip rate agreed and their </span>
+								<span class="wcspan wctext001" style="font-size:6pt; left:214.43pt; top:13.99pt; line-height:6.7pt;">terms &amp; condition mentioned in Amyal website. </span> -->
 							</div>
 						</div>
 					</div>
@@ -345,32 +352,32 @@
 				</div>
 			</div>
 			<div class="wcdiv" style="left:27.45pt; top:204.63pt;">
-				<div class="wcdiv" style="left:0.45pt; top:0.95pt; width:55.9pt; height:8.65pt; background-color:#000000; border:solid 0.1pt #000000;">
+				<div class="wcdiv" style="left:0.45pt; top:0.95pt; width:55.9pt; height:8.65pt; background-color:#0857b6; border:solid 0.1pt #0857b6;">
 				</div>
 				<div class="wcdiv" style="clip:rect(1pt,56.5pt,10.75pt,0.5pt);">
 					<div class="wcdiv" style="left:0.5pt;">
 						<span class="wcspan wctext002" style="font-size:6pt; color:#ffffff; left:0pt; top:0.2pt; line-height:6.7pt;">TO:</span>
 					</div>
 				</div>
-				<div class="wcdiv" style="left:57.45pt; top:0.95pt; width:127.9pt; height:8.65pt; background-color:#000000; border:solid 0.1pt #000000;">
+				<div class="wcdiv" style="left:57.45pt; top:0.95pt; width:127.9pt; height:8.65pt; background-color:#0857b6; border:solid 0.1pt #0857b6;">
 				</div>
-				<div class="wcdiv" style="left:186.45pt; top:0.95pt; width:52.15pt; height:8.65pt; background-color:#000000; border:solid 0.1pt #000000;">
+				<div class="wcdiv" style="left:186.45pt; top:0.95pt; width:52.15pt; height:8.65pt; background-color:#0857b6; border:solid 0.1pt #0857b6;">
 				</div>
 				<div class="wcdiv" style="left:186pt; clip:rect(1pt,52.75pt,10.75pt,0.5pt);">
 					<div class="wcdiv" style="left:0.5pt; direction:rtl;">
 						<span class="wcspan wctext001" style="font-size:6pt; color:#ffffff; left:28.71pt; top:0.2pt; line-height:6.7pt;">ﺍﻟﻤﺮﺳﻞ ﺇﻟﻴﻪ:</span>
 					</div>
 				</div>
-				<div class="wcdiv" style="left:275.7pt; top:0.95pt; width:67.15pt; height:8.65pt; background-color:#000000; border:solid 0.1pt #000000;">
+				<div class="wcdiv" style="left:275.7pt; top:0.95pt; width:67.15pt; height:8.65pt; background-color:#0857b6; border:solid 0.1pt #0857b6;">
 				</div>
 				<div class="wcdiv" style="left:275.25pt; clip:rect(1pt,67.75pt,10.75pt,0.5pt);">
 					<div class="wcdiv" style="left:0.5pt;">
 						<span class="wcspan wctext002" style="font-size:6pt; color:#ffffff; left:0pt; top:0.2pt; line-height:6.7pt;">From:</span>
 					</div>
 				</div>
-				<div class="wcdiv" style="left:343.95pt; top:0.95pt; width:176.65pt; height:8.65pt; background-color:#000000; border:solid 0.1pt #000000;">
+				<div class="wcdiv" style="left:343.95pt; top:0.95pt; width:176.65pt; height:8.65pt; background-color:#0857b6; border:solid 0.1pt #0857b6;">
 				</div>
-				<div class="wcdiv" style="left:521.7pt; top:0.95pt; width:34.9pt; height:8.65pt; background-color:#000000; border:solid 0.1pt #000000;">
+				<div class="wcdiv" style="left:521.7pt; top:0.95pt; width:34.9pt; height:8.65pt; background-color:#0857b6; border:solid 0.1pt #0857b6;">
 				</div>
 				<div class="wcdiv" style="left:521.25pt; clip:rect(1pt,35.5pt,10.75pt,0.5pt);">
 					<div class="wcdiv" style="left:0.5pt; direction:rtl;">
@@ -549,16 +556,16 @@
 				<div class="wcdiv" style="top:159.75pt;">
 					<div class="wcdiv" style="top:-159.75pt; clip:rect(0pt,221.25pt,190.93pt,0pt);">
 						<div class="wcdiv" style="left:0.5pt; top:12.93pt;">
-							<div class="wcdiv" style="left:0.45pt; top:0.95pt; width:35.4pt; height:5.8pt; background-color:#000000; border:solid 0.1pt #000000;">
+							<div class="wcdiv" style="left:0.45pt; top:0.95pt; width:35.4pt; height:5.8pt; background-color:#0857b6; border:solid 0.1pt #0857b6;">
 							</div>
 							<div class="wcdiv" style="clip:rect(1pt,36pt,7.9pt,0.5pt);">
 								<div class="wcdiv" style="left:0.5pt;">
 									<span class="wcspan wctext002" style="font-size:6pt; color:#ffffff; left:0pt; top:0.2pt; line-height:6.7pt;">Driver</span>
 								</div>
 							</div>
-							<div class="wcdiv" style="left:35.95pt; top:0.95pt; width:138.65pt; height:5.8pt; background-color:#000000; border:solid 0.1pt #000000;">
+							<div class="wcdiv" style="left:35.95pt; top:0.95pt; width:138.65pt; height:5.8pt; background-color:#0857b6; border:solid 0.1pt #0857b6;">
 							</div>
-							<div class="wcdiv" style="left:174.7pt; top:0.95pt; width:45.15pt; height:5.8pt; background-color:#000000; border:solid 0.1pt #000000;">
+							<div class="wcdiv" style="left:174.7pt; top:0.95pt; width:45.15pt; height:5.8pt; background-color:#0857b6; border:solid 0.1pt #0857b6;">
 							</div>
 							<div class="wcdiv" style="left:174.75pt; clip:rect(1pt,45.25pt,7.9pt,0pt);">
 								<div class="wcdiv" style="direction:rtl;">
@@ -674,14 +681,14 @@
 					</div>
 					<div class="wcdiv" style="left:221.25pt; top:-159.75pt; clip:rect(0pt,343.5pt,190.93pt,0pt);">
 						<div class="wcdiv" style="left:5pt; top:12.93pt;">
-							<div class="wcdiv" style="left:-0.05pt; top:0.95pt; width:57.9pt; height:5.8pt; background-color:#000000; border:solid 0.1pt #000000;">
+							<div class="wcdiv" style="left:-0.05pt; top:0.95pt; width:57.9pt; height:5.8pt; background-color:#0857b6; border:solid 0.1pt #0857b6;">
 							</div>
 							<div class="wcdiv" style="clip:rect(1pt,58pt,7.9pt,0pt);">
 								<span class="wcspan wctext002" style="font-size:6pt; color:#ffffff; left:0pt; top:0.2pt; line-height:6.7pt;">Carrier:</span>
 							</div>
-							<div class="wcdiv" style="left:58.45pt; top:0.95pt; width:227.15pt; height:5.8pt; background-color:#000000; border:solid 0.1pt #000000;">
+							<div class="wcdiv" style="left:58.45pt; top:0.95pt; width:227.15pt; height:5.8pt; background-color:#0857b6; border:solid 0.1pt #0857b6;">
 							</div>
-							<div class="wcdiv" style="left:286.2pt; top:0.95pt; width:43.65pt; height:5.8pt; background-color:#000000; border:solid 0.1pt #000000;">
+							<div class="wcdiv" style="left:286.2pt; top:0.95pt; width:43.65pt; height:5.8pt; background-color:#0857b6; border:solid 0.1pt #0857b6;">
 							</div>
 							<div class="wcdiv" style="left:285.75pt; clip:rect(1pt,44.25pt,7.9pt,0.5pt);">
 								<div class="wcdiv" style="left:0.5pt; direction:rtl;">

@@ -35,7 +35,7 @@ return [
     
     'pdf' => [
         'enabled' => true,
-        'binary' => '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"',
+        'binary' => env('WKHTML_PDF_BINARY', '/usr/local/bin/wkhtmltopdf-amd64'),
         'timeout' => false,
         'options' => [
             'enable-local-file-access' => true,
@@ -49,7 +49,7 @@ return [
     
     'image' => [
         'enabled' => true,
-        'binary' => '"C:\Program Files\wkhtmltopdf\bin\wkhtmltoimage"',
+        'binary' => env('WKHTML_IMG_BINARY', '/usr/local/bin/wkhtmltoimage-amd64'),
         'timeout' => false,
         'options' => ['enable-local-file-access', true],
         'env'     => [],
