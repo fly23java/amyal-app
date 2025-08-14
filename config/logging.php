@@ -3,6 +3,7 @@
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
+use Monolog\Processor\PsrLogMessageProcessor;
 
 return [
 
@@ -30,7 +31,10 @@ return [
     |
     */
 
-    'deprecations' => env('LOG_DEPRECATIONS_CHANNEL', 'null'),
+    'deprecations' => [
+        'channel' => env('LOG_DEPRECATIONS_CHANNEL', 'null'),
+        'trace' => false,
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -42,8 +46,7 @@ return [
     | you a variety of powerful log handlers / formatters to utilize.
     |
     | Available Drivers: "single", "daily", "slack", "syslog",
-    |                    "errorlog", "monolog",
-    |                    "custom", "stack"
+    |                    "errlog", "monolog", "stack", "array"
     |
     */
 
@@ -58,6 +61,7 @@ return [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
+            'replace_placeholders' => true,
         ],
 
         'daily' => [
@@ -65,6 +69,7 @@ return [
             'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 14,
+            'replace_placeholders' => true,
         ],
 
         'slack' => [
@@ -73,6 +78,7 @@ return [
             'username' => 'Laravel Log',
             'emoji' => ':boom:',
             'level' => env('LOG_LEVEL', 'critical'),
+            'replace_placeholders' => true,
         ],
 
         'papertrail' => [
@@ -84,6 +90,7 @@ return [
                 'port' => env('PAPERTRAIL_PORT'),
                 'connectionString' => 'tls://'.env('PAPERTRAIL_URL').':'.env('PAPERTRAIL_PORT'),
             ],
+            'processors' => [PsrLogMessageProcessor::class],
         ],
 
         'stderr' => [
@@ -94,16 +101,20 @@ return [
             'with' => [
                 'stream' => 'php://stderr',
             ],
+            'processors' => [PsrLogMessageProcessor::class],
         ],
 
         'syslog' => [
             'driver' => 'syslog',
             'level' => env('LOG_LEVEL', 'debug'),
+            'facility' => LOG_USER,
+            'replace_placeholders' => true,
         ],
 
         'errorlog' => [
             'driver' => 'errorlog',
             'level' => env('LOG_LEVEL', 'debug'),
+            'replace_placeholders' => true,
         ],
 
         'null' => [
@@ -113,6 +124,79 @@ return [
 
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
+        ],
+
+        // New channels for advanced monitoring
+        'performance' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/performance.log'),
+            'level' => 'info',
+            'days' => 30,
+            'replace_placeholders' => true,
+        ],
+
+        'alerts' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/alerts.log'),
+            'level' => 'warning',
+            'days' => 90,
+            'replace_placeholders' => true,
+        ],
+
+        'audit' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/audit.log'),
+            'level' => 'info',
+            'days' => 365,
+            'replace_placeholders' => true,
+        ],
+
+        'security' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/security.log'),
+            'level' => 'warning',
+            'days' => 365,
+            'replace_placeholders' => true,
+        ],
+
+        'queue' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/queue.log'),
+            'level' => 'info',
+            'days' => 30,
+            'replace_placeholders' => true,
+        ],
+
+        'cache' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/cache.log'),
+            'level' => 'info',
+            'days' => 30,
+            'replace_placeholders' => true,
+        ],
+
+        'database' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/database.log'),
+            'level' => 'info',
+            'days' => 30,
+            'replace_placeholders' => true,
+        ],
+
+        'api' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/api.log'),
+            'level' => 'info',
+            'days' => 30,
+            'replace_placeholders' => true,
+        ],
+
+        'notifications' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/notifications.log'),
+            'level' => 'info',
+            'days' => 30,
+            'replace_placeholders' => true,
         ],
     ],
 
