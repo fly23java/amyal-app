@@ -1,0 +1,42 @@
+name: PHP Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, dom, curl, sqlite3, pdo_sqlite, xml, zip
+          coverage: none
+          tools: composer
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Prepare environment (.env)
+        run: |
+          printf "APP_NAME=Laravel\nAPP_ENV=testing\nAPP_KEY=\nAPP_DEBUG=true\nAPP_URL=http://localhost\nLOG_CHANNEL=stack\nLOG_LEVEL=debug\nDB_CONNECTION=sqlite\nDB_DATABASE=database/testing.sqlite\nCACHE_DRIVER=array\nQUEUE_CONNECTION=sync\nSESSION_DRIVER=array\nMAIL_MAILER=array\n" > .env
+
+      - name: Generate APP_KEY
+        run: php artisan key:generate --ansi
+
+      - name: Create SQLite database file
+        run: |
+          mkdir -p database
+          touch database/testing.sqlite
+
+      - name: Run migrations
+        run: php artisan migrate --force --no-interaction
+
+      - name: Run PHPUnit
+        run: vendor/bin/phpunit --colors=always
