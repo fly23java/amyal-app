@@ -1,39 +1,37 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\VehicleTypesController;
-use App\Http\Controllers\VehiclesController;
-use App\Http\Controllers\DriversController;
-use App\Http\Controllers\CountriesController;
-use App\Http\Controllers\RegionsController;
-use App\Http\Controllers\CitiesController;
-use App\Http\Controllers\AccountController;
-use App\Http\Controllers\UnitsController;
-use App\Http\Controllers\GoodsTypesController;
-use App\Http\Controllers\GoodsController;
-use App\Http\Controllers\UsersController;
-use App\Http\Controllers\ContractsController;
-use App\Http\Controllers\ContractDetailsController;
-use App\Http\Controllers\StatusesController;
-use App\Http\Controllers\PaymentMethodsController;
-use App\Http\Controllers\ShipmentsController;
-use App\Http\Controllers\AccountsController;
-use App\Http\Controllers\ShipmentDeliveryDetailsController;
-use App\Http\Controllers\PrintWaybillController;
-use App\Http\Controllers\ReturnPricesController;
-use App\Http\Controllers\RetrunShipmentInTabsByStatusController;
-use App\Http\Controllers\VehicleGoodsExtractorController;
-
-use App\Http\Controllers\PricesController;
-use App\Http\Controllers\PriceDetailsController;
-use App\Http\Controllers\ShipmentNotActiveController;
-use App\Http\Controllers\ShipmentsCompletedController;
-
-use App\Http\Controllers\ReportShipmentController;
-
-use App\Http\Controllers\UpdateSelectedFieldsController;
-
+use App\Http\Controllers\{
+    VehicleTypesController,
+    VehiclesController,
+    DriversController,
+    CountriesController,
+    RegionsController,
+    CitiesController,
+    AccountController,
+    UnitsController,
+    GoodsTypesController,
+    GoodsController,
+    UsersController,
+    ContractsController,
+    ContractDetailsController,
+    StatusesController,
+    PaymentMethodsController,
+    ShipmentsController,
+    AccountsController,
+    ShipmentDeliveryDetailsController,
+    PrintWaybillController,
+    ReturnPricesController,
+    RetrunShipmentInTabsByStatusController,
+    VehicleGoodsExtractorController,
+    PricesController,
+    PriceDetailsController,
+    ShipmentNotActiveController,
+    ShipmentsCompletedController,
+    ReportShipmentController,
+    UpdateSelectedFieldsController,
+    HomeController
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -46,493 +44,536 @@ use App\Http\Controllers\UpdateSelectedFieldsController;
 |
 */
 
+// Public routes
 Route::get('/', function () {
-    return view('auth.login');
-});
+    return redirect()->route('login');
+})->name('welcome');
 
-// Route::get('/test', function () {
-//      return view('reports.invoices_report');
-// });
+// Authentication routes
+Auth::routes(['verify' => true]);
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-// Route::resource('country', CountryController::class);
-
-
-Route::group([
-     'prefix' => 'accounts',
- ], function () {
-     Route::get('/', [AccountsController::class, 'index'])
-          ->name('accounts.account.index');
-     Route::get('/create', [AccountsController::class, 'create'])
-          ->name('accounts.account.create');
-     Route::get('/show/{account}',[AccountsController::class, 'show'])
-          ->name('accounts.account.show');
-     Route::get('/{account}/edit',[AccountsController::class, 'edit'])
-          ->name('accounts.account.edit');
-     Route::post('/', [AccountsController::class, 'store'])
-          ->name('accounts.account.store');
-     Route::put('account/{account}', [AccountsController::class, 'update'])
-          ->name('accounts.account.update');
-     Route::delete('/account/{account}',[AccountsController::class, 'destroy'])
-          ->name('accounts.account.destroy');
- });
-
-Route::group([
-    'prefix' => 'vehicle_types',
-], function () {
-    Route::get('/', [VehicleTypesController::class, 'index'])
-         ->name('vehicle_types.vehicle_type.index');
-    Route::get('/create', [VehicleTypesController::class, 'create'])
-         ->name('vehicle_types.vehicle_type.create');
-    Route::get('/show/{vehicleType}',[VehicleTypesController::class, 'show'])
-         ->name('vehicle_types.vehicle_type.show')->where('id', '[0-9]+');
-    Route::get('/{vehicleType}/edit',[VehicleTypesController::class, 'edit'])
-         ->name('vehicle_types.vehicle_type.edit')->where('id', '[0-9]+');
-    Route::post('/', [VehicleTypesController::class, 'store'])
-         ->name('vehicle_types.vehicle_type.store');
-    Route::put('vehicle_type/{vehicleType}', [VehicleTypesController::class, 'update'])
-         ->name('vehicle_types.vehicle_type.update')->where('id', '[0-9]+');
-    Route::delete('/vehicle_type/{vehicleType}',[VehicleTypesController::class, 'destroy'])
-         ->name('vehicle_types.vehicle_type.destroy')->where('id', '[0-9]+');
-});
-
-
-Route::group([
-    'prefix' => 'vehicles',
-], function () {
-    Route::get('/', [VehiclesController::class, 'index'])
-         ->name('vehicles.vehicle.index');
-    Route::get('/create', [VehiclesController::class, 'create'])
-         ->name('vehicles.vehicle.create');
-    Route::get('/show/{vehicle}',[VehiclesController::class, 'show'])
-         ->name('vehicles.vehicle.show');
-    Route::get('/{vehicle}/edit',[VehiclesController::class, 'edit'])
-         ->name('vehicles.vehicle.edit');
-    Route::post('/', [VehiclesController::class, 'store'])
-         ->name('vehicles.vehicle.store');
-    Route::put('vehicle/{vehicle}', [VehiclesController::class, 'update'])
-         ->name('vehicles.vehicle.update');
-    Route::delete('/vehicle/{vehicle}',[VehiclesController::class, 'destroy'])
-         ->name('vehicles.vehicle.destroy');
-});
-
-Route::group([
-    'prefix' => 'drivers',
-], function () {
-    Route::get('/', [DriversController::class, 'index'])
-         ->name('drivers.driver.index');
-    Route::get('/create', [DriversController::class, 'create'])
-         ->name('drivers.driver.create');
-    Route::get('/show/{driver}',[DriversController::class, 'show'])
-         ->name('drivers.driver.show');
-    Route::get('/{driver}/edit',[DriversController::class, 'edit'])
-         ->name('drivers.driver.edit');
-    Route::post('/', [DriversController::class, 'store'])
-         ->name('drivers.driver.store');
-    Route::put('driver/{driver}', [DriversController::class, 'update'])
-         ->name('drivers.driver.update');
-    Route::delete('/driver/{driver}',[DriversController::class, 'destroy'])
-         ->name('drivers.driver.destroy');
-});
-
-Route::group([
-    'prefix' => 'countries',
-], function () {
-    Route::get('/', [CountriesController::class, 'index'])
-         ->name('countries.country.index');
-    Route::get('/create', [CountriesController::class, 'create'])
-         ->name('countries.country.create');
-    Route::get('/show/{country}',[CountriesController::class, 'show'])
-         ->name('countries.country.show');
-    Route::get('/{country}/edit',[CountriesController::class, 'edit'])
-         ->name('countries.country.edit');
-    Route::post('/', [CountriesController::class, 'store'])
-         ->name('countries.country.store');
-    Route::put('country/{country}', [CountriesController::class, 'update'])
-         ->name('countries.country.update');
-    Route::delete('/country/{country}',[CountriesController::class, 'destroy'])
-         ->name('countries.country.destroy');
-});
-
-Route::group([
-    'prefix' => 'regions',
-], function () {
-    Route::get('/', [RegionsController::class, 'index'])
-         ->name('regions.region.index');
-    Route::get('/create', [RegionsController::class, 'create'])
-         ->name('regions.region.create');
-    Route::get('/show/{region}',[RegionsController::class, 'show'])
-         ->name('regions.region.show');
-    Route::get('/{region}/edit',[RegionsController::class, 'edit'])
-         ->name('regions.region.edit');
-    Route::post('/', [RegionsController::class, 'store'])
-         ->name('regions.region.store');
-    Route::put('region/{region}', [RegionsController::class, 'update'])
-         ->name('regions.region.update');
-    Route::delete('/region/{region}',[RegionsController::class, 'destroy'])
-         ->name('regions.region.destroy');
-});
-
-Route::group([
-    'prefix' => 'cities',
-], function () {
-    Route::get('/', [CitiesController::class, 'index'])
-         ->name('cities.city.index');
-    Route::get('/create', [CitiesController::class, 'create'])
-         ->name('cities.city.create');
-    Route::get('/show/{city}',[CitiesController::class, 'show'])
-         ->name('cities.city.show');
-    Route::get('/{city}/edit',[CitiesController::class, 'edit'])
-         ->name('cities.city.edit');
-    Route::post('/', [CitiesController::class, 'store'])
-         ->name('cities.city.store');
-    Route::put('city/{city}', [CitiesController::class, 'update'])
-         ->name('cities.city.update');
-    Route::delete('/city/{city}',[CitiesController::class, 'destroy'])
-         ->name('cities.city.destroy');
-});
-
-Route::group([
-     'prefix' => 'units',
- ], function () {
-     Route::get('/', [UnitsController::class, 'index'])
-          ->name('units.unit.index');
-     Route::get('/create', [UnitsController::class, 'create'])
-          ->name('units.unit.create');
-     Route::get('/show/{unit}',[UnitsController::class, 'show'])
-          ->name('units.unit.show');
-     Route::get('/{unit}/edit',[UnitsController::class, 'edit'])
-          ->name('units.unit.edit');
-     Route::post('/', [UnitsController::class, 'store'])
-          ->name('units.unit.store');
-     Route::put('unit/{unit}', [UnitsController::class, 'update'])
-          ->name('units.unit.update');
-     Route::delete('/unit/{unit}',[UnitsController::class, 'destroy'])
-          ->name('units.unit.destroy');
- });
- 
- Route::group([
-     'prefix' => 'goods_types',
- ], function () {
-     Route::get('/', [GoodsTypesController::class, 'index'])
-          ->name('goods_types.goods_type.index');
-     Route::get('/create', [GoodsTypesController::class, 'create'])
-          ->name('goods_types.goods_type.create');
-     Route::get('/show/{goodsType}',[GoodsTypesController::class, 'show'])
-          ->name('goods_types.goods_type.show');
-     Route::get('/{goodsType}/edit',[GoodsTypesController::class, 'edit'])
-          ->name('goods_types.goods_type.edit');
-     Route::post('/', [GoodsTypesController::class, 'store'])
-          ->name('goods_types.goods_type.store');
-     Route::put('goods_type/{goodsType}', [GoodsTypesController::class, 'update'])
-          ->name('goods_types.goods_type.update');
-     Route::delete('/goods_type/{goodsType}',[GoodsTypesController::class, 'destroy'])
-          ->name('goods_types.goods_type.destroy');
- });
- 
- Route::group([
-     'prefix' => 'goods',
- ], function () {
-     Route::get('/', [GoodsController::class, 'index'])
-          ->name('goods.goods.index');
-     Route::get('/create', [GoodsController::class, 'create'])
-          ->name('goods.goods.create');
-     Route::get('/show/{goods}',[GoodsController::class, 'show'])
-          ->name('goods.goods.show');
-     Route::get('/{goods}/edit',[GoodsController::class, 'edit'])
-          ->name('goods.goods.edit');
-     Route::post('/', [GoodsController::class, 'store'])
-          ->name('goods.goods.store');
-     Route::put('goods/{goods}', [GoodsController::class, 'update'])
-          ->name('goods.goods.update');
-     Route::delete('/goods/{goods}',[GoodsController::class, 'destroy'])
-          ->name('goods.goods.destroy');
- });
- 
- Route::group([
-     'prefix' => 'users',
- ], function () {
-     Route::get('/', [UsersController::class, 'index'])
-          ->name('users.user.index');
-     Route::get('/create', [UsersController::class, 'create'])
-          ->name('users.user.create');
-     Route::get('/show/{user}',[UsersController::class, 'show'])
-          ->name('users.user.show');
-     Route::get('/{user}/edit',[UsersController::class, 'edit'])
-          ->name('users.user.edit');
-     Route::post('/', [UsersController::class, 'store'])
-          ->name('users.user.store');
-     Route::put('user/{user}', [UsersController::class, 'update'])
-          ->name('users.user.update');
-     Route::delete('/user/{user}',[UsersController::class, 'destroy'])
-          ->name('users.user.destroy');
- });
-
- Route::group([
-     'prefix' => 'contracts',
- ], function () {
-     Route::get('/', [ContractsController::class, 'index'])
-          ->name('contracts.contract.index');
-     Route::get('/create', [ContractsController::class, 'create'])
-          ->name('contracts.contract.create');
-     Route::get('/show/{contract}',[ContractsController::class, 'show'])
-          ->name('contracts.contract.show');
-     Route::get('/{contract}/edit',[ContractsController::class, 'edit'])
-          ->name('contracts.contract.edit');
-     Route::post('/', [ContractsController::class, 'store'])
-          ->name('contracts.contract.store');
-     Route::put('contract/{contract}', [ContractsController::class, 'update'])
-          ->name('contracts.contract.update');
-     Route::delete('/contract/{contract}',[ContractsController::class, 'destroy'])
-          ->name('contracts.contract.destroy');
- });
- 
- Route::group([
-     'prefix' => 'contract_details',
- ], function () {
-     Route::get('/', [ContractDetailsController::class, 'index'])
-          ->name('contract_details.contract_detail.index');
-     Route::get('/create', [ContractDetailsController::class, 'create'])
-          ->name('contract_details.contract_detail.create');
-     Route::get('/show/{contractDetail}',[ContractDetailsController::class, 'show'])
-          ->name('contract_details.contract_detail.show');
-     Route::get('/{contractDetail}/edit',[ContractDetailsController::class, 'edit'])
-          ->name('contract_details.contract_detail.edit');
-     Route::post('/', [ContractDetailsController::class, 'store'])
-          ->name('contract_details.contract_detail.store');
-     Route::put('contract_detail/{contractDetail}', [ContractDetailsController::class, 'update'])
-          ->name('contract_details.contract_detail.update');
-     Route::delete('/contract_detail/{contractDetail}',[ContractDetailsController::class, 'destroy'])
-          ->name('contract_details.contract_detail.destroy');
- });
- 
- Route::group([
-     'prefix' => 'statuses',
- ], function () {
-     Route::get('/', [StatusesController::class, 'index'])
-          ->name('statuses.status.index');
-     Route::get('/create', [StatusesController::class, 'create'])
-          ->name('statuses.status.create');
-     Route::get('/show/{status}',[StatusesController::class, 'show'])
-          ->name('statuses.status.show');
-     Route::get('/{status}/edit',[StatusesController::class, 'edit'])
-          ->name('statuses.status.edit');
-     Route::post('/', [StatusesController::class, 'store'])
-          ->name('statuses.status.store');
-     Route::put('status/{status}', [StatusesController::class, 'update'])
-          ->name('statuses.status.update');
-     Route::delete('/status/{status}',[StatusesController::class, 'destroy'])
-          ->name('statuses.status.destroy');
- });
- 
- Route::group([
-     'prefix' => 'payment_methods',
- ], function () {
-     Route::get('/', [PaymentMethodsController::class, 'index'])
-          ->name('payment_methods.payment_method.index');
-     Route::get('/create', [PaymentMethodsController::class, 'create'])
-          ->name('payment_methods.payment_method.create');
-     Route::get('/show/{paymentMethod}',[PaymentMethodsController::class, 'show'])
-          ->name('payment_methods.payment_method.show');
-     Route::get('/{paymentMethod}/edit',[PaymentMethodsController::class, 'edit'])
-          ->name('payment_methods.payment_method.edit');
-     Route::post('/', [PaymentMethodsController::class, 'store'])
-          ->name('payment_methods.payment_method.store');
-     Route::put('payment_method/{paymentMethod}', [PaymentMethodsController::class, 'update'])
-          ->name('payment_methods.payment_method.update');
-     Route::delete('/payment_method/{paymentMethod}',[PaymentMethodsController::class, 'destroy'])
-          ->name('payment_methods.payment_method.destroy');
- });
- 
- Route::group([
-     'prefix' => 'shipments',
- ], function () {
-     Route::get('/', [ShipmentsController::class, 'index'])
-          ->name('shipments.shipment.index');
-     Route::get('/test', [ShipmentsController::class, 'test'])
-          ->name('shipments.shipment.test');
-     Route::get('/create', [ShipmentsController::class, 'create'])
-          ->name('shipments.shipment.create');
-     Route::get('/show/{shipment}',[ShipmentsController::class, 'show'])
-          ->name('shipments.shipment.show');
-     Route::get('/{shipment}/edit',[ShipmentsController::class, 'edit'])
-          ->name('shipments.shipment.edit');
-     Route::post('/', [ShipmentsController::class, 'store'])
-          ->name('shipments.shipment.store');
-     Route::put('shipment/{shipment}', [ShipmentsController::class, 'update'])
-          ->name('shipments.shipment.update');
-     Route::delete('/shipment/{shipment}',[ShipmentsController::class, 'destroy'])
-          ->name('shipments.shipment.destroy');
-      
-      Route::get('/shipment/getVehcile',[ShipmentsController::class, 'getVehcile'])
-          ->name('shipments.shipment.getVehcile');
-     
-      Route::get('/shipment/getDatahipmentdetails',[ShipmentsController::class, 'getDatahipmentdetails'])
-          ->name('shipments.shipment.getDatahipmentdetails');
-      Route::post('/shipment/getAddVehcileToShipment',[ShipmentsController::class, 'getAddVehcileToShipment'])
-          ->name('shipments.shipment.getAddVehcileToShipment');
-      Route::get('/shipment/shipmentDetails',[ShipmentsController::class, 'shipmentDetails'])
-          ->name('shipments.shipment.shipmentDetails');
-      Route::post('/shipment/storeShipmentDetails',[ShipmentsController::class, 'storeShipmentDetails'])
-          ->name('shipments.shipment.storeShipmentDetails');
-      Route::get('/shipment/pdf/{shipment}',[ShipmentsController::class, 'pdf'])
-          ->name('shipments.shipment.pdf');
-      Route::get('/shipment/statusesGet',[ShipmentsController::class, 'statusesGet'])
-          ->name('shipments.shipment.statusesGet');
-      Route::post('/shipment/statusUpdate',[ShipmentsController::class, 'statusUpdate'])
-          ->name('shipments.shipment.statusUpdate');
-
-          
- });
-
-
- Route::group([
-     'prefix' => 'return_prices',
- ], function () {
-   
-     Route::get('/return_price/getPrice',[ReturnPricesController::class, 'returnPrice'])
-          ->name('return_prices.return_price.returnPrice');
-      
-      Route::get('/return_price/returnCarrierPrice',[ReturnPricesController::class, 'returnCarrierPrice'])
-          ->name('return_prices.return_price.returnCarrierPrice');
-});
- Route::group([
-     'prefix' => 'retrun_shipment_in_tabs_by_status',
- ], function () {
-   
-     Route::get('/retrunShipmentInTabsByStatus',[RetrunShipmentInTabsByStatusController::class, 'retrunShipmentInTabsByStatus'])
-          ->name('retrun_shipment_in_tabs_by_status.retrun_shipment_in_tabs_by_status.retrunShipmentInTabsByStatus');
-      
-      
-});
-
-Route::group([
-     'prefix' => 'shipment_completeds',
- ], function () {
-   
-     Route::get('/',[ShipmentsCompletedController::class, 'index'])
-          ->name('shipment_completeds.shipment_completed.index');
-         
-          Route::get('/shipmentsWithOutDeliveryDocumentOnly',[ShipmentsCompletedController::class, 'shipmentsWithOutDeliveryDocumentOnly'])
-          ->name('shipment_completeds.shipment_completed.shipmentsWithOutDeliveryDocumentOnly');
-
-          Route::get('/shipmentsWithDeliveryDocumentOnly',[ShipmentsCompletedController::class, 'shipmentsWithDeliveryDocumentOnly'])
-          ->name('shipment_completeds.shipment_completed.shipmentsWithDeliveryDocumentOnly');
-
-});
-
-
-Route::group([
-     'prefix' => 'shipment_not_actives',
- ], function () {
-   
-     Route::get('/',[ShipmentNotActiveController::class, 'index'])
-          ->name('shipment_not_actives.shipment_not_active.index');
-     Route::get('/retrunShipmentInTabsByStatus',[ShipmentNotActiveController::class, 'retrunShipmentInTabsByStatus'])
-          ->name('shipment_not_actives.shipment_not_active.retrunShipmentInTabsByStatus');
-
-});
-
-
-
- Route::group([
-    'prefix' => 'shipment_delivery_details',
-], function () {
-    Route::get('/', [ShipmentDeliveryDetailsController::class, 'index'])
-         ->name('shipment_delivery_details.shipment_delivery_detail.index');
-    Route::get('/create', [ShipmentDeliveryDetailsController::class, 'create'])
-         ->name('shipment_delivery_details.shipment_delivery_detail.create');
-    Route::get('/show/{shipmentDeliveryDetail}',[ShipmentDeliveryDetailsController::class, 'show'])
-         ->name('shipment_delivery_details.shipment_delivery_detail.show');
-    Route::get('/{shipmentDeliveryDetail}/edit',[ShipmentDeliveryDetailsController::class, 'edit'])
-         ->name('shipment_delivery_details.shipment_delivery_detail.edit');
-    Route::post('/', [ShipmentDeliveryDetailsController::class, 'store'])
-         ->name('shipment_delivery_details.shipment_delivery_detail.store');
-    Route::put('shipment_delivery_detail/{shipmentDeliveryDetail}', [ShipmentDeliveryDetailsController::class, 'update'])
-         ->name('shipment_delivery_details.shipment_delivery_detail.update');
-    Route::delete('/shipment_delivery_detail/{shipmentDeliveryDetail}',[ShipmentDeliveryDetailsController::class, 'destroy'])
-         ->name('shipment_delivery_details.shipment_delivery_detail.destroy');
-});
-
-Route::group([
-     'prefix' => 'print_waybills',
- ], function () {
-     Route::get('/{id}', [PrintWaybillController::class, 'generateInvoice'])
-          ->name('print_waybills.print_waybill.generateInvoice');
+// Protected routes
+Route::middleware(['auth', 'verified'])->group(function () {
     
- });
+    // Dashboard
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+    // API routes for AJAX requests
+    Route::prefix('api')->name('api.')->group(function () {
+        // Shipments API
+        Route::prefix('shipments')->name('shipments.')->group(function () {
+            Route::get('/statistics', [ShipmentsController::class, 'statistics'])->name('statistics');
+            Route::get('/export', [ShipmentsController::class, 'export'])->name('export');
+            Route::post('/bulk-update', [ShipmentsController::class, 'bulkUpdate'])->name('bulk-update');
+            Route::delete('/bulk-delete', [ShipmentsController::class, 'bulkDelete'])->name('bulk-delete');
+        });
 
- Route::get('/getGoodsByVehicleType/{selectedVehicleType}', [VehicleGoodsExtractorController::class, 'getGoodsByVehicleType'])->name('getGoodsByVehicleType');
+        // Users API
+        Route::prefix('users')->name('users.')->group(function () {
+            Route::get('/statistics', [UsersController::class, 'statistics'])->name('statistics');
+            Route::get('/online', [UsersController::class, 'online'])->name('online');
+        });
 
+        // Reports API
+        Route::prefix('reports')->name('reports.')->group(function () {
+            Route::get('/shipments', [ReportShipmentController::class, 'shipments'])->name('shipments');
+            Route::get('/financial', [ReportShipmentController::class, 'financial'])->name('financial');
+            Route::get('/performance', [ReportShipmentController::class, 'performance'])->name('performance');
+        });
+    });
 
+    // Main application routes
+    Route::middleware(['permission:view_shipments'])->group(function () {
+        
+        // Shipments routes
+        Route::resource('shipments', ShipmentsController::class)
+             ->names([
+                 'index' => 'shipments.index',
+                 'create' => 'shipments.create',
+                 'store' => 'shipments.store',
+                 'show' => 'shipments.show',
+                 'edit' => 'shipments.edit',
+                 'update' => 'shipments.update',
+                 'destroy' => 'shipments.destroy'
+             ])
+             ->except(['destroy'])
+             ->middleware([
+                 'create' => 'permission:create_shipments',
+                 'store' => 'permission:create_shipments',
+                 'edit' => 'permission:edit_shipments',
+                 'update' => 'permission:edit_shipments'
+             ]);
 
- Route::group([
-     'prefix' => 'prices',
- ], function () {
-     Route::get('/', [PricesController::class, 'index'])
-          ->name('prices.price.index');
-     Route::get('/create', [PricesController::class, 'create'])
-          ->name('prices.price.create');
-     Route::get('/show/{price}',[PricesController::class, 'show'])
-          ->name('prices.price.show');
-     Route::get('/{price}/edit',[PricesController::class, 'edit'])
-          ->name('prices.price.edit');
-     Route::post('/', [PricesController::class, 'store'])
-          ->name('prices.price.store');
-     Route::put('price/{price}', [PricesController::class, 'update'])
-          ->name('prices.price.update');
-     Route::delete('/price/{price}',[PricesController::class, 'destroy'])
-          ->name('prices.price.destroy');
- 
-      Route::get('/price/vehicle_types',[PricesController::class, 'vehicleTypes'])
-          ->name('prices.price.vehicleTypes');
-     Route::get('/price/fetchGoods',[PricesController::class, 'fetchGoods'])
-          ->name('prices.price.fetchGoods');
- 
-     Route::get('/price/fetchCity',[PricesController::class, 'fetchCity'])
-          ->name('prices.price.fetchCity');
- 
-     Route::get('/prices/details/{id}', [PricesController::class, 'getPriceDetails'])
-          ->name('prices.price.details');
- });
- 
- Route::group([
-     'prefix' => 'price_details',
- ], function () {
-     Route::get('/', [PriceDetailsController::class, 'index'])
-          ->name('price_details.price_detail.index');
-     Route::get('/create', [PriceDetailsController::class, 'create'])
-          ->name('price_details.price_detail.create');
-     Route::get('/show/{priceDetail}',[PriceDetailsController::class, 'show'])
-          ->name('price_details.price_detail.show');
-     Route::get('/{priceDetail}/edit',[PriceDetailsController::class, 'edit'])
-          ->name('price_details.price_detail.edit');
-     Route::post('/', [PriceDetailsController::class, 'store'])
-          ->name('price_details.price_detail.store');
-     Route::put('price_detail/{priceDetail}', [PriceDetailsController::class, 'update'])
-          ->name('price_details.price_detail.update');
-     Route::delete('/price_detail/{priceDetail}',[PriceDetailsController::class, 'destroy'])
-          ->name('price_details.price_detail.destroy');
- });
- Route::group([
-     'prefix' => 'reports',
- ], function () {
-     Route::get('/', [ReportShipmentController::class, 'index'])
-          ->name('reports.report.index');
-     Route::get('/shipmentByStautasResult', [ReportShipmentController::class, 'shipmentByStautasResult'])
-          ->name('reports.report.shipmentByStautasResult');
-   
- });
- Route::group([
-     'prefix' => 'update_selected_fields',
- ], function () {
-     Route::post('/update-selected-fields', [UpdateSelectedFieldsController::class, 'updateSelectedFields'])->name('update_selected_fields.update_selected_field.updateSelectedFields');
+        // Shipment deletion (separate for permission control)
+        Route::delete('/shipments/{shipment}', [ShipmentsController::class, 'destroy'])
+             ->name('shipments.destroy')
+             ->middleware('permission:delete_shipments');
 
- });
+        // Shipment delivery details
+        Route::resource('shipment-delivery-details', ShipmentDeliveryDetailsController::class)
+             ->names([
+                 'index' => 'shipment-delivery-details.index',
+                 'create' => 'shipment-delivery-details.create',
+                 'store' => 'shipment-delivery-details.store',
+                 'show' => 'shipment-delivery-details.show',
+                 'edit' => 'shipment-delivery-details.edit',
+                 'update' => 'shipment-delivery-details.update',
+                 'destroy' => 'shipment-delivery-details.destroy'
+             ])
+             ->middleware([
+                 'create' => 'permission:create_shipments',
+                 'store' => 'permission:create_shipments',
+                 'edit' => 'permission:edit_shipments',
+                 'update' => 'permission:edit_shipments',
+                 'destroy' => 'permission:delete_shipments'
+             ]);
+
+        // Shipment status management
+        Route::prefix('shipments/{shipment}')->name('shipments.')->group(function () {
+            Route::patch('/status', [ShipmentsController::class, 'updateStatus'])->name('update-status');
+            Route::patch('/deliver', [ShipmentsController::class, 'markAsDelivered'])->name('deliver');
+            Route::post('/assign-vehicle', [ShipmentsController::class, 'assignVehicle'])->name('assign-vehicle');
+        })->middleware('permission:edit_shipments');
+
+        // Shipment reports
+        Route::prefix('shipments')->name('shipments.')->group(function () {
+            Route::get('/completed', [ShipmentsCompletedController::class, 'index'])->name('completed');
+            Route::get('/not-active', [ShipmentNotActiveController::class, 'index'])->name('not-active');
+            Route::get('/overdue', [ShipmentsController::class, 'overdue'])->name('overdue');
+        });
+    });
+
+    // Users management (admin only)
+    Route::middleware(['permission:manage_users'])->group(function () {
+        Route::resource('users', UsersController::class)
+             ->names([
+                 'index' => 'users.index',
+                 'create' => 'users.create',
+                 'store' => 'users.store',
+                 'show' => 'users.show',
+                 'edit' => 'users.edit',
+                 'update' => 'users.update',
+                 'destroy' => 'users.destroy'
+             ]);
+
+        // User profile management
+        Route::prefix('users/{user}')->name('users.')->group(function () {
+            Route::get('/profile', [UsersController::class, 'profile'])->name('profile');
+            Route::patch('/profile', [UsersController::class, 'updateProfile'])->name('update-profile');
+            Route::patch('/password', [UsersController::class, 'updatePassword'])->name('update-password');
+            Route::patch('/status', [UsersController::class, 'updateStatus'])->name('update-status');
+            Route::post('/roles', [UsersController::class, 'assignRoles'])->name('assign-roles');
+        });
+    });
+
+    // Accounts management
+    Route::middleware(['permission:view_accounts'])->group(function () {
+        Route::resource('accounts', AccountsController::class)
+             ->names([
+                 'index' => 'accounts.index',
+                 'create' => 'accounts.create',
+                 'store' => 'accounts.store',
+                 'show' => 'accounts.show',
+                 'edit' => 'accounts.edit',
+                 'update' => 'accounts.update',
+                 'destroy' => 'accounts.destroy'
+             ])
+             ->except(['destroy'])
+             ->middleware([
+                 'create' => 'permission:create_accounts',
+                 'store' => 'permission:create_accounts',
+                 'edit' => 'permission:edit_accounts',
+                 'update' => 'permission:edit_accounts'
+             ]);
+
+        Route::delete('/accounts/{account}', [AccountsController::class, 'destroy'])
+             ->name('accounts.destroy')
+             ->middleware('permission:delete_accounts');
+    });
+
+    // Vehicles management
+    Route::middleware(['permission:view_vehicles'])->group(function () {
+        Route::resource('vehicles', VehiclesController::class)
+             ->names([
+                 'index' => 'vehicles.index',
+                 'create' => 'vehicles.create',
+                 'store' => 'vehicles.store',
+                 'show' => 'vehicles.show',
+                 'edit' => 'vehicles.edit',
+                 'update' => 'vehicles.update',
+                 'destroy' => 'vehicles.destroy'
+             ])
+             ->except(['destroy'])
+             ->middleware([
+                 'create' => 'permission:create_vehicles',
+                 'store' => 'permission:create_vehicles',
+                 'edit' => 'permission:edit_vehicles',
+                 'update' => 'permission:edit_vehicles'
+             ]);
+
+        Route::delete('/vehicles/{vehicle}', [VehiclesController::class, 'destroy'])
+             ->name('vehicles.destroy')
+             ->middleware('permission:delete_vehicles');
+
+        // Vehicle types
+        Route::resource('vehicle-types', VehicleTypesController::class)
+             ->names([
+                 'index' => 'vehicle-types.index',
+                 'create' => 'vehicle-types.create',
+                 'store' => 'vehicle-types.store',
+                 'show' => 'vehicle-types.show',
+                 'edit' => 'vehicle-types.edit',
+                 'update' => 'vehicle-types.update',
+                 'destroy' => 'vehicle-types.destroy'
+             ])
+             ->middleware([
+                 'create' => 'permission:create_vehicles',
+                 'store' => 'permission:create_vehicles',
+                 'edit' => 'permission:edit_vehicles',
+                 'update' => 'permission:edit_vehicles',
+                 'destroy' => 'permission:delete_vehicles'
+             ]);
+    });
+
+    // Drivers management
+    Route::middleware(['permission:view_drivers'])->group(function () {
+        Route::resource('drivers', DriversController::class)
+             ->names([
+                 'index' => 'drivers.index',
+                 'create' => 'drivers.create',
+                 'store' => 'drivers.store',
+                 'show' => 'drivers.show',
+                 'edit' => 'drivers.edit',
+                 'update' => 'drivers.update',
+                 'destroy' => 'drivers.destroy'
+             ])
+             ->middleware([
+                 'create' => 'permission:create_drivers',
+                 'store' => 'permission:create_drivers',
+                 'edit' => 'permission:edit_drivers',
+                 'update' => 'permission:edit_drivers',
+                 'destroy' => 'permission:delete_drivers'
+             ]);
+    });
+
+    // Goods management
+    Route::middleware(['permission:view_goods'])->group(function () {
+        Route::resource('goods', GoodsController::class)
+             ->names([
+                 'index' => 'goods.index',
+                 'create' => 'goods.create',
+                 'store' => 'goods.store',
+                 'show' => 'goods.show',
+                 'edit' => 'goods.edit',
+                 'update' => 'goods.update',
+                 'destroy' => 'goods.destroy'
+             ])
+             ->middleware([
+                 'create' => 'permission:create_goods',
+                 'store' => 'permission:create_goods',
+                 'edit' => 'permission:edit_goods',
+                 'update' => 'permission:edit_goods',
+                 'destroy' => 'permission:delete_goods'
+             ]);
+
+        Route::resource('goods-types', GoodsTypesController::class)
+             ->names([
+                 'index' => 'goods-types.index',
+                 'create' => 'goods-types.create',
+                 'store' => 'goods-types.store',
+                 'show' => 'goods-types.show',
+                 'edit' => 'goods-types.edit',
+                 'update' => 'goods-types.update',
+                 'destroy' => 'goods-types.destroy'
+             ])
+             ->middleware([
+                 'create' => 'permission:create_goods',
+                 'store' => 'permission:create_goods',
+                 'edit' => 'permission:edit_goods',
+                 'update' => 'permission:edit_goods',
+                 'destroy' => 'permission:delete_goods'
+             ]);
+    });
+
+    // Pricing management
+    Route::middleware(['permission:view_prices'])->group(function () {
+        Route::resource('prices', PricesController::class)
+             ->names([
+                 'index' => 'prices.index',
+                 'create' => 'prices.create',
+                 'store' => 'prices.store',
+                 'show' => 'prices.show',
+                 'edit' => 'prices.edit',
+                 'update' => 'prices.update',
+                 'destroy' => 'prices.destroy'
+             ])
+             ->middleware([
+                 'create' => 'permission:create_prices',
+                 'store' => 'permission:create_prices',
+                 'edit' => 'permission:edit_prices',
+                 'update' => 'permission:edit_prices',
+                 'destroy' => 'permission:delete_prices'
+             ]);
+
+        Route::resource('price-details', PriceDetailsController::class)
+             ->names([
+                 'index' => 'price-details.index',
+                 'create' => 'price-details.create',
+                 'store' => 'price-details.store',
+                 'show' => 'price-details.show',
+                 'edit' => 'price-details.edit',
+                 'update' => 'price-details.update',
+                 'destroy' => 'price-details.destroy'
+             ])
+             ->middleware([
+                 'create' => 'permission:create_prices',
+                 'store' => 'permission:create_prices',
+                 'edit' => 'permission:edit_prices',
+                 'update' => 'permission:edit_prices',
+                 'destroy' => 'permission:delete_prices'
+             ]);
+    });
+
+    // Contracts management
+    Route::middleware(['permission:view_contracts'])->group(function () {
+        Route::resource('contracts', ContractsController::class)
+             ->names([
+                 'index' => 'contracts.index',
+                 'create' => 'contracts.create',
+                 'store' => 'contracts.store',
+                 'show' => 'contracts.show',
+                 'edit' => 'contracts.edit',
+                 'update' => 'contracts.update',
+                 'destroy' => 'contracts.destroy'
+             ])
+             ->middleware([
+                 'create' => 'permission:create_contracts',
+                 'store' => 'permission:create_contracts',
+                 'edit' => 'permission:edit_contracts',
+                 'update' => 'permission:edit_contracts',
+                 'destroy' => 'permission:delete_contracts'
+             ]);
+
+        Route::resource('contract-details', ContractDetailsController::class)
+             ->names([
+                 'index' => 'contract-details.index',
+                 'create' => 'contract-details.create',
+                 'store' => 'contract-details.store',
+                 'show' => 'contract-details.show',
+                 'edit' => 'contract-details.edit',
+                 'update' => 'contract-details.update',
+                 'destroy' => 'contract-details.destroy'
+             ])
+             ->middleware([
+                 'create' => 'permission:create_contracts',
+                 'store' => 'permission:create_contracts',
+                 'edit' => 'permission:edit_contracts',
+                 'update' => 'permission:edit_contracts',
+                 'destroy' => 'permission:delete_contracts'
+             ]);
+    });
+
+    // Statuses management
+    Route::middleware(['permission:view_statuses'])->group(function () {
+        Route::resource('statuses', StatusesController::class)
+             ->names([
+                 'index' => 'statuses.index',
+                 'create' => 'statuses.create',
+                 'store' => 'statuses.store',
+                 'show' => 'statuses.show',
+                 'edit' => 'statuses.edit',
+                 'update' => 'statuses.update',
+                 'destroy' => 'statuses.destroy'
+             ])
+             ->middleware([
+                 'create' => 'permission:create_statuses',
+                 'store' => 'permission:create_statuses',
+                 'edit' => 'permission:edit_statuses',
+                 'update' => 'permission:edit_statuses',
+                 'destroy' => 'permission:delete_statuses'
+             ]);
+    });
+
+    // Payment methods management
+    Route::middleware(['permission:view_payment_methods'])->group(function () {
+        Route::resource('payment-methods', PaymentMethodsController::class)
+             ->names([
+                 'index' => 'payment-methods.index',
+                 'create' => 'payment-methods.create',
+                 'store' => 'payment-methods.store',
+                 'show' => 'payment-methods.show',
+                 'edit' => 'payment-methods.edit',
+                 'update' => 'payment-methods.update',
+                 'destroy' => 'payment-methods.destroy'
+             ])
+             ->middleware([
+                 'create' => 'permission:create_payment_methods',
+                 'store' => 'permission:create_payment_methods',
+                 'edit' => 'permission:edit_payment_methods',
+                 'update' => 'permission:edit_payment_methods',
+                 'destroy' => 'permission:delete_payment_methods'
+             ]);
+    });
+
+    // Geographic data management
+    Route::middleware(['permission:view_geographic_data'])->group(function () {
+        Route::resource('countries', CountriesController::class)
+             ->names([
+                 'index' => 'countries.index',
+                 'create' => 'countries.create',
+                 'store' => 'countries.store',
+                 'show' => 'countries.show',
+                 'edit' => 'countries.edit',
+                 'update' => 'countries.update',
+                 'destroy' => 'countries.destroy'
+             ])
+             ->middleware([
+                 'create' => 'permission:create_geographic_data',
+                 'store' => 'permission:create_geographic_data',
+                 'edit' => 'permission:edit_geographic_data',
+                 'update' => 'permission:edit_geographic_data',
+                 'destroy' => 'permission:delete_geographic_data'
+             ]);
+
+        Route::resource('regions', RegionsController::class)
+             ->names([
+                 'index' => 'regions.index',
+                 'create' => 'regions.create',
+                 'store' => 'regions.store',
+                 'show' => 'regions.show',
+                 'edit' => 'regions.edit',
+                 'update' => 'regions.update',
+                 'destroy' => 'regions.destroy'
+             ])
+             ->middleware([
+                 'create' => 'permission:create_geographic_data',
+                 'store' => 'permission:create_geographic_data',
+                 'edit' => 'permission:edit_geographic_data',
+                 'update' => 'permission:edit_geographic_data',
+                 'destroy' => 'permission:delete_geographic_data'
+             ]);
+
+        Route::resource('cities', CitiesController::class)
+             ->names([
+                 'index' => 'cities.index',
+                 'create' => 'cities.create',
+                 'store' => 'cities.store',
+                 'show' => 'cities.show',
+                 'edit' => 'cities.edit',
+                 'update' => 'cities.update',
+                 'destroy' => 'cities.destroy'
+             ])
+             ->middleware([
+                 'create' => 'permission:create_geographic_data',
+                 'store' => 'permission:create_geographic_data',
+                 'edit' => 'permission:edit_geographic_data',
+                 'update' => 'permission:edit_geographic_data',
+                 'destroy' => 'permission:delete_geographic_data'
+             ]);
+    });
+
+    // Units management
+    Route::middleware(['permission:view_units'])->group(function () {
+        Route::resource('units', UnitsController::class)
+             ->names([
+                 'index' => 'units.index',
+                 'create' => 'units.create',
+                 'store' => 'units.store',
+                 'show' => 'units.show',
+                 'edit' => 'units.edit',
+                 'update' => 'units.update',
+                 'destroy' => 'units.destroy'
+             ])
+             ->middleware([
+                 'create' => 'permission:create_units',
+                 'store' => 'permission:create_units',
+                 'edit' => 'permission:edit_units',
+                 'update' => 'permission:edit_units',
+                 'destroy' => 'permission:delete_units'
+             ]);
+    });
+
+    // Reports
+    Route::middleware(['permission:view_reports'])->group(function () {
+        Route::prefix('reports')->name('reports.')->group(function () {
+            Route::get('/', [ReportShipmentController::class, 'index'])->name('index');
+            Route::get('/shipments', [ReportShipmentController::class, 'shipments'])->name('shipments');
+            Route::get('/financial', [ReportShipmentController::class, 'financial'])->name('financial');
+            Route::get('/performance', [ReportShipmentController::class, 'performance'])->name('performance');
+            Route::get('/export/{type}', [ReportShipmentController::class, 'export'])->name('export');
+        });
+    });
+
+    // Print and utilities
+    Route::middleware(['permission:view_shipments'])->group(function () {
+        Route::prefix('print')->name('print.')->group(function () {
+            Route::get('/waybill/{shipment}', [PrintWaybillController::class, 'waybill'])->name('waybill');
+            Route::get('/invoice/{shipment}', [PrintWaybillController::class, 'invoice'])->name('invoice');
+            Route::get('/receipt/{shipment}', [PrintWaybillController::class, 'receipt'])->name('receipt');
+        });
+    });
+
+    // Return shipments
+    Route::middleware(['permission:view_shipments'])->group(function () {
+        Route::prefix('return-shipments')->name('return-shipments.')->group(function () {
+            Route::get('/', [RetrunShipmentInTabsByStatusController::class, 'index'])->name('index');
+            Route::get('/by-status/{status}', [RetrunShipmentInTabsByStatusController::class, 'byStatus'])->name('by-status');
+        });
+
+        Route::prefix('return-prices')->name('return-prices.')->group(function () {
+            Route::get('/', [ReturnPricesController::class, 'index'])->name('index');
+            Route::get('/create', [ReturnPricesController::class, 'create'])->name('create');
+            Route::post('/', [ReturnPricesController::class, 'store'])->name('store');
+        });
+    });
+
+    // Vehicle goods extractor
+    Route::middleware(['permission:view_vehicles'])->group(function () {
+        Route::prefix('vehicle-goods')->name('vehicle-goods.')->group(function () {
+            Route::get('/', [VehicleGoodsExtractorController::class, 'index'])->name('index');
+            Route::post('/extract', [VehicleGoodsExtractorController::class, 'extract'])->name('extract');
+        });
+    });
+
+    // Update selected fields
+    Route::middleware(['permission:edit_shipments'])->group(function () {
+        Route::prefix('update-fields')->name('update-fields.')->group(function () {
+            Route::get('/', [UpdateSelectedFieldsController::class, 'index'])->name('index');
+            Route::post('/bulk-update', [UpdateSelectedFieldsController::class, 'bulkUpdate'])->name('bulk-update');
+        });
+    });
+
+    // User profile management
+    Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', [UsersController::class, 'profile'])->name('show');
+        Route::get('/edit', [UsersController::class, 'editProfile'])->name('edit');
+        Route::patch('/', [UsersController::class, 'updateProfile'])->name('update');
+        Route::patch('/password', [UsersController::class, 'updatePassword'])->name('password');
+        Route::patch('/preferences', [UsersController::class, 'updatePreferences'])->name('preferences');
+    });
+
+    // System settings (admin only)
+    Route::middleware(['permission:manage_system'])->group(function () {
+        Route::prefix('settings')->name('settings.')->group(function () {
+            Route::get('/', [HomeController::class, 'settings'])->name('index');
+            Route::get('/general', [HomeController::class, 'generalSettings'])->name('general');
+            Route::get('/notifications', [HomeController::class, 'notificationSettings'])->name('notifications');
+            Route::get('/security', [HomeController::class, 'securitySettings'])->name('security');
+            Route::patch('/general', [HomeController::class, 'updateGeneralSettings'])->name('update-general');
+            Route::patch('/notifications', [HomeController::class, 'updateNotificationSettings'])->name('update-notifications');
+            Route::patch('/security', [HomeController::class, 'updateSecuritySettings'])->name('update-security');
+        });
+    });
+});
+
+// Fallback route for 404 errors
+Route::fallback(function () {
+    if (request()->expectsJson()) {
+        return response()->json(['message' => 'الصفحة غير موجودة'], 404);
+    }
+    
+    return response()->view('errors.404', [], 404);
+});
 
 
