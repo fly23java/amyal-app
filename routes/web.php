@@ -33,6 +33,8 @@ use App\Http\Controllers\ShipmentsCompletedController;
 use App\Http\Controllers\ReportShipmentController;
 
 use App\Http\Controllers\UpdateSelectedFieldsController;
+use App\Http\Controllers\WalletController;
+use App\Http\Controllers\WalletTransactionController;
 
 
 /*
@@ -528,11 +530,31 @@ Route::group([
           ->name('reports.report.shipmentByStautasResult');
    
  });
- Route::group([
-     'prefix' => 'update_selected_fields',
- ], function () {
-     Route::post('/update-selected-fields', [UpdateSelectedFieldsController::class, 'updateSelectedFields'])->name('update_selected_fields.update_selected_field.updateSelectedFields');
+Route::group([
+    'prefix' => 'update_selected_fields',
+], function () {
+    Route::post('/update-selected-fields', [UpdateSelectedFieldsController::class, 'updateSelectedFields'])->name('update_selected_fields.update_selected_field.updateSelectedFields');
+});
 
- });
+// Wallet Routes
+Route::middleware('auth')->group(function () {
+    // Wallet Resource Routes
+    Route::resource('wallets', WalletController::class);
+    
+    // Wallet Operations
+    Route::post('wallets/{wallet}/deposit', [WalletController::class, 'deposit'])->name('wallets.deposit');
+    Route::post('wallets/{wallet}/withdraw', [WalletController::class, 'withdraw'])->name('wallets.withdraw');
+    Route::post('wallets/{wallet}/transfer', [WalletController::class, 'transfer'])->name('wallets.transfer');
+    
+    // Wallet Management
+    Route::post('wallets/{wallet}/set-pin', [WalletController::class, 'setPin'])->name('wallets.set-pin');
+    Route::post('wallets/{wallet}/freeze', [WalletController::class, 'freeze'])->name('wallets.freeze');
+    Route::post('wallets/{wallet}/unfreeze', [WalletController::class, 'unfreeze'])->name('wallets.unfreeze');
+    
+    // Wallet Utilities
+    Route::get('wallets/{wallet}/qr-code', [WalletController::class, 'qrCode'])->name('wallets.qr-code');
+    Route::get('wallets/{wallet}/transactions', [WalletController::class, 'transactions'])->name('wallets.transactions');
+    Route::get('wallets/{wallet}/export', [WalletController::class, 'exportTransactions'])->name('wallets.export');
+});
 
 
