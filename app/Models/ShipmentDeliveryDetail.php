@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class ShipmentDeliveryDetail extends Model
 {
     
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * The database table used by the model.
      *
@@ -81,108 +84,108 @@ class ShipmentDeliveryDetail extends Model
      * @param  string  $value
      * @return void
      */
-    // public function setLoadingTimeAttribute($value)
-    // {
-    //     $this->attributes['loading_time'] = !empty($value) ? \DateTime::createFromFormat('j/n/Y g:i A', $value) : null;
-    // }
+    public function setLoadingTimeAttribute($value)
+    {
+        $this->attributes['loading_time'] = !empty($value) ? \DateTime::createFromFormat('j/n/Y g:i A', $value) : null;
+    }
 
-    // /**
-    //  * Set the unloading_time.
-    //  *
-    //  * @param  string  $value
-    //  * @return void
-    //  */
-    // public function setUnloadingTimeAttribute($value)
-    // {
-    //     $this->attributes['unloading_time'] = !empty($value) ? \DateTime::createFromFormat('j/n/Y g:i A', $value) : null;
-    // }
+    /**
+     * Set the unloading_time.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setUnloadingTimeAttribute($value)
+    {
+        $this->attributes['unloading_time'] = !empty($value) ? \DateTime::createFromFormat('j/n/Y g:i A', $value) : null;
+    }
 
-    // /**
-    //  * Set the arrival_time.
-    //  *
-    //  * @param  string  $value
-    //  * @return void
-    //  */
-    // public function setArrivalTimeAttribute($value)
-    // {
-    //     $this->attributes['arrival_time'] = !empty($value) ? \DateTime::createFromFormat('j/n/Y g:i A', $value) : null;
-    // }
+    /**
+     * Set the arrival_time.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setArrivalTimeAttribute($value)
+    {
+        $this->attributes['arrival_time'] = !empty($value) ? \DateTime::createFromFormat('j/n/Y g:i A', $value) : null;
+    }
 
-    // /**
-    //  * Set the departure_time.
-    //  *
-    //  * @param  string  $value
-    //  * @return void
-    //  */
-    // public function setDepartureTimeAttribute($value)
-    // {
-    //     $this->attributes['departure_time'] = !empty($value) ? \DateTime::createFromFormat('j/n/Y g:i A', $value) : null;
-    // }
+    /**
+     * Set the departure_time.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setDepartureTimeAttribute($value)
+    {
+        $this->attributes['departure_time'] = !empty($value) ? \DateTime::createFromFormat('j/n/Y g:i A', $value) : null;
+    }
 
-    // /**
-    //  * Get loading_time in array format
-    //  *
-    //  * @param  string  $value
-    //  * @return array
-    //  */
-    // public function getLoadingTimeAttribute($value)
-    // {
-    //     return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
-    // }
+    /**
+     * Get loading_time in array format
+     *
+     * @param  string  $value
+     * @return array
+     */
+    public function getLoadingTimeAttribute($value)
+    {
+        return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
+    }
 
-    // /**
-    //  * Get unloading_time in array format
-    //  *
-    //  * @param  string  $value
-    //  * @return array
-    //  */
-    // public function getUnloadingTimeAttribute($value)
-    // {
-    //     return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
-    // }
+    /**
+     * Get unloading_time in array format
+     *
+     * @param  string  $value
+     * @return array
+     */
+    public function getUnloadingTimeAttribute($value)
+    {
+        return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
+    }
 
-    // /**
-    //  * Get arrival_time in array format
-    //  *
-    //  * @param  string  $value
-    //  * @return array
-    //  */
-    // public function getArrivalTimeAttribute($value)
-    // {
-    //     return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
-    // }
+    /**
+     * Get arrival_time in array format
+     *
+     * @param  string  $value
+     * @return array
+     */
+    public function getArrivalTimeAttribute($value)
+    {
+        return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
+    }
 
-    // /**
-    //  * Get departure_time in array format
-    //  *
-    //  * @param  string  $value
-    //  * @return array
-    //  */
-    // public function getDepartureTimeAttribute($value)
-    // {
-    //     return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
-    // }
+    /**
+     * Get departure_time in array format
+     *
+     * @param  string  $value
+     * @return array
+     */
+    public function getDepartureTimeAttribute($value)
+    {
+        return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
+    }
 
-    // /**
-    //  * Get created_at in array format
-    //  *
-    //  * @param  string  $value
-    //  * @return array
-    //  */
-    // public function getCreatedAtAttribute($value)
-    // {
-    //     return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
-    // }
+    /**
+     * Get created_at in array format
+     *
+     * @param  string  $value
+     * @return array
+     */
+    public function getCreatedAtAttribute($value)
+    {
+        return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
+    }
 
-    // /**
-    //  * Get updated_at in array format
-    //  *
-    //  * @param  string  $value
-    //  * @return array
-    //  */
-    // public function getUpdatedAtAttribute($value)
-    // {
-    //     return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
-    // }
+    /**
+     * Get updated_at in array format
+     *
+     * @param  string  $value
+     * @return array
+     */
+    public function getUpdatedAtAttribute($value)
+    {
+        return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
+    }
 
 }
